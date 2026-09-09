@@ -127,6 +127,11 @@ eine Gestalt, dokumentweit konsistent:
 Badges sind für Sand- und Weiß-Grund rezeptiert; auf getönten
 Flächen (Tint auf Tint) haben sie nichts verloren.
 
+**Status-Badges** (Bewertung, nicht Semantik): `status-*-tint` als
+Fläche, Text in `--charcoal`, optional ein Punkt in der Base-Farbe.
+Nie Base-Text auf eigener Tint (Kontrast). Wann welche Stufe:
+[`02-colors.md`](02-colors.md) §2.8.
+
 ## 7.7 Bildsprache
 
 > ⚠️ **Work in progress** *(Nils, 2026-07-14)*: Das Editorial-Foto-Konzept

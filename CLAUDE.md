@@ -75,6 +75,10 @@
   gestrichen — Grüntöne nur noch in Gradient-Rezepten und `surface-sage`.
 - Jede Farbe als **Familie** nutzen (Base/Deep/Soft/Tint) — keine
   Zwischentöne erfinden, keine neuen Farben.
+- **Status-Farben** `--status-good/-warn/-poor/-critical` (+ Tint) sind
+  Funktionsfarben **nur für Bewertungen** (Scores, Ampeln,
+  Prüfergebnisse) — nie Deko, Akzent oder Chart-Serie, nicht auf Dunkel.
+  Binäres Ja/Nein bleibt Teal/Berry. Details `guidelines/02` §2.8.
 - **Eine dominante Farbe pro Sektion**; Neutrals tragen den Rest.
   Farbe ist rationiert.
 - **Auf Dunkel:** Headlines `--off-white`, Fließtext `--soft`,

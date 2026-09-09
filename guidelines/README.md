@@ -12,7 +12,7 @@ ausdrücklich.
 | Kapitel | Inhalt |
 |---|---|
 | [01-essence](01-essence.md) | Positionierung, Mission/Vision, Logo („Bindestrich"), Voice-Polarität, Principles |
-| [02-colors](02-colors.md) | Marken-Triade, Farbfamilien, Neutrals, Surfaces, On-Dark, Ränder |
+| [02-colors](02-colors.md) | Marken-Triade, Farbfamilien, Neutrals, Surfaces, On-Dark, Ränder, Status-Farben |
 | [03-typography](03-typography.md) | Schriften, die fluide `type-*`-Skala, Tracking, deutsche Display-Regeln |
 | [04-surfaces-glass](04-surfaces-glass.md) | Karten-Familie (Paper & Glass), Grain, Kasane, Gradient-Katalog, Handwerks-Fallen |
 | [05-motion](05-motion.md) | Motion-Rationierung, Dauern/Easings, Kasane-Drift, Hover-Konventionen, Reveals |

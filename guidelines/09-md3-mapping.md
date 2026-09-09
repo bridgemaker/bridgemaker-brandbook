@@ -59,7 +59,8 @@ mappen:
 | `on-surface-variant` | `--mid` | `#6B6B65` |
 | `outline` | `--surface-mid-stone` | `#C5C0B8` |
 | `outline-variant` | Haarlinien-Ton aus Charcoal | `rgba(28,28,30,0.06)` |
-| `error` | MD3-Default | behalten |
+| `error` | `--status-critical` | `#C4403C` |
+| `error-container` | `--status-critical-tint` | `#F7DDDB` |
 
 **Dark Scheme:** Basis `--charcoal`, `primary` wird `--bm-lavender-dark`
 (`#AF94D2`) — die On-Dark-Regel aus [`02-colors.md`](02-colors.md) §2.5

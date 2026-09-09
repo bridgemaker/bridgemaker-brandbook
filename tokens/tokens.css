@@ -43,6 +43,19 @@
   /* Sage als benannte Farbe gestrichen (2026-07-14) — Grüntöne existieren
      nur noch als Bestandteile der Gradient-Rezepte und als surface-sage. */
 
+  /* ---------- Status-Farben — nur für Bewertungen (guidelines/02 §2.8) ----------
+     Website: --color-status-* in globals.css, Klassen bg-/text-status-*.
+     Base für Balken/Zahlen auf Hell, Tint als Fläche mit Charcoal-Text.
+     Nie Deko, nie Chart-Serie, nicht auf Dunkel. */
+  --status-good:          #3F9A6E;
+  --status-good-tint:     #E0F0E8;
+  --status-warn:          #D6A63A;
+  --status-warn-tint:     #F7EBD0;
+  --status-poor:          #D4703B;
+  --status-poor-tint:     #F8E3D6;
+  --status-critical:      #C4403C;
+  --status-critical-tint: #F7DDDB;
+
   /* ---------- Neutrals ---------- */
   --charcoal:  #1C1C1E;
   --dark:      #3D3D3A;

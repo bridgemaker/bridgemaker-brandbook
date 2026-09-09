@@ -3,7 +3,7 @@
 > Quelle der Werte: `tokens/tokens.css` (gespiegelt in
 > `tokens/tokens.json`). Farben nie inline neu definieren — immer aus den
 > Tokens ziehen. Alle Werte hier sind gegen die Website (`globals.css`,
-> Juli 2026) verifiziert.
+> September 2026) verifiziert.
 
 ## 2.1 Marken-Triade
 
@@ -102,3 +102,44 @@ Inset-Haarlinie, die in die Karten-Rezepte eingebacken ist
   eine Sektionsfläche im Rhythmus, nicht der Grundton
 - ❌ `--bm-purple`-Text auf Dunkel (→ `--bm-lavender-dark`)
 - ❌ Neue Farben erfinden. Wenn eine fehlt: fragen.
+- ❌ Status-Farben (§2.8) als Deko, Akzent oder Chart-Farbe — sie
+  bedeuten immer eine Bewertung.
+
+## 2.8 Status-Farben — Funktionsfarben für Bewertungen
+
+*(Website, 2026-09-09; erster Einsatz: Ampel der Dimensions-Scores im
+Commercial-Readiness-Scan.)* Die Marken-Triade kann Bewertungen nicht
+tragen: Teal und Berry standen bislang für „erfüllt" und „nicht erfüllt",
+für Zwischenstufen fehlte alles. Deshalb gibt es vier Status-Farben mit
+Tint, gedämpft, damit sie neben der Palette stehen können, ohne sie zu
+übertönen.
+
+| Stufe | Token | Hex | Tint | Hex |
+|---|---|---|---|---|
+| Gut | `--status-good` | `#3F9A6E` | `--status-good-tint` | `#E0F0E8` |
+| Achtung | `--status-warn` | `#D6A63A` | `--status-warn-tint` | `#F7EBD0` |
+| Schwach | `--status-poor` | `#D4703B` | `--status-poor-tint` | `#F8E3D6` |
+| Kritisch | `--status-critical` | `#C4403C` | `--status-critical-tint` | `#F7DDDB` |
+
+Auf der Website heißen die Tailwind-Klassen `bg-status-*` / `text-status-*`
+(Tokens `--color-status-*` in `globals.css`).
+
+**Regeln:**
+
+- Status-Farben tragen **nur Bewertungen** (Scores, Prüfergebnisse,
+  Ampeln). Nie als Sektionsfarbe, Akzent, Chart-Serie oder Illustration.
+- **Schwellen sind Sache des Produkts**, nicht der Farbe. Referenz Scan:
+  ab 70 gut, 50–69 Achtung, 30–49 schwach, unter 30 kritisch — als
+  Konstanten im Code, nicht in Copy.
+- **Base-Farbe** für Balken, Zahlen und Punkte auf hellem Grund
+  (Off-White, Weiß, Surfaces). **Tint** für Flächen dahinter (Badge,
+  Zeile). Auf einer Tint steht Text in `--charcoal`, nie in der eigenen
+  Base-Farbe — Amber auf Amber-Tint hat keinen Kontrast.
+- Binäre Prüfungen (erfüllt / nicht erfüllt) bleiben bei
+  `teal-tint`+`deep-teal` und `rose-tint`+`deep-berry` (Stand Website).
+  Status-Farben kommen erst ins Spiel, wenn es Zwischenstufen gibt.
+- **Auf Dunkel** sind Status-Farben nicht rezeptiert. Der Score-Ring im
+  dunklen Band bleibt Off-White; Amber und Ziegelrot auf Plum wirken
+  schrill.
+- Höchstens **eine Ampel pro View**. Zwei Bewertungslogiken nebeneinander
+  liest niemand mehr.
