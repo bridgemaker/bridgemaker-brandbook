@@ -415,6 +415,39 @@ Hover-Effekte. (Stage-Neufassung 16.07.2026 — ersetzt die frühere
   korrigieren und erneut rendern, bis nichts mehr auffällt.
   Workflow im Repo-Skill `bridgemaker-slides`.
 
+### 7.8.1 Ausnahme: interaktive Artefakte im Deck-Look
+
+*(Nils, 2026-09-29)* Manche Seiten sehen aus wie ein Deck, sind aber
+keine Lese-Artefakte: Die Website erzeugt sie aus Daten, sie sind
+klickbar und werden als Link geteilt, nicht als PDF. Erster Fall ist
+das Tautiom-Transform-Deck (Website-Repo `src/lib/transform-deck/`,
+ausgeliefert unter `bridgemaker.com/tautiom/transform/report/…`).
+Für solche Artefakte gilt §7.8 mit diesen Abweichungen und
+Klarstellungen:
+
+- **Bühne 1920×1080** statt 1440×810, aufs Fenster skaliert. Grund
+  ist die Dichte (Suchfeld-Übersicht mit bis zu sechs Spalten,
+  Fluss-Grafik mit Detailbereich) plus die Bedienelemente.
+- **Tokens und Flächen live von der Website:** Farben, Schatten,
+  Radien, Schriftgrößen, Easing und die Flächen-Klassen (`bg-kasane-hero`,
+  `bg-contact-cta`, `grain-screen`) werden beim Ausliefern aus
+  `globals.css` eingesetzt. Das Artefakt trägt keine eigenen
+  Farbwerte; ein Test bricht ab, sobald eins auftaucht.
+- **Schrift aus den Web-Tokens:** Die `type-*`-Klassen sind fluide,
+  deshalb setzt das Artefakt Schriftgrößen direkt über die Tokens
+  `--font-size-*` aus `globals.css` (Headline `--font-size-h1`,
+  Cover `--font-size-display-xl`, Boxen `--font-size-body` usw.).
+  Keine eigenen Größen, ein Test prüft das.
+- **4er-Raster** für Abstände und Größen (§6 fordert 8px): Bei
+  dieser Dichte trägt das Achter-Raster nicht. Radien kommen aus
+  den Radius-Tokens.
+- **Bedienung erlaubt:** Funktionsleiste (Blättern, Teilen,
+  Vollbild), Hover- und Auswahlzustände. Die Schlussfolie darf CTAs
+  tragen, als Buttons nach §7.3.
+
+Weitere Artefakte dieser Art übernehmen diese Regeln und werden
+hier ergänzt.
+
 ## 7.9 Print-Publikationen (DIN A4)
 
 Für gedruckte Broschüren, Bookazines und Reports gilt ein eigener
