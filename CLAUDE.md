@@ -259,7 +259,8 @@ keine Box markieren.
   fixed` + th-Breiten, identisch auf allen Seiten), `.deck-body`
   auf `flex-start` — beim Blättern steht ALLES. Die 72px-Reserve
   über der Fußzeile (`--deck-pad-b`) ist Sperrzone für Content;
-  deck-lint misst Serie, Sperrzone und Cover-Brücken-Naht
+  deck-lint misst Serie, Sperrzone, Cover-Brücken-Naht und
+  farbige Kanten an Boxen
   *(Nils, 2026-07-24)*. Cover-Kopf:
   Logo-Brücke nur bei Kundendecks, interne Decks nur Wortmarke
   (`.cover-head-intern`). Layouts ausschließlich aus dem
@@ -314,7 +315,9 @@ Digitale Produkte bauen auf **MD3** mit Bridgemaker-Theming
   `node templates/new-app.js <ordner> --projekt "Name"` legt den
   Projektordner außerhalb an — Brandbook live als `brand/`
   (Clone statt Kopie, Kopien driften), Session-Start-Hook pullt
-  den Kanon und meldet neue Regel-Commits als Vorschlag
+  den Kanon und meldet neue Regel-Commits als Vorschlag; ein
+  PostToolUse-Hook (`templates/app-lint.js`) blockiert farbige
+  Kanten an Boxen direkt beim Schreiben
   *(Workflow Nils, 2026-07-24; Howto: `howto/produkt-projekte.md`)*.
 
 ## 10. Do's & Don'ts

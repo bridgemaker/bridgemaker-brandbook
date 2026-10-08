@@ -24,7 +24,9 @@
    Status- oder KPI-Karten, auch nicht als Kategorie-Code.
    Hervorhebung nur über Surfaces (`bm-card-stone/-mauve/-sage/-sand`),
    Status-Boxen als Tint-Fläche, Outline-Box nimmt zurück
-   (`brand/guidelines/04-surfaces-glass.md` §4.2).
+   (`brand/guidelines/04-surfaces-glass.md` §4.2). Ein Hook
+   (`brand/templates/app-lint.js`) prüft jede geschriebene Datei;
+   meldet er „BRAND-LINT", wird sofort korrigiert, nie umgangen.
 5. **Unklar? Fragen.** Markenkritisches nie improvisieren
    (`brand/CLAUDE.md`, Abschnitt 11).
 

@@ -29,6 +29,9 @@
    - Serien-Register: läuft dieselbe Tabelle über mehrere Slides,
      stehen Headline, Tabellen-Oberkante und Spaltenraster beim
      Blättern (identische th-Signatur = eine Serie)
+   - Farbige Kanten an Boxen: einseitige/ungleiche Border, farbiger
+     Rahmen, einseitiger Inset-Shadow, ::before/::after-Balken,
+     Streifen-Div am Rand — an jeder Seite verboten (Nils, 08.10.)
 
    Nutzung (im Deck-Ordner oder mit Pfad):
      node ../templates/deck-lint.js <deck>.html
@@ -197,6 +200,73 @@ function lintInPage() {
     if (overX > 2 || overY > 2) {
       err(`Inhalt läuft aus der Slide (${overX > 2 ? overX + 'px horizontal' : ''}${overX > 2 && overY > 2 ? ', ' : ''}${overY > 2 ? overY + 'px vertikal' : ''}) — kürzen oder Layout wechseln.`);
     }
+
+    /* Farbige Kanten an Boxen — absolut verboten, an jeder Seite
+       (guidelines/04 §4.2, Nils 2026-10-08). Gemessen am echten
+       Layout: einseitige oder ungleich starke Border, farbiger
+       Rahmen ringsum, einseitiger Inset-Shadow, Balken als
+       ::before/::after oder schmales Div am Rand einer Box.
+       Neutrale 1px-Trenner (.stat-cell) bleiben erlaubt. */
+    const rgbOf = c => (c.match(/[\d.]+/g) || []).map(Number);
+    const visible = c => { const v = rgbOf(c); return v.length >= 3 && (v.length < 4 || v[3] > 0.05); };
+    const colorful = c => { const [r, g, b] = rgbOf(c); return Math.max(r, g, b) - Math.min(r, g, b) > 24; };
+    const isBox = cs => parseFloat(cs.borderTopLeftRadius) > 0 || parseFloat(cs.borderBottomRightRadius) > 0 ||
+      visible(cs.backgroundColor) || (cs.boxShadow !== 'none' && !/inset/.test(cs.boxShadow));
+    const edgeHits = new Set();
+    const edgeErr = (el, what) => {
+      const key = what + '|' + (el.className || el.tagName);
+      if (edgeHits.has(key)) return;
+      edgeHits.add(key);
+      const label = (el.innerText || '').trim().replace(/\s+/g, ' ').slice(0, 30) || el.tagName.toLowerCase() + (el.classList.length ? '.' + [...el.classList].join('.') : '');
+      err(`${what} bei „${label}" — farbige Kanten an Boxen sind verboten (oben, links, egal wo). Hervorhebung über eine Surface, Outline-Box nimmt zurück (guidelines/04 §4.2).`);
+    };
+    s.querySelectorAll('*').forEach(el => {
+      if (el.closest('svg') || el.closest('.cover-head, .slide-foot, .slide-head')) return;
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none') return;
+      const sides = ['Top', 'Right', 'Bottom', 'Left'].map(k => ({
+        w: cs['border' + k + 'Style'] === 'none' ? 0 : parseFloat(cs['border' + k + 'Width']) || 0,
+        c: cs['border' + k + 'Color'],
+      }));
+      const drawn = sides.filter(x => x.w > 0);
+      if (drawn.length) {
+        const maxW = Math.max(...drawn.map(x => x.w));
+        const uniform = drawn.length === 4 && drawn.every(x => x.w === sides[0].w && x.c === sides[0].c);
+        if (!uniform && (maxW >= 2 || (isBox(cs) && drawn.some(x => colorful(x.c))))) {
+          edgeErr(el, `Einseitige Kante (${maxW}px)`);
+        } else if (uniform && isBox(cs) && colorful(sides[0].c)) {
+          edgeErr(el, 'Farbiger Rahmen');
+        }
+      }
+      if (/inset/.test(cs.boxShadow)) {
+        cs.boxShadow.split(/,(?![^(]*\))/).forEach(sh => {
+          if (!/inset/.test(sh)) return;
+          const nums = (sh.replace(/rgba?\([^)]*\)/, '').match(/-?[\d.]+px/g) || []).map(parseFloat);
+          const col = (sh.match(/rgba?\([^)]*\)/) || [''])[0];
+          const [r, g, b] = rgbOf(col);
+          const white = r > 240 && g > 240 && b > 240;
+          if ((nums[0] || nums[1]) && !white && visible(col)) edgeErr(el, 'Einseitiger Inset-Shadow');
+        });
+      }
+      const pr = el.parentElement;
+      ['::before', '::after'].forEach(pseudo => {
+        const ps = getComputedStyle(el, pseudo);
+        if (ps.content === 'none' || ps.content === 'normal' || ps.display === 'none') return;
+        if (!/absolute|fixed/.test(ps.position) || !isBox(cs)) return;
+        const w = parseFloat(ps.width) || 0, h = parseFloat(ps.height) || 0;
+        const bar = (w > 0 && w <= 8 && h >= 16) || (h > 0 && h <= 8 && w >= 16);
+        if (bar && visible(ps.backgroundColor) && (colorful(ps.backgroundColor) || Math.max(w, h) >= 2 * Math.min(w, h))) {
+          edgeErr(el, `Balken als ${pseudo}`);
+        }
+      });
+      if (pr && isBox(getComputedStyle(pr)) && !el.children.length && !(el.innerText || '').trim() && visible(cs.backgroundColor)) {
+        const r = el.getBoundingClientRect(), p = pr.getBoundingClientRect();
+        const thinV = r.width / scale <= 8 && r.height >= p.height * 0.6;
+        const thinH = r.height / scale <= 8 && r.width >= p.width * 0.6;
+        const atEdge = Math.abs(r.left - p.left) < 3 || Math.abs(r.right - p.right) < 3 || Math.abs(r.top - p.top) < 3 || Math.abs(r.bottom - p.bottom) < 3;
+        if ((thinV || thinH) && atEdge) edgeErr(el, 'Farbstreifen-Element am Rand');
+      }
+    });
 
     /* Fußzeilen-Schutzzone: --deck-pad-b (Slide-padding-bottom)
        ist Sperrzone. Inhalt, der „noch auf die Seite passt", aber

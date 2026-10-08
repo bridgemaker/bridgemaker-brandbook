@@ -16,7 +16,8 @@
      <zielordner>/
        brand/                  (Brandbook, live — Session-Sync pullt)
        CLAUDE.md               (Regel-Destillat + Update-Protokoll)
-       .claude/settings.json   (SessionStart-Hook → brand-sync.sh)
+       .claude/settings.json   (SessionStart → brand-sync.sh,
+                                PostToolUse → brand/templates/app-lint.js)
        .claude/brand-sync.sh   (Pull + Delta-Meldung)
        README.md
 
@@ -93,6 +94,9 @@ if [ "$OLD" != "$NEW" ]; then
 else
   echo "Brandbook-Kanon unverändert (Stand $(git -C brand log -1 --format=%h))."
 fi
+# Brand-Lint: Verstöße gegen absolute Verbote (farbige Kanten an Boxen)
+# bei jedem Sitzungsbeginn melden — Korrektur hat Vorrang.
+[ -f brand/templates/app-lint.js ] && node brand/templates/app-lint.js . || true
 `;
 fs.writeFileSync(path.join(dest, '.claude', 'brand-sync.sh'), syncSh, { mode: 0o755 });
 
@@ -100,6 +104,11 @@ fs.writeFileSync(path.join(dest, '.claude', 'settings.json'), JSON.stringify({
   hooks: {
     SessionStart: [
       { hooks: [{ type: 'command', command: 'bash .claude/brand-sync.sh' }] },
+    ],
+    /* Nach jedem Schreiben: farbige Kanten an Boxen blockieren —
+       Exit 2 schickt den Fund sofort zurück an Claude. */
+    PostToolUse: [
+      { matcher: 'Edit|Write|MultiEdit', hooks: [{ type: 'command', command: 'cd "$CLAUDE_PROJECT_DIR" && { test ! -f brand/templates/app-lint.js || node brand/templates/app-lint.js --hook; }' }] },
     ],
   },
 }, null, 2) + '\n');
