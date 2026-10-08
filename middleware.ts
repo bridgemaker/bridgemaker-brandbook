@@ -161,7 +161,8 @@ function loginPage(zustand: Zustand, status: number, next = '/'): Response {
                 0 10px 24px -18px rgba(28,28,30,0.10);
   }
   .wordmark { height: 20px; width: auto; display: block; margin-bottom: 32px; }
-  h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+  h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; text-wrap: balance; }
+  p, .fehler { text-wrap: pretty; }
   p { font-size: 15px; color: #55524C; margin-bottom: 32px; line-height: 1.5; }
   .button {
     display: flex; align-items: center; justify-content: center; gap: 12px;
@@ -178,7 +179,7 @@ function loginPage(zustand: Zustand, status: number, next = '/'): Response {
 <main class="card">
   ${WORDMARK}
   <h1>Brandbook</h1>
-  <p>Melde dich mit deinem Bridgemaker-Konto an.</p>
+  <p>Melde dich mit deinem Bridgemaker-Konto&nbsp;an.</p>
   ${meldung ? `<div class="fehler">${meldung}</div>` : ''}
   ${zustand === 'setup' ? '' : `<a class="button" href="/auth/login?next=${encodeURIComponent(next)}">${GOOGLE_G}Über Google anmelden</a>`}
 </main>
