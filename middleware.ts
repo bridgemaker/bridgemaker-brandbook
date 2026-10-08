@@ -157,12 +157,13 @@ function loginPage(zustand: Zustand, status: number, next = '/'): Response {
   }
   .card {
     background: #fff; border-radius: 20px; padding: 48px 40px; max-width: 400px; width: 100%;
+    text-align: center;
     box-shadow: inset 0 0 0 1px rgba(28,28,30,0.06), 0 1px 2px rgba(28,28,30,0.03),
                 0 10px 24px -18px rgba(28,28,30,0.10);
   }
-  .wordmark { height: 20px; width: auto; display: block; margin-bottom: 32px; }
+  .wordmark { height: 20px; width: auto; display: block; margin: 0 auto 32px; }
   h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; text-wrap: balance; }
-  p, .fehler { text-wrap: pretty; }
+  p, .fehler { text-wrap: balance; }
   p { font-size: 15px; color: #55524C; margin-bottom: 32px; line-height: 1.5; }
   .button {
     display: flex; align-items: center; justify-content: center; gap: 12px;
