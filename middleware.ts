@@ -117,6 +117,12 @@ function safeNext(next: string | null): string {
 
 /* ---------- Login-Seite ---------- */
 
+// Googles „G" nach den Sign-in-Branding-Richtlinien: immer vierfarbig,
+// nie umgefärbt — fremde Marke, keine Ausnahme von der Icon-Regel
+// (eigene Icons bleiben einfarbig). Button = Googles dunkle Variante
+// in Bridgemaker-Form (Charcoal-Pill), Label in Googles Wortlaut.
+const GOOGLE_G = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
+
 type Zustand = 'login' | 'domain' | 'abgelaufen' | 'abgebrochen' | 'fehler' | 'setup';
 
 const MELDUNG: Record<Zustand, string> = {
@@ -158,11 +164,13 @@ function loginPage(zustand: Zustand, status: number, next = '/'): Response {
   h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
   p { font-size: 15px; color: #55524C; margin-bottom: 32px; line-height: 1.5; }
   .button {
-    display: block; width: 100%; padding: 13px 24px; font-size: 15px; font-weight: 500;
-    text-align: center; text-decoration: none; border-radius: 999px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    width: 100%; padding: 13px 24px; font-size: 15px; font-weight: 500;
+    text-decoration: none; border-radius: 999px;
     background: #1C1C1E; color: #F5F4F1; transition: background 240ms ease-out;
   }
   .button:hover { background: #4A3268; }
+  .button svg { width: 18px; height: 18px; flex: none; }
   .fehler { color: #B84A6F; font-size: 13px; line-height: 1.5; margin: -16px 0 24px; }
 </style>
 </head>
@@ -172,7 +180,7 @@ function loginPage(zustand: Zustand, status: number, next = '/'): Response {
   <h1>Brandbook</h1>
   <p>Interner Bereich. Melde dich mit deinem Bridgemaker-Konto an.</p>
   ${meldung ? `<div class="fehler">${meldung}</div>` : ''}
-  ${zustand === 'setup' ? '' : `<a class="button" href="/auth/login?next=${encodeURIComponent(next)}">Mit Google anmelden</a>`}
+  ${zustand === 'setup' ? '' : `<a class="button" href="/auth/login?next=${encodeURIComponent(next)}">${GOOGLE_G}Über Google anmelden</a>`}
 </main>
 </body>
 </html>`;
