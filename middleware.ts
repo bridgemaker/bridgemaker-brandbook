@@ -1,17 +1,26 @@
 /* ============================================================
-   PASSWORTSCHUTZ — brandbook.bridgemaker.com
+   ZUGANGSSCHUTZ — brandbook.bridgemaker.com
    Vercel Routing Middleware (läuft vor dem Cache, auf jedem
    Request, auch auf den *.vercel.app-Domains und Previews).
 
-   Nur EIN Passwortfeld (Wunsch Nils, 22.07.): statt Basic Auth
-   (dessen Browser-Dialog immer auch einen Benutzernamen zeigt)
-   eine eigene Login-Seite. Richtiges Passwort setzt ein
-   HttpOnly-Cookie (30 Tage), das die Middleware danach prüft.
+   Login mit Google, nur für Konten von bridgemaker.com
+   (Wunsch Nils, 08.10.: Passwort gestrichen). Ablauf:
+   /auth/login → Google (hd=bridgemaker.com) → /auth/callback
+   tauscht den Code serverseitig gegen das ID-Token, prüft
+   Aussteller, Client, Ablauf, verifizierte Mail UND die Domain
+   (hd-Claim + Mail-Endung — der hd-Parameter im Link allein
+   ist nur ein Hinweis an Google, kein Schutz). Erst dann setzt
+   die Middleware ein HMAC-signiertes Session-Cookie (30 Tage).
+   /auth/logout löscht es.
 
-   Das Passwort liegt NIE im Repo: Vercel-Umgebungsvariable
-   BRANDBOOK_PASSWORD. Ist sie nicht gesetzt, bleibt alles zu —
-   sicher geschlossen statt offen. Im Cookie steht nie das
-   Passwort selbst, sondern sein SHA-256-Hash.
+   Konfiguration nur über Vercel-Umgebungsvariablen, nie im Repo:
+   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET (OAuth-Client vom Typ
+   „Webanwendung", Zielgruppe „Intern", Redirect-URI
+   <origin>/auth/callback) und AUTH_SECRET (Zufallswert, signiert
+   die Cookies; neu setzen = alle abmelden). Fehlt eine davon,
+   bleibt alles zu — sicher geschlossen statt offen. Der Login
+   funktioniert nur auf Origins, deren Callback im Google-Client
+   eingetragen ist (brandbook.bridgemaker.com).
 
    Die Login-Seite ist der einzige öffentliche Teil: kein
    Google-Fonts-Aufruf (DSGVO), kein tokens.css (läge sonst vor
@@ -26,8 +35,11 @@
 
 export const config = { matcher: '/((?!assets/fonts/).*)' };
 
-const COOKIE = 'bb_auth';
+const DOMAIN = 'bridgemaker.com';
+const SESSION = 'bb_session';
+const STATE = 'bb_oauth';
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 Tage
+const STATE_AGE = 60 * 10; // 10 Minuten für den Weg über Google
 
 const WORDMARK = `<svg class="wordmark" role="img" aria-label="Bridgemaker" width="386" height="48" viewBox="0 0 386 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_936_89)">
@@ -51,13 +63,73 @@ const WORDMARK = `<svg class="wordmark" role="img" aria-label="Bridgemaker" widt
 </defs>
 </svg>`;
 
-async function token(secret: string): Promise<string> {
-  const data = new TextEncoder().encode(secret + ':bm-brandbook-v1');
-  const hash = await crypto.subtle.digest('SHA-256', data);
-  return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+/* ---------- Signierte Cookies (HMAC-SHA-256) ---------- */
+
+const enc = new TextEncoder();
+
+function b64url(bytes: Uint8Array): string {
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-function loginPage(fehler: boolean): Response {
+function fromB64url(s: string): Uint8Array {
+  const bin = atob(s.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - (s.length % 4)) % 4));
+  return Uint8Array.from(bin, c => c.charCodeAt(0));
+}
+
+function hmacKey(secret: string): Promise<CryptoKey> {
+  return crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']);
+}
+
+async function sign(data: object, secret: string): Promise<string> {
+  const body = b64url(enc.encode(JSON.stringify(data)));
+  const sig = await crypto.subtle.sign('HMAC', await hmacKey(secret), enc.encode(body));
+  return `${body}.${b64url(new Uint8Array(sig))}`;
+}
+
+// Liefert den Inhalt nur bei gültiger Signatur und nicht abgelaufenem x (ms).
+async function unsign(value: string | null, secret: string): Promise<Record<string, any> | null> {
+  if (!value) return null;
+  const [body, sig] = value.split('.');
+  if (!body || !sig) return null;
+  try {
+    const ok = await crypto.subtle.verify('HMAC', await hmacKey(secret), fromB64url(sig), enc.encode(body));
+    if (!ok) return null;
+    const data = JSON.parse(new TextDecoder().decode(fromB64url(body)));
+    return typeof data.x === 'number' && data.x > Date.now() ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+function readCookie(request: Request, name: string): string | null {
+  const cookies = request.headers.get('cookie') ?? '';
+  const match = cookies.match(new RegExp(`(?:^|;\\s*)${name}=([A-Za-z0-9_.-]+)`));
+  return match ? match[1] : null;
+}
+
+// Nur Pfade auf derselben Seite — kein offener Redirect über ?next=.
+function safeNext(next: string | null): string {
+  if (!next || !next.startsWith('/') || next.startsWith('//') || next.startsWith('/\\') || next.startsWith('/auth/')) return '/';
+  return next;
+}
+
+/* ---------- Login-Seite ---------- */
+
+type Zustand = 'login' | 'domain' | 'abgelaufen' | 'abgebrochen' | 'fehler' | 'setup';
+
+const MELDUNG: Record<Zustand, string> = {
+  login: '',
+  domain: 'Dieses Konto gehört nicht zu bridgemaker.com. Melde dich mit deinem Bridgemaker-Konto an.',
+  abgelaufen: 'Die Anmeldung ist abgelaufen. Starte sie bitte neu.',
+  abgebrochen: 'Die Anmeldung wurde abgebrochen.',
+  fehler: 'Google hat die Anmeldung nicht bestätigt. Versuch es noch einmal.',
+  setup: 'Der Login ist noch nicht eingerichtet.',
+};
+
+function loginPage(zustand: Zustand, status: number, next = '/'): Response {
+  const meldung = MELDUNG[zustand];
   const html = `<!doctype html>
 <html lang="de">
 <head>
@@ -85,71 +157,140 @@ function loginPage(fehler: boolean): Response {
   .wordmark { height: 20px; width: auto; display: block; margin-bottom: 32px; }
   h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
   p { font-size: 15px; color: #55524C; margin-bottom: 32px; line-height: 1.5; }
-  label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; }
-  input {
-    width: 100%; padding: 12px 14px; font-size: 15px; font-family: inherit;
-    border: 1px solid #C5C0B8; border-radius: 10px; background: transparent;
-    margin-bottom: 24px; outline: none;
+  .button {
+    display: block; width: 100%; padding: 13px 24px; font-size: 15px; font-weight: 500;
+    text-align: center; text-decoration: none; border-radius: 999px;
+    background: #1C1C1E; color: #F5F4F1; transition: background 240ms ease-out;
   }
-  input:focus { border: 1.5px solid #6B4A94; background: #fff; padding: 11.5px 13.5px; }
-  button {
-    width: 100%; padding: 13px 24px; font-size: 15px; font-weight: 500; font-family: inherit;
-    border: none; border-radius: 999px; background: #1C1C1E; color: #F5F4F1; cursor: pointer;
-    transition: background 240ms ease-out;
-  }
-  button:hover { background: #4A3268; }
-  .fehler { color: #B84A6F; font-size: 13px; margin: -16px 0 24px; }
+  .button:hover { background: #4A3268; }
+  .fehler { color: #B84A6F; font-size: 13px; line-height: 1.5; margin: -16px 0 24px; }
 </style>
 </head>
 <body>
 <main class="card">
   ${WORDMARK}
   <h1>Brandbook</h1>
-  <p>Interner Bereich. Das Passwort bekommst du im Team.</p>
-  <form method="post">
-    <label for="password">Passwort</label>
-    <input id="password" name="password" type="password" autocomplete="current-password" autofocus required />
-    ${fehler ? '<div class="fehler">Das Passwort stimmt nicht.</div>' : ''}
-    <button type="submit">Brandbook öffnen</button>
-  </form>
+  <p>Interner Bereich. Melde dich mit deinem Bridgemaker-Konto an.</p>
+  ${meldung ? `<div class="fehler">${meldung}</div>` : ''}
+  ${zustand === 'setup' ? '' : `<a class="button" href="/auth/login?next=${encodeURIComponent(next)}">Mit Google anmelden</a>`}
 </main>
 </body>
 </html>`;
   return new Response(html, {
-    status: 401,
+    status,
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
   });
 }
 
+/* ---------- Google OAuth ---------- */
+
+function cookieHeader(name: string, value: string, maxAge: number, path = '/'): string {
+  return `${name}=${value}; Path=${path}; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Lax`;
+}
+
+// ID-Token kommt direkt vom Google-Token-Endpunkt (TLS, mit Client-Secret)
+// — OIDC Core 3.1.3.7 erlaubt dann den Verzicht auf die Signaturprüfung.
+function readIdToken(idToken: string): Record<string, any> | null {
+  try {
+    return JSON.parse(new TextDecoder().decode(fromB64url(idToken.split('.')[1])));
+  } catch {
+    return null;
+  }
+}
+
+function isBridgemaker(claims: Record<string, any>, clientId: string): boolean {
+  const email = String(claims.email ?? '').toLowerCase();
+  return (
+    (claims.iss === 'https://accounts.google.com' || claims.iss === 'accounts.google.com') &&
+    claims.aud === clientId &&
+    typeof claims.exp === 'number' && claims.exp * 1000 > Date.now() &&
+    claims.email_verified === true &&
+    claims.hd === DOMAIN &&
+    email.endsWith('@' + DOMAIN)
+  );
+}
+
 export default async function middleware(request: Request) {
-  const secret = process.env.BRANDBOOK_PASSWORD;
-  if (!secret) return loginPage(false);
-  const expected = await token(secret);
+  const url = new URL(request.url);
 
-  const cookies = request.headers.get('cookie') ?? '';
-  const match = cookies.match(new RegExp(`(?:^|;\\s*)${COOKIE}=([a-f0-9]+)`));
-  if (match && match[1] === expected) return; // durchlassen — Antwort liefert das statische Deploy
-
-  if (request.method === 'POST') {
-    let password = '';
-    try {
-      const form = await request.formData();
-      password = String(form.get('password') ?? '');
-    } catch {
-      /* kein Formular-Body → wie leeres Passwort behandeln */
-    }
-    if (password === secret) {
-      return new Response(null, {
-        status: 303,
-        headers: {
-          Location: new URL(request.url).pathname,
-          'Set-Cookie': `${COOKIE}=${expected}; Path=/; Max-Age=${MAX_AGE}; HttpOnly; Secure; SameSite=Lax`,
-          'Cache-Control': 'no-store',
-        },
-      });
-    }
-    return loginPage(true);
+  if (url.pathname === '/auth/logout') {
+    return new Response(null, {
+      status: 303,
+      headers: { Location: '/', 'Set-Cookie': cookieHeader(SESSION, '', 0), 'Cache-Control': 'no-store' },
+    });
   }
 
-  return loginPage(false);
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const secret = process.env.AUTH_SECRET;
+  if (!clientId || !clientSecret || !secret) return loginPage('setup', 503);
+
+  const redirectUri = `${url.origin}/auth/callback`;
+
+  if (url.pathname === '/auth/login') {
+    const state = b64url(crypto.getRandomValues(new Uint8Array(16)));
+    const next = safeNext(url.searchParams.get('next'));
+    const stateCookie = await sign({ s: state, n: next, x: Date.now() + STATE_AGE * 1000 }, secret);
+    const google = new URL('https://accounts.google.com/o/oauth2/v2/auth');
+    google.search = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      response_type: 'code',
+      scope: 'openid email',
+      hd: DOMAIN,
+      prompt: 'select_account',
+      state,
+    }).toString();
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: google.toString(),
+        'Set-Cookie': cookieHeader(STATE, stateCookie, STATE_AGE, '/auth/callback'),
+        'Cache-Control': 'no-store',
+      },
+    });
+  }
+
+  if (url.pathname === '/auth/callback') {
+    const stored = await unsign(readCookie(request, STATE), secret);
+    if (!stored || stored.s !== url.searchParams.get('state')) return loginPage('abgelaufen', 400);
+    const next = safeNext(stored.n);
+
+    const code = url.searchParams.get('code');
+    if (!code) return loginPage('abgebrochen', 401, next);
+
+    let claims: Record<string, any> | null = null;
+    try {
+      const res = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          code,
+          client_id: clientId,
+          client_secret: clientSecret,
+          redirect_uri: redirectUri,
+          grant_type: 'authorization_code',
+        }),
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (typeof json.id_token === 'string') claims = readIdToken(json.id_token);
+      }
+    } catch {
+      /* Netzwerkfehler → unten als „fehler" behandelt */
+    }
+    if (!claims) return loginPage('fehler', 502, next);
+    if (!isBridgemaker(claims, clientId)) return loginPage('domain', 403, next);
+
+    const session = await sign({ e: String(claims.email).toLowerCase(), x: Date.now() + MAX_AGE * 1000 }, secret);
+    const headers = new Headers({ Location: next, 'Cache-Control': 'no-store' });
+    headers.append('Set-Cookie', cookieHeader(SESSION, session, MAX_AGE));
+    headers.append('Set-Cookie', cookieHeader(STATE, '', 0, '/auth/callback'));
+    return new Response(null, { status: 303, headers });
+  }
+
+  const session = await unsign(readCookie(request, SESSION), secret);
+  if (session && String(session.e).endsWith('@' + DOMAIN)) return; // durchlassen — Antwort liefert das statische Deploy
+
+  return loginPage('login', 401, url.pathname + url.search);
 }
