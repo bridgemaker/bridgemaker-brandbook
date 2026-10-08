@@ -47,10 +47,53 @@ schlichtem Off-White liest Glas sich als schmutziges Weiß → Paper nehmen
 dazwischen.
 
 Karten-Konventionen (alle Varianten): `radius-xl` (20px), großzügiges
-Padding auf dem 8er-Raster, Füllung variieren — nie drei Karten derselben
-Surface in einer Reihe. **Farbige Akzent-Kanten sind absolut verboten**
-(`border-left: 4px solid …`-Callout-Balken sind gebannt — Betonung über
-Surface-Füllung, Badge oder Eyebrow).
+Padding auf dem 8er-Raster. **Tönung braucht Bedeutung:** Dieselbe
+Surface darf sich in einer Reihe frei wiederholen — Uniformität ist
+Ruhe, kein Fehler. Unterschiedliche Tönungen nur, wenn der Unterschied
+etwas sagt (Identität, Kategorie, Rolle); verboten ist die
+Schachbrett-Alternanz zweier Tönungen und jeder Farbwechsel als
+Deko-Rhythmus.
+
+### Hervorhebung — vier Stufen, sonst nichts
+
+*(Nils, 2026-10-08)* Eine Karte wird hervorgehoben, indem sie eine
+Surface bekommt — nicht durch Rahmen oder Kanten.
+
+| Stufe | Rezept | Wirkung | Einsatz |
+|---|---|---|---|
+| Weiß flach | `bm-card` | neutral | Grundform, ruhiger Inhalt |
+| Weiß shallow | `bm-card card-clean` | sitzt auf der Seite | Standard-Content-Karte |
+| **Surface** | `bm-card` + `bm-card-stone/-mauve/-sage/-sand` (+ `card-elevated`) | **hebt hervor** | Das eine Mittel der Hervorhebung; Kategorie/Rolle über die Familie |
+| Outline | transparent, `border: var(--border-subtle)` rundum, `radius-xl` | **nimmt zurück** | Nebensache, Optionales, Platzhalter, Leerzustand |
+
+Die Haarlinie rundum gibt es nur als Outline-Box — und die nimmt
+zurück, sie hebt nie hervor. Kategorien unterscheidet die Eyebrow
+oder der Titel, nicht die Farbe eines Rahmens. Status-Boxen
+(Hinweis, Warnung, Ergebnis) laufen als Fläche im Status-Tint
+(§2.8) ohne Rand.
+
+### ⛔ Verboten: farbige Kanten an Boxen — absolut
+
+Nie eine farbige oder abweichend starke Kante an nur einer Seite
+einer Karte, Box, Callout-, Alert-, Status- oder Listen-Box — **egal
+ob oben, links, rechts oder unten.** Bei abgerundeten Ecken sieht es
+besonders schlimm aus und wirkt sofort wie generisches AI-Design.
+
+Verboten in jeder Bauform:
+
+- `border-top` / `border-left` / `border-right` / `border-bottom` mit
+  Farbe oder abweichender Stärke an einer Box
+- Tailwind `border-t-*`, `border-l-*`, `border-r-*`, `border-b-*`
+  (z. B. `border-t-4 border-bm-teal`) an Boxen
+- `border-inline-start/-end`, `border-block-start/-end`
+- einseitiger Inset-Shadow (`box-shadow: inset 4px 0 0 …`)
+- `::before`/`::after`-Balken, schmales farbiges Div oder
+  Gradient-Streifen am Rand einer Box
+- ein farbiger Rahmen ringsum als Hervorhebung
+
+Erlaubt bleiben neutrale Trennlinien *zwischen* Elementen
+(Spalten-/Zeilentrenner wie `.stat-cell`, Sektionsgrenzen
+`--surface-stone`, Header-Haarlinie) — sie markieren keine Box.
 
 ## 4.3 Karten-Rezepte (exakt kopieren)
 

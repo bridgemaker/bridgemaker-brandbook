@@ -169,6 +169,12 @@ den Einleitungstext, nicht fünfmal ins Raster.
    aus" ist hier ein Fehler). Für weitere Kapitel nimmst du die
    fünf mitgelieferten Trenner-Vorlagen (eine je Farbwelt); ein
    Kapitel behält seine Farbwelt.
+8. **Nie eine farbige Kante an einer Box — oben, links, egal wo.**
+   Kein Farbstreifen an Karten oder Hinweis-Boxen, keine farbige
+   `border-top`/`border-left`, kein `::before`-Balken, kein farbiger
+   Rahmen, auch nicht als Kategorie-Code. Hervorhebung nur über die
+   Surface-Flächen; eine Outline-Box nimmt zurück. Neutrale
+   Trennlinien zwischen Spalten (`.stat-cell`) bleiben erlaubt.
 
 ## Selbstcheck nach jeder Runde
 
@@ -179,6 +185,8 @@ machen.) Ist jede Headline maximal zweizeilig (etwa 60 Zeichen)
 und frei von Gedankenstrichen? Tragen alle Content-Slides Kopf-
 und Fußzeile mit fortlaufender Seitenzahl? Steht die Wortmarke
 auf dem Cover in der unveränderten `cover-head`-Zeile oben links?
+Trägt irgendeine Box eine farbige Kante oder einen farbigen Rahmen?
+(Dann entfernen, Hervorhebung über die Surface.)
 Behauptet jede Slide genau eine Sache?
 
 Danach der **Zeichen-Suchlauf** — kein Stilgefühl, ein Suchlauf:

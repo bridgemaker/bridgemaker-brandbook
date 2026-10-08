@@ -53,6 +53,9 @@ Nichts weglassen, nichts umbauen. Der Kommentar in Zeile 2
        Kategorie, Rolle). SCHACHBRETT-ALTERNANZ IST VERBOTEN.
        Summen-/Resultat-Elemente anders exponieren als die Reihe
        darüber (Rolle = Behandlung → .result-band).
+     - NIE EINE FARBIGE KANTE AN EINER BOX: kein Farbstreifen
+       oben/links/sonstwo, kein ::before-Balken, kein farbiger
+       Rahmen. Hervorhebung nur über Surfaces.
      - EINE LINIEN-EBENE PRO FLÄCHE: Die Hairline hat pro Slide
        genau einen Job (Spalten eröffnen ODER Zeilen trennen).
        Sie bindet sich durch Nähe an ihren Inhalt. Zwischen-

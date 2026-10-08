@@ -97,7 +97,10 @@ beantworten (kurz notieren, nicht nur denken):
 - **Zwei, drei tragende Zahlen?** → freie Stats zwischen vertikalen
   Hairlines — kein Chart, keine KPI-Kacheln.
 - **Benannte Dinge (Produkte, Cases, Angebote)?** → Objekt-Karten,
-  Tönung uniform oder eine je Identität — nie Schachbrett.
+  Tönung uniform oder eine je Identität — nie Schachbrett. Identität
+  trägt die Surface oder der Titel, **nie ein Farbstreifen an der
+  Karte** (weder oben noch links, kein `::before`-Balken, kein
+  farbiger Rahmen; guidelines/04 §4.2).
 - **Zählbare Handlungsaufträge (Risiken, Hebel, Felder)?** →
   nummerierte Objekt-Karten: Display-Ziffer light im
   Familien-Deep-Ton, Surface-Farbcode eine je Identität.
@@ -189,6 +192,8 @@ jede Frage explizit beantworten** (abhaken, nicht überfliegen):
       Illustration? Alles andere → Hairlines.
 - [ ] Tönungen: Wiederholung okay, Unterschied nur mit Bedeutung —
       **kein Schachbrett?** Resultat-Elemente anders exponiert?
+- [ ] **Keine farbige Kante an irgendeiner Box?** (oben, links,
+      egal wo; kein Balken, kein farbiger Rahmen — absolut verboten)
 - [ ] Eine Linien-Ebene? (Keine Unterstreichung + Trennlinie
       gemischt, keine Linien-Listen in Karten)
 - [ ] Badges gezählt und klassifiziert? (max. 3; Werte als

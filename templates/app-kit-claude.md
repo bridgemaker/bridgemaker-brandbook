@@ -18,7 +18,14 @@
 3. **Rezepte nutzen statt nachbauen:** `type-*`, `bm-btn`,
    `bm-input`/`bm-select` (Chevron eingebaut), `card-clean`,
    Badges nach Vokabular. MD3 füllt nur die Lücken.
-4. **Unklar? Fragen.** Markenkritisches nie improvisieren
+4. **Nie eine farbige Kante an einer Box — oben, links, egal wo.**
+   Kein `border-t-4`/`border-l-4`, kein inset-Shadow-Streifen, kein
+   `::before`-Balken, kein farbiger Rahmen — auch nicht bei Hinweis-,
+   Status- oder KPI-Karten, auch nicht als Kategorie-Code.
+   Hervorhebung nur über Surfaces (`bm-card-stone/-mauve/-sage/-sand`),
+   Status-Boxen als Tint-Fläche, Outline-Box nimmt zurück
+   (`brand/guidelines/04-surfaces-glass.md` §4.2).
+5. **Unklar? Fragen.** Markenkritisches nie improvisieren
    (`brand/CLAUDE.md`, Abschnitt 11).
 
 ## Kanon-Updates einarbeiten

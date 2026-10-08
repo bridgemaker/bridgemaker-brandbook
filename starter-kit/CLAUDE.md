@@ -59,6 +59,10 @@
 - Farben NUR über Token-Utilities (`bg-bm-purple`, `text-mid`, …).
 - Grundton Off-White; Weiß ist Sektionsfläche im Wechsel.
 - Buttons Pill, immer. Marketing: `bm-btn`-Familie; Produkt: MD3-Buttons.
-- Karten sitzen: `card-clean`/`bm-card-*`; keine Akzent-Kanten.
+- Karten sitzen: `card-clean`/`bm-card-*`. Hervorhebung NUR über
+  Surfaces (`bm-card-stone/-mauve/-sage/-sand`); Outline-Box nimmt zurück.
+- **Nie eine farbige Kante an einer Box — oben, links, egal wo**
+  (`border-t-4`, `border-l-4`, inset-Shadow, `::before`-Balken) und nie
+  farbige Rahmen. Auch nicht bei Status-/Hinweis-Boxen: die sind Tint-Fläche.
 - Höchstens ein Motion-Moment pro Sektion; `prefers-reduced-motion` gilt.
 - Unklar? Fragen — Markenkritisches nie improvisieren.

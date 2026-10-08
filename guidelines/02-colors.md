@@ -135,6 +135,9 @@ Auf der Website heißen die Tailwind-Klassen `bg-status-*` / `text-status-*`
   (Off-White, Weiß, Surfaces). **Tint** für Flächen dahinter (Badge,
   Zeile). Auf einer Tint steht Text in `--charcoal`, nie in der eigenen
   Base-Farbe — Amber auf Amber-Tint hat keinen Kontrast.
+- **Status-Boxen** (Hinweis, Warnung, Prüfergebnis) sind reine
+  Tint-Flächen ohne Rand. Nie Tint plus farbige Kante oben oder links,
+  nie Base-Farbe als Rahmen (Verbot: `04-surfaces-glass.md` §4.2).
 - Binäre Prüfungen (erfüllt / nicht erfüllt) bleiben bei
   `teal-tint`+`deep-teal` und `rose-tint`+`deep-berry` (Stand Website).
   Status-Farben kommen erst ins Spiel, wenn es Zwischenstufen gibt.

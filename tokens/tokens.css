@@ -205,6 +205,13 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
 .bm-card-sand  { background: var(--surface-sand); }
 .bm-card-dark  { background: var(--charcoal); color: var(--off-white); }
 
+/* Hervorhebung: weiß flach (bm-card) → shallow (+ card-clean) → Surface
+   (bm-card-* + card-elevated) = DAS Mittel der Hervorhebung. Outline-Box
+   (transparent, var(--border-subtle) rundum) nimmt zurück.
+   VERBOTEN: farbige/stärkere Kante an nur einer Seite einer Box (oben,
+   links, egal wo; border-t-*/border-l-*, inset-Shadow, ::before-Balken)
+   und farbige Rahmen als Hervorhebung. Siehe guidelines/04 §4.2. */
+
 /* Paper — weiße matte Karte: knackige Inset-Haarlinie + nahe Elevation */
 .card-clean {
   box-shadow:

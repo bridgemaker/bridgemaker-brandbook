@@ -11,7 +11,7 @@ function BbSurfacesSection() {
       <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "0 0 24px", maxWidth: 620 }}>
         Signature-Treatment: knackige <strong>Inset-Haarlinie rundum + nahe Elevation</strong> — als Schatten-Rezept,
         nie als CSS-border. <code>card-clean</code> auf Weiß, <code>card-elevated</code> auf Tint-Füllungen.
-        Verlinkte Karten liften auf Hover. Farbige Akzent-Kanten (border-left-Callouts) sind verboten.
+        Verlinkte Karten liften auf Hover. Farbige Kanten an Boxen (oben, links, egal wo) und farbige Rahmen sind verboten.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 64 }}>
         {[

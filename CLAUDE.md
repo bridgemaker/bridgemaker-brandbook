@@ -48,7 +48,11 @@
 8. **Textarbeit? Erst `guidelines/08-voice.md` lesen** (Tone-Level,
    Wortlisten, harte Schreibregeln).
 9. **Produkt-/App-UI? → MD3 mit Bridgemaker-Mapping** (Abschnitt 9).
-10. **Unklar? FRAGEN.** Markenkritisches nie improvisieren.
+10. **Keine einzelne farbige Kante — an keiner Seite.** Karten, Boxen,
+   Callouts und Listen bekommen nie einen Farbstreifen oben, links,
+   rechts oder unten. Hervorhebung läuft über Surfaces (Abschnitt 4,
+   „Hervorhebung"). *(Nils, 2026-10-08)*
+11. **Unklar? FRAGEN.** Markenkritisches nie improvisieren.
 
 ---
 
@@ -132,12 +136,39 @@
   sagt (Identität, Kategorie, Rolle). **Verboten: Schachbrett-
   Alternanz** zweier Tönungen im Grid und jeder Farbwechsel als
   Deko-Rhythmus. Summen-/Resultat-/Basis-Elemente werden anders
-  exponiert als die Reihe darüber (Rolle = Behandlung). **Farbige
-  Akzent-Kanten (`border-left`-Callouts) sind verboten.**
+  exponiert als die Reihe darüber (Rolle = Behandlung).
   Karten-Reihen: gleiche Höhe nur bei gleicher Rolle — trägt EINE
   Karte mehr Inhalt, bricht sie als Bento aus (kompakte Karten
   gestapelt neben der hohen Detail-Karte), statt dass sich die
   Nachbarn leer aufblähen.
+
+**Hervorhebung — vier Stufen, sonst nichts** *(Nils, 2026-10-08)*:
+
+| Stufe | Rezept | Wann |
+|---|---|---|
+| Weiß flach | `bm-card` | Grundform, ruhiger Inhalt |
+| Weiß shallow | `bm-card card-clean` | Karte soll sitzen, Standard-Content |
+| **Surface** | `bm-card` + `bm-card-stone/-mauve/-sage/-sand` (+ `card-elevated`) | **DAS Mittel der Hervorhebung** — Tönung braucht Bedeutung |
+| Outline | transparent, `border: var(--border-subtle)` rundum, `radius-xl` | **zurücknehmend:** Nebensache, Optionales, Platzhalter |
+
+Die Haarlinie rundum gibt es nur als Outline-Box, und die nimmt
+zurück; sie hebt nie hervor. Kategorien unterscheidet die Eyebrow
+oder der Titel, nicht die Farbe des Rahmens.
+
+**⛔ Verbot: farbige Kanten an Boxen — absolut, ohne Ausnahme.**
+Nie eine farbige oder abweichend starke Kante an nur einer Seite
+einer Karte, Box, Callout-, Alert-, Status- oder Listen-Box,
+egal ob oben, links, rechts oder unten. Das gilt für jede Bauform:
+`border-top`/`-left`/`-right`/`-bottom` mit Farbe oder
+abweichender Stärke, Tailwind `border-t-*`/`border-l-*`/
+`border-r-*`/`border-b-*` an Boxen, `border-inline-*`/
+`border-block-*`, einseitiger Inset-Shadow (`inset 4px 0 0 …`),
+`::before`/`::after`-Balken, schmales farbiges Div oder
+Gradient-Streifen am Rand. Ebenso verboten: ein farbiger Rahmen
+ringsum als Hervorhebung. Erlaubt bleiben neutrale Trennlinien
+*zwischen* Elementen (Spalten-/Zeilentrenner, Sektionsgrenzen,
+Header-Haarlinie) in `--border-subtle`/`--surface-stone`, weil sie
+keine Box markieren.
 
 **⚠ Handwerks-Fallen (hart erarbeitet):**
 1. Tailwind v4 strippt handgeschriebenes `backdrop-filter` in
@@ -294,7 +325,8 @@ Grain auf Glas/Gradient ✓ Tone of Voice vor Textarbeit ✓ Platzhalter
 statt erfundener Assets ✓ Negativraum atmen lassen ✓ Fragen, wenn unklar.
 
 **Don't:** ganze Seiten in sterilem Reinweiß ❌ Monogramm im Header ❌
-Rechtecke statt Pills ❌ farbige Akzent-Kanten ❌ Hover nach Schwarz ❌
+Rechtecke statt Pills ❌ farbige Kanten an Boxen (oben, links, egal
+wo) ❌ farbige Rahmen als Hervorhebung ❌ Hover nach Schwarz ❌
 rohes Purple auf Dunkel ❌ drei Markenfarben gleichgewichtet ❌
 Schachbrett-Alternanz zweier Tönungen ❌ Kasane als Tapete oder hinter
 Fließtext ❌ ad-hoc-Typografie ❌ dekorative Illustrationen erfinden ❌

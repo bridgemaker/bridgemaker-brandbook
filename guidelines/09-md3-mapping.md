@@ -154,6 +154,14 @@ schiefgingen, als Regeln:)*
    Tönung bleibt an Bedeutung gebunden: KPIs gleicher Art nicht
    einfärben; höchstens die Detail-Karte, wenn ihre Rolle das
    trägt.
+4. **Hinweise, Alerts, Banner, Status-Boxen — nie mit farbiger
+   Kante:** MD3 und shadcn liefern gern Varianten mit Farbstreifen
+   oben oder links (`border-l-4`, `border-t-4`). Die sind bei uns
+   verboten, ebenso farbige Rahmen. Status-Boxen sind reine
+   Tint-Flächen (§2.8), Hervorhebung läuft über Surfaces, eine
+   Outline-Box nimmt zurück (`04-surfaces-glass.md` §4.2). Karten
+   in einer Reihe unterscheidet die Eyebrow oder der Titel, nie ein
+   Farbstreifen.
 
 ## 9.8 Icons
 
