@@ -178,7 +178,7 @@ function loginPage(zustand: Zustand, status: number, next = '/'): Response {
 <main class="card">
   ${WORDMARK}
   <h1>Brandbook</h1>
-  <p>Interner Bereich. Melde dich mit deinem Bridgemaker-Konto an.</p>
+  <p>Melde dich mit deinem Bridgemaker-Konto an.</p>
   ${meldung ? `<div class="fehler">${meldung}</div>` : ''}
   ${zustand === 'setup' ? '' : `<a class="button" href="/auth/login?next=${encodeURIComponent(next)}">${GOOGLE_G}Über Google anmelden</a>`}
 </main>
