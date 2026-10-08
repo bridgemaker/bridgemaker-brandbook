@@ -40,8 +40,9 @@ Chips und ähnliche nicht definierte Elemente.
 
 **Das Theme NICHT aus einer Seed-Farbe generieren.** MD3s
 HCT-Palettengenerierung verschiebt `#6B4A94` in Töne, die kein
-Bridgemaker-Purple mehr sind. Die Rollen explizit aus den Token-Familien
-mappen:
+Bridgemaker-Purple mehr sind. Dasselbe gilt für Dynamic Color und die
+„vibrant"-Schemata aus M3 Expressive (§9.11): nie. Die Rollen explizit
+aus den Token-Familien mappen:
 
 | MD3-Rolle | Bridgemaker-Token | Wert |
 |---|---|---|
@@ -91,6 +92,8 @@ Bridgemaker-Muster und dürfen in Produkt-UIs über Seitentiteln stehen.
 - MD3-Shape-Tokens mappen: extra-small→`--radius-sm`,
   small→`--radius-md`, medium→`--radius-lg`, large→`--radius-xl`,
   extra-large→`--radius-2xl`, full→`--radius-pill`.
+- Die Expressive-Formen (35 Shapes, Shape-Morphing) werden nicht
+  gemappt (§9.11).
 
 ## 9.5 Elevation
 
@@ -108,16 +111,40 @@ per Tint-Mathematik.
 MD3-Motion wird durch Bridgemaker-Zurückhaltung gedeckelt: Dauern und
 Easings aus [`05-motion.md`](05-motion.md), höchstens ein Motion-Moment
 pro View, `prefers-reduced-motion` Pflicht. State-Layer und Ripple dürfen
-bleiben (Feedback, keine Dekoration).
+bleiben (Feedback, keine Dekoration). Feder-Motion (Spring-Physik aus
+M3 Expressive) ist kein Default: Sie hat keine feste Dauer und bricht
+das 150/240/400-ms-Raster. Erlaubt nur dort, wo `05-motion.md` Spring
+zulässt (verspielte Mikro-Interaktionen, `--ease-spring`).
 
 ## 9.7 Implementierungs-Hinweis
 
-Referenz-Implementierung (Entscheidung zum Start des Starter-Kit-Baus):
-Empfehlung **`@material/web`** (Googles offizielle
-MD3-Web-Components; React 19 rendert Custom Elements nativ), Alternative
-MUI, falls SSR-Ergonomie schwerer wiegt als MD3-Treue. Unabhängig von der
-Library: ausschließlich über das obige Mapping themen — keine
-Library-Defaults durchsickern lassen.
+**Basis bleibt `@material/web`** (Googles offizielle
+MD3-Web-Components; React 19 rendert Custom Elements nativ) —
+bestätigt *(Nils, 2026-10-08)*. Unabhängig von der Library:
+ausschließlich über das obige Mapping themen, keine Library-Defaults
+durchsickern lassen.
+
+**Status (Stand Oktober 2026):** Material Web ist seit Juni 2024 im
+Wartungsmodus. Google liefert Bugfixes und Sicherheits-Patches, aber
+keine neuen Komponenten, und M3 Expressive kommt nicht ins Web
+([Ankündigung](https://github.com/material-components/material-web/discussions/5642),
+[m3.material.io/develop/web](https://m3.material.io/develop/web)). Für
+uns tragbar: MD3 füllt nach der Vorrang-Regel (§9.1) nur Lücken,
+Buttons, Inputs, Karten und Typo sind ohnehin Bridgemaker-Rezepte.
+
+**Lücken in Material Web** (Tooltip, Combobox, Datepicker u. ä.) in
+dieser Reihenfolge füllen:
+
+1. **Natives HTML** — `<dialog>`, Popover-API (`popover`-Attribut),
+   `<input type="date">`, `<details>` —, gestaltet über die Tokens.
+2. **React Aria** (Adobe, headless, ohne eigene Optik), wenn natives
+   HTML Barrierefreiheit oder Verhalten nicht trägt.
+
+Keine zweite Komponentenbibliothek mit eigener Optik (MUI, Mantine,
+Chakra, Ant Design, HeroUI) und kein shadcn/Radix/Base UI daneben —
+zwei Basen bedeuten zwei Looks, die wir dauerhaft überstimmen müssten.
+Ein Wechsel der Basis ist eine Kanon-Entscheidung, nie eine
+Projekt-Entscheidung.
 
 **⚠ Handwerks-Falle (hart erarbeitet):** CSS-Reset-Regeln der Seite
 (z. B. Tailwind-Preflight `* { padding: 0 }`) überschreiben per
@@ -199,3 +226,31 @@ Jedes Produkt-UI führt die fertigen Icons, keine selbst gebauten
   `src/app/favicon.ico` und `src/app/apple-icon.png` — Next serviert
   sie über die Datei-Konvention automatisch, kein `icons`-Metadata
   nötig.
+
+## 9.11 M3 Expressive — was wir übernehmen und was nicht
+
+*(Nils, 2026-10-08)* M3 Expressive (Mai 2025) erweitert MD3 um neue
+Komponenten, Feder-Motion, 35 Formen mit Shape-Morphing, betonte
+Schriftstile und „vibrant" Farbschemata. Offiziell gibt es Expressive
+nur für Android (Jetpack Compose), nicht fürs Web und nicht für
+Flutter. Wir übernehmen die Prinzipien, die zu uns passen, und bauen
+sie mit unseren Mitteln:
+
+**Übernehmen:**
+
+- **Hero-Momente rationieren** („Stick to one or two hero moments") —
+  deckt sich mit „höchstens ein Motion-Moment pro Sektion".
+- **Gruppieren statt Dekorieren** („Contain content for emphasis") —
+  deckt sich mit „Rolle = Behandlung" und Hervorhebung über Surfaces
+  (`04-surfaces-glass.md` §4.2).
+- **Button-Groups und Toolbars** als Anatomie-Vorlage, gebaut aus
+  `bm-btn` (Pill).
+
+**Nicht übernehmen:**
+
+- Shape-Morphing und die Expressive-Formen — wir haben Pill,
+  `radius-md` und `radius-xl`, keine Deko-Formen.
+- Feder-Motion als Default (§9.6).
+- Vibrant- und Dynamic-Color (§9.2) — Farbe ist rationiert.
+- Betonte Schriftstile („Emphasized") — Typo nur über `type-*`.
+

@@ -308,6 +308,13 @@ Digitale Produkte bauen auf **MD3** mit Bridgemaker-Theming
 - Bridgemaker-Elevation statt MD3-Tonal-Elevation; Motion gedeckelt.
 - MD3 liefert Anatomie, States, A11y — Bridgemaker liefert Farbe, Typo,
   Shape, Zurückhaltung.
+- **Basis bleibt `@material/web`** (Wartungsmodus, keine neuen
+  Komponenten). Lücken: erst natives HTML, dann React Aria — keine
+  zweite Bibliothek mit eigener Optik. **M3 Expressive** gibt es fürs
+  Web nicht; übernommen werden nur Prinzipien (Hero-Momente
+  rationieren, Gruppieren statt Dekorieren), nie Shape-Morphing,
+  Feder-Motion, Vibrant-Color oder Emphasized-Typo (`09 §9.7, §9.11`)
+  *(Nils, 2026-10-08)*.
 - **Vorrang-Regel:** Bridgemaker-Rezepte (type-*, bm-btn, bm-input,
   Karten, Badges) gelten auch in Produkt-UIs — MD3 füllt NUR die
   Lücken (Dialoge, Menüs, Tabs, Loader, Slider, Switches …).
