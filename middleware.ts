@@ -20,7 +20,9 @@
    die Cookies; neu setzen = alle abmelden). Fehlt eine davon,
    bleibt alles zu — sicher geschlossen statt offen. Der Login
    funktioniert nur auf Origins, deren Callback im Google-Client
-   eingetragen ist (brandbook.bridgemaker.com).
+   eingetragen ist (brandbook.bridgemaker.com). Alle anderen Hosts
+   (*.vercel.app, Previews) leiten deshalb per 308 dorthin um;
+   nur localhost bleibt für lokale Tests stehen.
 
    Die Login-Seite ist der einzige öffentliche Teil: kein
    Google-Fonts-Aufruf (DSGVO), kein tokens.css (läge sonst vor
@@ -36,6 +38,7 @@
 export const config = { matcher: '/((?!assets/fonts/).*)' };
 
 const DOMAIN = 'bridgemaker.com';
+const HOST = 'brandbook.bridgemaker.com';
 const SESSION = 'bb_session';
 const STATE = 'bb_oauth';
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 Tage
@@ -222,6 +225,16 @@ function isBridgemaker(claims: Record<string, any>, clientId: string): boolean {
 
 export default async function middleware(request: Request) {
   const url = new URL(request.url);
+
+  // Eine Adresse, ein Callback: *.vercel.app und Previews leiten
+  // auf die Hauptdomain um, sonst endet der Login bei Google mit
+  // redirect_uri_mismatch (Fall 28.10.: alte Test-URL in Umlauf).
+  if (url.hostname !== HOST && url.hostname !== 'localhost' && url.hostname !== '127.0.0.1') {
+    return new Response(null, {
+      status: 308,
+      headers: { Location: `https://${HOST}${url.pathname}${url.search}`, 'Cache-Control': 'no-store' },
+    });
+  }
 
   if (url.pathname === '/auth/logout') {
     return new Response(null, {
