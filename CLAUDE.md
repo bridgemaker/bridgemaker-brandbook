@@ -22,7 +22,8 @@
 2. **Grundton `--off-white` (#F5F4F1).** Reines Weiß ist Sektionsfläche
    im Wechsel (Weiß ↔ Off-White ↔ Surfaces), nie der Ganzseiten-Grund.
 3. **Inter für alles — Mono nur für echten Code.** JetBrains Mono ist
-   ausschließlich für Code-Darstellung und Platzhalter-Captions erlaubt;
+   ausschließlich für echte Code-Darstellung erlaubt (auch Platzhalter,
+   Hex-Werte und px-Angaben laufen in Inter, Nils 2026-10-30);
    UI-Text (Eyebrows, Badges, KPIs, Nummerierungen, Meta-Zeilen,
    Chart-Achsen, Folios) läuft IMMER in Inter. In Next.js via
    `next/font`; statische Artefakte (Decks) laden die lokal
@@ -102,6 +103,8 @@
   `type-nav`, `type-small/caption/micro`, `type-eyebrow`
   (12px, Versalien, +0.10em — einzige positive Spationierung).
 - Negatives Tracking auf Headlines (fluide Stufen in `em`).
+- **Große KPIs und Ziffern immer Light (300)** — `type-stat`, Deck-Zahlen,
+  Karten-Nummern *(Nils, 2026-10-30)*.
 - Umlaute in Display-Headlines sind willkommen; lange Komposita brechen
   lassen (`overflow-wrap: break-word`), nicht schrumpfen.
 
@@ -250,9 +253,9 @@ keine Box markieren.
   das neue Konzept steht: KEINE Bildentscheidungen ohne CD-Freigabe.
   Fehlendes **Bild-Asset** (Foto, freie Illustration, CD-pflichtige
   Bildwelt, fehlendes Logo) → gestreifter Platzhalter mit
-  Monospace-Caption. **Informationsgrafiken** — Diagramme, Timelines,
+  Caption in Inter. **Informationsgrafiken** — Diagramme, Timelines,
   Prozess-Schaubilder, Charts aus der Marken-Formensprache (Linien,
-  Kreise, Typo, Familienfarben, Material Symbols) — sind kein
+  Kreise, Typo, Familienfarben, Lucide-Icons) — sind kein
   Bild-Asset: Sie werden IMMER gebaut, als erster Draft, der
   gemeinsam iteriert wird. Nie als Platzhalter mit Text-Idee ablegen.
 - **Decks** *(Nils, 2026-10-30)*: **Leitplanken, keine Zwangsjacke** —
@@ -319,10 +322,11 @@ Primitive-Basis und Bridgemaker-Theming
 - **Eine Stufe Luft:** Abstände eine Stufe größer als shadcn
   (Karte/Dialog 32px statt 24, Popover 24 statt 16; Tabelle:
   `09 §9.6`).
-- Icons: **Material Symbols Outlined** für alle Inhalte, auch in
-  Decks; einfarbig in der Textfarbe des Kontexts (hell: Charcoal),
-  nie in Markenfarben (`09 §9.8`). **Lucide** nur für Glyphen
-  innerhalb der shadcn-Komponenten (Häkchen, Chevron, X), Strich 1.5.
+- Icons: **Lucide, Strichstärke 1.5** — einzige Icon-Quelle für
+  alles (Produkt-UIs, Decks, Brandbook, Website); einfarbig in der
+  Textfarbe des Kontexts (hell: Charcoal), nie in Markenfarben.
+  React `lucide-react`, statisch die SVGs aus `assets/icons/lucide/`
+  (`09 §9.8`) *(Nils, 2026-10-30)*.
 - Radix liefert Verhalten, Fokus und A11y; Bridgemaker liefert Farbe,
   Typo, Shape, Abstände, Zurückhaltung. Keine zweite Bibliothek mit
   eigener Optik daneben (auch nicht Radix Themes).
@@ -332,6 +336,12 @@ Primitive-Basis und Bridgemaker-Theming
   übernimmt die Lücken (Dialoge, Menüs, Tabs, Popover, Slider,
   Switches …). Nach jedem `shadcn add` die Datei auf Typo, Abstände
   und Rahmen durchgehen (`09 §9.11`).
+- **Navigation interner Tools = Floating Sidebar** *(Nils,
+  2026-10-30)*: Glas-Insel links, einklappbar zur 68px-Pill-Säule
+  (⌘B), mobil als Leiste unten; schwarz-weiß, Auswahl als leise
+  Tönung; eingeklappt Gedankenstrich im schwarzen Kreis statt Wortmarke.
+  Rezept `bm-sidenav` in tokens.css, React `AppShell` im
+  Starter-Kit (`09 §9.12`).
 - **Produkt-Projekte entstehen NIE in diesem Repo:**
   `node templates/new-app.js <ordner> --projekt "Name"` legt den
   Projektordner außerhalb an — Brandbook live als `brand/`

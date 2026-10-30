@@ -41,7 +41,7 @@ function BbColorsSection() {
                 display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 20 }}>
               <div style={{ font: "500 11px/1 Inter, sans-serif", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{b.role}</div>
               <div style={{ font: "600 22px/1 Inter, sans-serif", color: "#fff", letterSpacing: "-0.4px", marginTop: 6 }}>{b.name}</div>
-              <div style={{ font: "400 12px/1 'JetBrains Mono', Menlo, monospace", color: "rgba(255,255,255,0.75)", marginTop: 6 }}>{b.hex}</div>
+              <div style={{ font: "400 12px/1 Inter, sans-serif", color: "rgba(255,255,255,0.75)", marginTop: 6 }}>{b.hex}</div>
             </div>
             <p style={{ font: "var(--text-caption)", color: "#6B6B65", marginTop: 10, lineHeight: 1.4 }}>{b.desc}</p>
             <div style={{ display: "flex", gap: 4, marginTop: 12 }}>
@@ -52,7 +52,7 @@ function BbColorsSection() {
                     border: s.light ? "1px solid rgba(0,0,0,0.06)" : "none",
                   }} />
                   <div style={{ font: "400 10px/1.2 Inter, sans-serif", color: "#918F87", marginTop: 4 }}>{s.name}</div>
-                  <div style={{ font: "400 9px/1.2 'JetBrains Mono', Menlo, monospace", color: "#A8A69E" }}>{s.hex}</div>
+                  <div style={{ font: "400 9px/1.2 Inter, sans-serif", color: "#A8A69E" }}>{s.hex}</div>
                 </div>
               ))}
             </div>

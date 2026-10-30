@@ -181,7 +181,7 @@ Read) und abhaken:
 - [ ] **Keine farbige Kante an irgendeiner Box, kein farbiger Rahmen?**
 - [ ] Eine Linien-Ebene pro Fläche?
 - [ ] Farbige Zahlen und Texte nur mit Identität, sonst Charcoal?
-- [ ] Icons einfarbig in der Textfarbe, Material Symbols?
+- [ ] Icons aus Lucide, Strich 1.5, einfarbig in der Textfarbe?
 - [ ] Bilder echt und scharf; Platzhalter nur, wo wirklich nichts da ist?
 - [ ] Grafik-Geometrie nachgerechnet, keine Kollision Linie ↔ Text?
 - [ ] Arbeitsstände in den Speaker Notes statt auf der Slide?

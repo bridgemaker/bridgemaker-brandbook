@@ -144,30 +144,33 @@ Animations-Bibliotheken für Komponenten-Zustände.
 
 ## 9.8 Icons
 
-**Material Symbols Outlined** ist die Icon-Quelle für Inhalte, in
-Produkt-UIs und in Decks (Beschluss 16.07.2026).
+**Lucide** ist die einzige Icon-Quelle, für Produkt-UIs, Decks,
+Brandbook und Website *(Nils, 2026-10-30 — ersetzt Material Symbols)*.
+Ein Set für alles: Inhalts-Icons und die Glyphen in den
+shadcn-Komponenten sehen gleich aus.
 
-- Stil ausschließlich **Outlined**, `FILL 0`; **Weight 300** (passt
-  zur Inter-Strichstärke), `GRAD 0`, `opsz 48`, via
-  `font-variation-settings`.
+- **Strichstärke 1.5** überall (Lucide-Standard ist 2). Die Regel
+  steht in `tokens.css` (`svg.lucide { stroke-width: 1.5 }`) und
+  greift damit in jedem Format. Keine gefüllten Varianten, kein
+  zweites Icon-Set.
 - **Einfarbig in der Textfarbe des Kontexts**: auf Hell
   `--charcoal`, auf Dunkel `--off-white`. Nie in Markenfarben und nie
   mehrfarbige Icon-Reihen *(Nils, 2026-07-23: ein einzelnes farbiges
   Icon in einer neutralen Reihe liest sich als Bedeutung, wo keine
   ist)*.
 - **Funktional statt dekorativ:** Icons geben Orientierung (ein Icon
-  pro Karte oder Aspekt), nie als Zeilenschmuck vor jedem Bullet,
-  nie als Bildersatz.
-- Laden: im Starter-Kit selbst gehostet via `next/font/local`
-  (Klasse `.material-symbols-outlined`), in statischen Artefakten aus
-  `assets/fonts/`. Icon-Namen: fonts.google.com/icons.
-
-**Lucide** *(Nils, 2026-10-30)* bleibt nur für die kleinen Glyphen
-INNERHALB der shadcn-Komponenten: Häkchen, Chevron, Schließen-X,
-Radio-Punkt, Spinner. Strichstärke 1.5 (globale `.lucide`-Regel),
-damit sie zur Symbols-Weight 300 passen. Inhalts-Icons (Navigation,
-Aktionen, Karten, Leerzustände) kommen nie aus Lucide: Zwei
-Icon-Stile nebeneinander wirken unruhig.
+  pro Karte, Aspekt oder Navigationspunkt), nie als Zeilenschmuck
+  vor jedem Bullet, nie als Bildersatz.
+- **Größen:** 24px Standard, 18–22px in Zeilen und Navigation,
+  32px als Akzent in Karten.
+- **Laden:** In React `lucide-react` (`<LayoutDashboard />`). In
+  statischem HTML (Decks, einfache Tools) das SVG aus
+  `assets/icons/lucide/<name>.svg` inline einsetzen, in einem
+  `<span class="bm-icon">`; `stroke="currentColor"` erbt die
+  Textfarbe. Im Slides-Artefakt ebenfalls als inline-SVG. Namen:
+  lucide.dev/icons.
+- **Version:** Die Dateien in `assets/icons/lucide/` entsprechen der
+  `lucide-react`-Version im Starter-Kit (Lizenz ISC liegt bei).
 
 ## 9.9 Favicon & App-Icon
 
@@ -239,3 +242,42 @@ dem Style Guide gebaut wurde.)*
   Hintergrund einer Badge), braucht `!` (`!bg-transparent`).
   Rezepte mit `display: block` (z. B. `bm-label`) nie mit
   `flex`-Layouts kombinieren, das `flex` verliert.
+
+## 9.12 Navigation interner Tools: Floating Sidebar
+
+*(Nils, 2026-10-30 — Grundlage: MarketingOS-Prototyp und die
+1Q-Dashboards)* Interne Tools mit mehreren Bereichen navigieren über
+eine **Floating Sidebar**: eine Glas-Insel, die links über dem Inhalt
+schwebt.
+
+- **Rezept `bm-sidenav`** in `tokens.css` (auch für statische Tools
+  ohne React), React-Komponente `AppShell` im Starter-Kit
+  (`src/components/brand/app-shell.tsx`), Demo unter `/dashboard`.
+- **Zwei Zustände:** ausgeklappt 280px mit Icon und Label,
+  eingeklappt eine Pill-Säule von 68px mit 44px-Kreisen. Der
+  Zustand wird gemerkt, ⌘B bzw. Strg+B schaltet um. Eingeklappt
+  zeigt ein Tooltip das Label (Radix; im statischen Rezept per
+  `data-label`).
+- **Marke:** ausgeklappt die Wortmarke (20px), eingeklappt der
+  Gedankenstrich im schwarzen Kreis (32px), passend zur Pill-Säule
+  und zum App-Icon. Kein B—M in der Säule, kein Tool-Logo-Ersatz.
+- **Schwarz-weiß:** Die Navigation trägt keine Markenfarbe. Hover
+  und Auswahl sind leise Charcoal-Tönungen (5 % und 6 %), die
+  Auswahl zusätzlich semi-bold. Kein Charcoal-Block, keine farbige
+  Kante am aktiven Eintrag.
+- **Aufbau von oben nach unten:** Marke, Hauptbereiche (scrollen bei
+  niedrigem Fenster, mit Luft innen), Trennlinie, Fußbereich mit
+  Einstellungen, Nutzer und Einklappen.
+- **Unterpunkte** (z. B. Chats, gespeicherte Ansichten) erscheinen
+  nur unter dem aktiven Eintrag; die Tönung trägt dann der ganze
+  Block, der aktive Unterpunkt ist weiß. Eingeklappt verschwinden
+  sie.
+- **Noch nicht verfügbare Bereiche** stehen ausgegraut mit
+  „Bald"-Badge in der Liste und sind nicht klickbar.
+- **Icons:** Lucide, Strich 1.5, einfarbig in Charcoal (§9.8).
+- **Inhalt** rückt um Insel und Luft ein (`bm-app-main`); der Rand
+  bleibt auch unten frei (06 §6.6).
+- **Mobil (< 768px):** dieselbe Insel als Icon-Leiste unten, mittig,
+  horizontal scrollbar; Unterpunkte und „Bald"-Einträge entfallen.
+- **Dunkle Variante** (wie in den 1Q-Dashboards) gibt es noch nicht;
+  sie wird gebaut, wenn ein Tool sie braucht.

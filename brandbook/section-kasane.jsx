@@ -40,7 +40,7 @@ function BbKasaneSection() {
             <div className={`${v.cls} kasane-drift`} style={{ position: "absolute", inset: "-8%" }} />
             <div className={v.textColor === "#fff" ? "grain-screen" : "grain"} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
             <div style={{ position: "relative", zIndex: 1, height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 40 }}>
-              <div style={{ font: "500 11px/1.4 'JetBrains Mono', Menlo, monospace", letterSpacing: "0.05em", color: v.eyebrowColor, marginBottom: 10 }}>.{v.cls}</div>
+              <div style={{ font: "500 11px/1.4 Inter, sans-serif", letterSpacing: "0.05em", color: v.eyebrowColor, marginBottom: 10 }}>.{v.cls}</div>
               <div style={{ font: "600 clamp(24px,3vw,36px)/1.15 Inter, sans-serif", letterSpacing: "-1px", color: v.textColor }}>{v.headline}</div>
             </div>
           </div>

@@ -56,7 +56,7 @@ export function Swatch({
       </div>
       <div className="bg-white p-4 border border-t-0 border-border-hairline rounded-b-lg">
         <div className="text-[15px] font-medium text-charcoal">{name}</div>
-        <div className="font-mono text-[12px] text-mid mt-0.5">{hex}</div>
+        <div className="text-[12px] text-mid mt-0.5">{hex}</div>
         {token && (
           <div className="font-mono text-[11px] text-light mt-1.5">{token}</div>
         )}

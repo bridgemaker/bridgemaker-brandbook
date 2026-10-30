@@ -139,7 +139,7 @@ Nie Base-Text auf eigener Tint (Kontrast). Wann welche Stufe:
 > Fotografie: feine Linien im topografischen Stil auf Gradients und
 > konstruierte Vektor-Icons. Das neue Bildkonzept ist in Klärung.
 > Bis dahin: keine Bildentscheidungen ohne CD-Freigabe; der gestreifte
-> Platzhalter mit Monospace-Caption bleibt der Standard für fehlende
+> Platzhalter mit Inter-Caption bleibt der Standard für fehlende
 > Assets. Der folgende Alt-Stand dient nur noch als Referenz.
 
 Drei Prinzipien:
@@ -160,12 +160,12 @@ Heroes und Cover-Slides.
 
 - **Bild-Asset fehlt?** (Foto, freie Illustration, CD-pflichtige
   Bildwelt, fehlendes Logo): Gestreiften Platzhalter-Block mit
-  Monospace-Caption verwenden, die beschreibt, was dort hingehört.
+  Caption in Inter verwenden, die beschreibt, was dort hingehört.
   Nie eine dekorative Illustration erfinden.
 - **Informationsgrafiken sind kein Bild-Asset** *(2026-07-17)*:
   Diagramme, Timelines, Prozess-Schaubilder und Charts aus der
   Marken-Formensprache (Linien, Kreise, Typografie, Familienfarben,
-  Material Symbols) werden IMMER gebaut — als erster Draft, der
+  Lucide-Icons) werden IMMER gebaut — als erster Draft, der
   gemeinsam iteriert wird. Nie als Platzhalter mit Text-Idee
   abgelegt (Regeln: §7.11).
 - **KI-generierte Bilder sind erlaubt**, wenn sie den editorialen
@@ -313,7 +313,7 @@ Die folgenden Regeln gelten für beide Wege.
 - **Grafiken bauen, nicht ankündigen** *(2026-07-17)*: Wo ein
   Diagramm, eine Karte, eine Timeline oder ein Schaubild hilft, wird
   es gebaut, als erster Draft, der gemeinsam iteriert wird (§7.11).
-- **Icons:** nur Material Symbols Outlined (`09 §9.8`), einfarbig in
+- **Icons:** nur Lucide, Strich 1.5 (`09 §9.8`), einfarbig in
   der Textfarbe des Kontexts *(Nils, 2026-07-23)*, funktional statt
   dekorativ. Eine Icon-Kachel (weiße Fläche in einer getönten
   Karte) ist erlaubt.
@@ -413,8 +413,8 @@ skaliert verlustfrei).
 - **Topografische Konturen:** Generator
   `templates/deck-topo-konturen.js` (cover/schluss); bei mehreren
   Trennern Seed = Basis + Kapitelnummer.
-- **Fonts lokal:** Inter, JetBrains Mono und Material Symbols aus
-  `assets/fonts/` (der Google-Fonts-Link ist hier tabu,
+- **Fonts lokal:** Inter und JetBrains Mono aus
+  `assets/fonts/`; Icons als inline-SVG aus `assets/icons/lucide/` (der Google-Fonts-Link ist hier tabu,
   *2026-07-17*). Ausnahme *2026-07-20*: rein interne Entwürfe in
   Firmen-Tools ohne Dateizugriff (z. B. Langdock-Canvas) dürfen
   Inter per Google-Link laden. Keine Animationen, kein
@@ -475,7 +475,7 @@ Validiert am Bookazine v1 (Druck: Pinguin Druck Berlin, 2026).
 - **Schrift:** Display-Grade laufen im Print in **Inter Display**
   (`--font-display`-Override im Print-Layer; Ausnahme-Regel in
   Kapitel 03 §3.1). Body/UI bleiben Inter. Mono nur noch für echte
-  Code-Darstellung und Platzhalter-Captions *(seit 2026-07-16)* —
+  Code-Darstellung *(seit 2026-07-16; Platzhalter seit 2026-10-30 in Inter)* —
   Folio, Running Header und TOC-Kapitelnummern laufen in Inter.
   Hinweis: Bookazine v1 wurde noch mit Mono-Folio validiert; die
   Inter-Folios sind beim nächsten Druck zu prüfen.
@@ -506,7 +506,7 @@ Validiert am Bookazine v1 (Druck: Pinguin Druck Berlin, 2026).
   (`@page { size: A4; margin: 0 }`); Varianten `.pp-page-bleed`
   (vollflächig, z. B. Cover/Opener) und `.pp-page-dark`. Running
   Header + Folio in Inter-Versalien (+0.10em), Platzhalter wie am
-  Bildschirm gestreift mit Monospace-Caption.
+  Bildschirm gestreift mit Caption in Inter.
 
 ## 7.10 Venture-Projekte
 

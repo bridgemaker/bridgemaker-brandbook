@@ -41,8 +41,8 @@ function BbTypeSection() {
             {t.name === "Eyebrow" ? "Was wir bauen" : "Wir entwerfen Geschäftsmodelle."}
           </div>
           <div style={{ textAlign: "right", minWidth: 200 }}>
-            <div style={{ font: "400 11px/1.4 'JetBrains Mono', Menlo, monospace", color: "#6B6B65" }}>{t.size}</div>
-            <div style={{ font: "400 11px/1.4 'JetBrains Mono', Menlo, monospace", color: "#918F87" }}>{t.weight}, {t.tracking}, {t.lh}</div>
+            <div style={{ font: "400 11px/1.4 Inter, sans-serif", color: "#6B6B65" }}>{t.size}</div>
+            <div style={{ font: "400 11px/1.4 Inter, sans-serif", color: "#918F87" }}>{t.weight}, {t.tracking}, {t.lh}</div>
             <div style={{ font: "400 11px/1.4 Inter, sans-serif", color: "#918F87", marginTop: 2 }}>{t.usage}</div>
           </div>
         </div>
@@ -79,7 +79,7 @@ function BbDisplaySection() {
           </div>
           <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
             <span className="bm-badge bm-badge-purple">{d.name}</span>
-            <code style={{ font: "400 12px/1 'JetBrains Mono', Menlo, monospace", color: "#6B6B65" }}>{d.size}</code>
+            <code style={{ font: "400 12px/1 Inter, sans-serif", color: "#6B6B65" }}>{d.size}</code>
             <span style={{ font: "var(--text-caption)", color: "#6B6B65" }}>
               {d.weight === 600 ? "SemiBold" : d.weight === 500 ? "Medium" : "Regular"} ({d.weight}), {d.tracking}, {d.lh}
             </span>

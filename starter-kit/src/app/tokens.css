@@ -179,7 +179,7 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
 .type-display    { font-size: clamp(40px, 5.5vw, 64px); font-weight: 600; line-height: 1.10; letter-spacing: -0.03em; }
 .type-h1         { font-size: clamp(32px, 4.2vw, 48px); font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; }
 .type-h2         { font-size: clamp(26px, 3vw, 32px);   font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; }
-.type-stat       { font-size: clamp(28px, 3vw, 36px);   font-weight: 500; line-height: 1.10; letter-spacing: -0.025em; }
+.type-stat       { font-size: clamp(28px, 3vw, 36px);   font-weight: 300; line-height: 1.10; letter-spacing: -0.025em; }
 .type-h3         { font-size: 24px; font-weight: 500; line-height: 1.30; letter-spacing: -0.5px; }
 .type-h4         { font-size: 20px; font-weight: 500; line-height: 1.40; letter-spacing: -0.3px; }
 .type-card-title { font-size: 18px; font-weight: 600; line-height: 1.45; letter-spacing: -0.3px; }
@@ -717,6 +717,206 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
 }
 .bm-label { font: 500 14px/1.5 var(--font-sans); color: var(--charcoal); display: block; margin-bottom: 6px; }
 .bm-help  { font: 400 12px/1.4 var(--font-sans); color: var(--mid); margin-top: 6px; }
+
+/* ============================================================
+   Icons — Lucide, einzige Icon-Quelle (guidelines/09 §9.8)
+   React: lucide-react. Statisch: SVG aus assets/icons/lucide/
+   inline einsetzen (stroke="currentColor" erbt die Textfarbe).
+   Strichstärke überall 1.5 (Nils, 2026-10-30).
+   ============================================================ */
+svg.lucide, .lucide { stroke-width: 1.5; }
+.bm-icon { display: inline-flex; flex: none; width: 24px; height: 24px; color: inherit; vertical-align: middle; }
+.bm-icon svg { width: 100%; height: 100%; }
+
+/* ============================================================
+   Floating Sidebar — Navigation interner Tools (guidelines/09 §9.12)
+   Glas-Insel links, einklappbar zur Pill-Säule (68px), auf Mobile
+   als Insel unten. Navigation bleibt schwarz-weiß; die Auswahl ist
+   eine leise Tönung, kein Charcoal-Block.
+
+   Aufbau:
+   <div class="bm-app" data-sidenav="expanded|collapsed">
+     <nav class="bm-sidenav"> … </nav>
+     <nav class="bm-bottomnav"> … </nav>   (Mobile)
+     <main class="bm-app-main"> … </main>
+   </div>
+   ============================================================ */
+.bm-app { --bm-sidenav-w: 280px; }
+.bm-app[data-sidenav="collapsed"] { --bm-sidenav-w: 68px; }
+
+/* Inhalt rückt um Insel + Luft ein; unten Platz bis zur Kante. */
+.bm-app-main {
+  min-height: 100vh;
+  padding: var(--space-8) var(--space-8) var(--space-16);
+  padding-left: calc(var(--bm-sidenav-w) + var(--space-4) + var(--space-8));
+  transition: padding-left var(--duration-base) var(--ease-out);
+}
+
+.bm-sidenav {
+  position: fixed;
+  inset: var(--space-4) auto var(--space-4) var(--space-4);
+  z-index: 40;
+  width: var(--bm-sidenav-w);
+  display: flex; flex-direction: column;
+  padding: var(--space-3);
+  border-radius: var(--radius-2xl);
+  /* Glas wie .card-glass: es gibt etwas zu frosten (scrollender Inhalt) */
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.46));
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  backdrop-filter: blur(24px) saturate(1.5);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    0 0 0 1px rgba(28, 28, 30, 0.04),
+    0 1px 2px rgba(28, 28, 30, 0.05),
+    0 6px 16px -8px rgba(28, 28, 30, 0.12);
+  transition: width var(--duration-base) var(--ease-out),
+              border-radius var(--duration-base) var(--ease-out);
+}
+@supports not (backdrop-filter: blur(1px)) { .bm-sidenav, .bm-bottomnav { background: var(--white); } }
+[data-sidenav="collapsed"] .bm-sidenav { border-radius: var(--radius-pill); }
+/* Vorschau im Brandbook: Insel im Fluss statt fixiert */
+.bm-sidenav.bm-sidenav-static { position: relative; inset: auto; height: 100%; }
+
+/* Marke: ausgeklappt Wortmarke (20px), eingeklappt der Gedankenstrich
+   im schwarzen Kreis — passt zur Pill-Säule und zum App-Icon (B—M im
+   Kreis); das B—M selbst ist bei 32px unlesbar (Nils, 2026-10-30). */
+.bm-sidenav-brand {
+  display: flex; align-items: center;
+  height: 48px; padding: 0 var(--space-3);
+  margin-bottom: var(--space-4);
+  flex: none;
+}
+.bm-sidenav-wordmark { height: 20px; width: auto; display: block; }
+.bm-sidenav-mark {
+  display: none; position: relative;
+  width: 32px; height: 32px; border-radius: var(--radius-pill);
+  background: var(--charcoal);
+}
+.bm-sidenav-mark::before {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 18px; height: 3px; translate: -50% -50%;
+  background: var(--off-white);
+}
+[data-sidenav="collapsed"] .bm-sidenav-brand { padding: 0; justify-content: center; }
+[data-sidenav="collapsed"] .bm-sidenav-wordmark { display: none; }
+[data-sidenav="collapsed"] .bm-sidenav-mark { display: block; }
+
+/* Gruppen: die Hauptliste scrollt bei niedrigem Fenster, mit Luft
+   innen — der letzte Eintrag klebt nie an der Kante (06 §6.6). */
+.bm-sidenav-group { display: flex; flex-direction: column; gap: var(--space-1); }
+.bm-sidenav-scroll { flex: 1; min-height: 0; overflow-y: auto; padding-bottom: var(--space-2); scrollbar-width: none; }
+.bm-sidenav-scroll::-webkit-scrollbar { display: none; }
+.bm-sidenav-divider { height: 1px; margin: var(--space-3) var(--space-3); background: rgba(28, 28, 30, 0.06); flex: none; }
+
+.bm-sidenav-item {
+  position: relative;
+  display: flex; align-items: center; gap: var(--space-3);
+  width: 100%; height: 44px;
+  padding: 0 var(--space-3);
+  border: none; border-radius: var(--radius-pill);
+  background: transparent;
+  font: 500 15px/1.4 var(--font-sans);
+  color: var(--charcoal); text-align: left; text-decoration: none;
+  white-space: nowrap; cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .bm-sidenav-item:hover { background: rgba(28, 28, 30, 0.05); }
+}
+.bm-sidenav-item:active { transform: scale(0.97); }
+.bm-sidenav-item:focus-visible { outline: 1.5px solid var(--charcoal); outline-offset: 2px; }
+.bm-sidenav-item[aria-current="page"] { background: rgba(28, 28, 30, 0.06); font-weight: 600; }
+.bm-sidenav-item[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.bm-sidenav-item[aria-disabled="true"]:active { transform: none; }
+.bm-sidenav-icon { flex: none; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+.bm-sidenav-icon svg { width: 22px; height: 22px; }
+.bm-sidenav-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.bm-sidenav-item .bm-badge { height: 20px; padding: 0 8px; font-size: 11px; flex: none; }
+
+/* Aktiver Eintrag mit Unterpunkten: die Tönung trägt der ganze Block. */
+.bm-sidenav-block { display: flex; flex-direction: column; border-radius: 22px; background: rgba(28, 28, 30, 0.06); padding-bottom: var(--space-2); }
+.bm-sidenav-block > .bm-sidenav-item[aria-current="page"] { background: transparent; }
+.bm-sidenav-sub { display: flex; flex-direction: column; gap: 2px; padding: 0 var(--space-2) 0 44px; }
+.bm-sidenav-subitem {
+  display: flex; align-items: center; gap: var(--space-2);
+  height: 36px; padding: 0 var(--space-3);
+  border: none; border-radius: var(--radius-pill); background: transparent;
+  font: 400 14px/1.5 var(--font-sans); color: var(--dark);
+  text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer;
+  overflow: hidden; text-overflow: ellipsis;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .bm-sidenav-subitem:hover { background: rgba(28, 28, 30, 0.05); }
+}
+.bm-sidenav-subitem[aria-current="page"] { background: var(--white); color: var(--charcoal); font-weight: 500; }
+
+.bm-sidenav-user { display: flex; align-items: center; gap: var(--space-3); height: 48px; padding: 0 var(--space-2); }
+.bm-sidenav-avatar {
+  flex: none; width: 32px; height: 32px; border-radius: var(--radius-pill);
+  background: var(--surface-stone); color: var(--charcoal);
+  display: flex; align-items: center; justify-content: center;
+  font: 600 13px/1 var(--font-sans);
+}
+.bm-sidenav-user .bm-sidenav-label { font: 400 14px/1.5 var(--font-sans); color: var(--mid); }
+
+/* Eingeklappt: Labels weichen, Einträge werden 44px-Kreise mittig
+   in der Säule; Unterpunkte verschwinden. */
+[data-sidenav="collapsed"] .bm-sidenav-label,
+[data-sidenav="collapsed"] .bm-sidenav-item .bm-badge,
+[data-sidenav="collapsed"] .bm-sidenav-sub { display: none; }
+[data-sidenav="collapsed"] .bm-sidenav-item,
+[data-sidenav="collapsed"] .bm-sidenav-user { width: 44px; height: 44px; padding: 0; justify-content: center; align-self: center; }
+[data-sidenav="collapsed"] .bm-sidenav-block { background: transparent; padding: 0; align-self: center; }
+[data-sidenav="collapsed"] .bm-sidenav-block > .bm-sidenav-item[aria-current="page"] { background: rgba(28, 28, 30, 0.06); }
+[data-sidenav="collapsed"] .bm-sidenav-group { align-items: center; }
+
+/* Tooltip ohne JavaScript (statische Tools): data-label am Eintrag.
+   React-Komponenten nutzen stattdessen den Radix-Tooltip. */
+[data-sidenav="collapsed"] .bm-sidenav-item[data-label]::after {
+  content: attr(data-label);
+  position: absolute; left: calc(100% + 12px); top: 50%; translate: 0 -50%;
+  padding: 8px 12px; border-radius: var(--radius-md);
+  background: var(--charcoal); color: var(--off-white);
+  font: 400 12px/1.4 var(--font-sans); white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-sidenav="collapsed"] .bm-sidenav-item[data-label]:hover::after { opacity: 1; transition-delay: 300ms; }
+}
+
+/* Mobile: dieselbe Insel als Icon-Leiste unten. */
+.bm-bottomnav { display: none; }
+@media (max-width: 767px) {
+  .bm-sidenav { display: none; }
+  .bm-sidenav.bm-sidenav-static { display: flex; }
+  .bm-app-main { padding: var(--space-6) var(--space-4) calc(var(--space-24) + env(safe-area-inset-bottom)); }
+  .bm-bottomnav {
+    display: flex; align-items: center; gap: var(--space-1);
+    position: fixed; z-index: 40;
+    left: 50%; translate: -50% 0;
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+    max-width: calc(100vw - var(--space-8));
+    padding: var(--space-2);
+    border-radius: var(--radius-pill);
+    overflow-x: auto; scrollbar-width: none;
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.46));
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    backdrop-filter: blur(24px) saturate(1.5);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+      0 0 0 1px rgba(28, 28, 30, 0.04),
+      0 1px 2px rgba(28, 28, 30, 0.05),
+      0 6px 16px -8px rgba(28, 28, 30, 0.16);
+  }
+  .bm-bottomnav::-webkit-scrollbar { display: none; }
+  .bm-bottomnav .bm-sidenav-item { flex: none; width: 48px; height: 48px; padding: 0; justify-content: center; }
+}
 
 /* ============================================================
    Container & Eyebrow-Utility

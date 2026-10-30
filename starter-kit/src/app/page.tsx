@@ -1,5 +1,6 @@
 "use client";
 
+import { Ellipsis } from "lucide-react";
 import { Wordmark } from "@/components/brand/wordmark";
 import {
   AlertDialog,
@@ -80,13 +81,6 @@ function Section({
   );
 }
 
-function Icon({ name }: { name: string }) {
-  return (
-    <span className="material-symbols-outlined" aria-hidden="true">
-      {name}
-    </span>
-  );
-}
 
 export default function ComponentReference() {
   return (
@@ -179,7 +173,7 @@ export default function ComponentReference() {
         <Section
           eyebrow="shadcn"
           title="Tabs, Filter und Menü"
-          lead="Tabs und Filter-Chips sind Pills. Inhalts-Icons kommen aus Material Symbols, Lucide bleibt in den Komponenten."
+          lead="Tabs und Filter-Chips sind Pills. Alle Icons kommen aus Lucide, Strichstärke 1,5."
         >
           <Tabs defaultValue="overview">
             <TabsList>
@@ -210,7 +204,7 @@ export default function ComponentReference() {
                 <TooltipTrigger asChild>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Weitere Aktionen">
-                      <Icon name="more_horiz" />
+                      <Ellipsis />
                     </Button>
                   </DropdownMenuTrigger>
                 </TooltipTrigger>

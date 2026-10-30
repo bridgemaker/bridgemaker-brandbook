@@ -114,30 +114,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Material Symbols Outlined — Inhalts-Icons (guidelines/09 §9.8).
-   Font selbst gehostet via next/font/local (layout.tsx). */
-.material-symbols-outlined {
-  font-family: var(--font-material-symbols), "Material Symbols Outlined";
-  font-weight: 300;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 48;
-  -webkit-font-feature-settings: "liga";
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Lucide nur für Glyphen INNERHALB der shadcn-Komponenten (Häkchen,
-   Chevron, Schließen). Strich 1.5 statt 2 — passt zu Symbols wght 300. */
-.lucide {
-  stroke-width: 1.5;
-}
+/* Icons: Lucide (lucide-react), Strich 1.5 — die Regel steht in
+   tokens.css (svg.lucide), gilt damit auch für statische Tools. */
 
 /* ==========================================================================
    Base — konservativer Reset; Farben/Typo kommen aus tokens.css

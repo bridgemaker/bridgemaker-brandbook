@@ -155,7 +155,7 @@ den Einleitungstext, nicht fünfmal ins Raster.
    redigierst sie SOFORT (kürzen, nie die Schrift verkleinern).
    Ohne Schlusspunkt, ohne Ausrufezeichen, ohne Gedankenstrich (—),
    normale Groß-/Kleinschreibung (im Englischen sentence case).
-5. **Icons nur Material Symbols Outlined.** Kein Middot, nirgends.
+5. **Icons nur Lucide (Strich 1.5, inline-SVG).** Kein Middot, nirgends.
 6. **Grafiken werden gebaut** — aus Linien, Typo und den
    Familienfarben des Templates, als erster Entwurf zum gemeinsamen
    Verfeinern. Stelle vorher die Typografie-Frage: Tragen zwei,

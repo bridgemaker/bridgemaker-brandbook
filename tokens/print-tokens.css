@@ -437,7 +437,7 @@
   content: attr(data-caption);
   position: absolute;
   left: 5mm; bottom: 5mm;
-  font: 500 9pt/14pt var(--font-mono);
+  font: 500 9pt/14pt var(--font-sans);
   color: var(--charcoal);
   background: var(--off-white);
   padding: 2mm 4mm;

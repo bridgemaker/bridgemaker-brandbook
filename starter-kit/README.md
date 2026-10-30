@@ -25,7 +25,6 @@ src/
 │  ├─ tokens.css         ← Kanon-Kopie (Quelle: ../tokens/tokens.css)
 │  ├─ shadcn-theme.css   ← shadcn-Variablen ← Bridgemaker-Tokens
 │  ├─ globals.css        ← Tailwind-Verdrahtung (@theme) + Icons
-│  ├─ fonts/             ← Material Symbols Outlined (selbst gehostet)
 │  └─ …                  ← Demo-Routen
 ├─ components/
 │  ├─ ui/                ← shadcn-Komponenten, auf Bridgemaker abgestimmt

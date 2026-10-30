@@ -1,6 +1,58 @@
 /* global React */
 // Brandbook — Section: shadcn/ui + Radix UI für Produkt-UIs
 
+// Lucide-Icon aus assets/icons/lucide/ inline laden (erbt die Textfarbe)
+function BbLucide({ name }) {
+  const [svg, setSvg] = React.useState("");
+  React.useEffect(() => {
+    fetch(`../assets/icons/lucide/${name}.svg`).then(r => r.text()).then(setSvg).catch(() => {});
+  }, [name]);
+  return <span className="bm-sidenav-icon" aria-hidden="true" dangerouslySetInnerHTML={{ __html: svg }} />;
+}
+
+function BbSidenavPreview({ state }) {
+  const items = [
+    ["layout-dashboard", "Übersicht"],
+    ["folder-open", "Projekte"],
+    ["users", "Kunden"],
+  ];
+  const Item = ({ icon, label, current, soon }) => (
+    <button className="bm-sidenav-item" data-label={label} aria-current={current ? "page" : undefined} aria-disabled={soon || undefined}>
+      <BbLucide name={icon} />
+      <span className="bm-sidenav-label">{label}</span>
+      {soon && <span className="bm-badge">Bald</span>}
+    </button>
+  );
+  return (
+    <div className="bm-app" data-sidenav={state} style={{ height: 560 }}>
+      <nav className="bm-sidenav bm-sidenav-static" aria-label={`Sidebar ${state}`}>
+        <div className="bm-sidenav-brand">
+          <img className="bm-sidenav-wordmark" src="../assets/logos/wordmark-black.svg" alt="Bridgemaker" />
+          <span className="bm-sidenav-mark" />
+        </div>
+        <div className="bm-sidenav-scroll">
+          <div className="bm-sidenav-group">
+            {items.map(([i, l]) => <Item key={l} icon={i} label={l} />)}
+            <div className="bm-sidenav-block">
+              <Item icon="messages-square" label="Daten-Chat" current />
+              <div className="bm-sidenav-sub">
+                <button className="bm-sidenav-subitem">Neuer Chat</button>
+                <button className="bm-sidenav-subitem" aria-current="page">Pipeline Q4</button>
+              </div>
+            </div>
+            <Item icon="book-open" label="Wissen" soon />
+          </div>
+        </div>
+        <div className="bm-sidenav-divider" />
+        <div className="bm-sidenav-group">
+          <Item icon="settings" label="Einstellungen" />
+          <Item icon={state === "collapsed" ? "panel-left-open" : "panel-left-close"} label="Navigation einklappen" />
+        </div>
+      </nav>
+    </div>
+  );
+}
+
 function BbProductUiSection() {
   const colorRoles = [
     ["--background", "--off-white", "#F5F4F1"],
@@ -63,6 +115,18 @@ function BbProductUiSection() {
         Switches, Slider.
       </div>
 
+      <h3 style={{ font: "500 17px/1.3 Inter, sans-serif", color: "#1C1C1E", margin: "0 0 8px" }}>Navigation: Floating Sidebar</h3>
+      <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "0 0 24px", maxWidth: 720, lineHeight: 1.6 }}>
+        Interne Tools navigieren über eine Glas-Insel links. Ausgeklappt mit Wortmarke und Labels, eingeklappt als
+        Pill-Säule mit dem Gedankenstrich im Kreis und Tooltips (⌘B), mobil als Leiste unten. Die Navigation bleibt
+        schwarz-weiß, die Auswahl ist eine leise Tönung. Rezept <code>bm-sidenav</code>, React <code>AppShell</code>,
+        Regeln in <code>guidelines/09 §9.12</code>.
+      </p>
+      <div className="bg-kasane-band-mauve" style={{ borderRadius: 20, padding: 32, marginBottom: 48, display: "flex", gap: 32, alignItems: "stretch" }}>
+        <div style={{ width: 280 + 0 }}><BbSidenavPreview state="expanded" /></div>
+        <div style={{ width: 68 }}><BbSidenavPreview state="collapsed" /></div>
+      </div>
+
       <h3 style={{ font: "500 17px/1.3 Inter, sans-serif", color: "#1C1C1E", margin: "0 0 24px" }}>Farbrollen-Mapping</h3>
       <div className="card-clean" style={{ background: "#fff", borderRadius: 16, padding: "16px 32px", marginBottom: 48 }}>
         {colorRoles.map(([role, token, hex], i) => (
@@ -72,7 +136,7 @@ function BbProductUiSection() {
           }}>
             <code style={{ font: "500 12px/1.3 'JetBrains Mono', Menlo, monospace", color: "#1C1C1E" }}>{role}</code>
             <code style={{ font: "400 12px/1.3 'JetBrains Mono', Menlo, monospace", color: "#6B4A94" }}>{token}</code>
-            <code style={{ font: "400 11px/1 'JetBrains Mono', Menlo, monospace", color: "#918F87" }}>{hex}</code>
+            <code style={{ font: "400 11px/1 Inter, sans-serif", color: "#918F87" }}>{hex}</code>
             <div style={{ width: 32, height: 20, borderRadius: 6, background: hex, border: "1px solid rgba(0,0,0,0.06)" }} />
           </div>
         ))}
@@ -109,7 +173,7 @@ function BbProductUiSection() {
       </div>
 
       <p style={{ font: "var(--text-small)", color: "#6B6B65", maxWidth: 720, lineHeight: 1.7 }}>
-        Icons: Material Symbols für Inhalte, Lucide nur für Glyphen in den Komponenten (Häkchen, Chevron, X).
+        Icons: Lucide in Strichstärke 1,5 für alles, Inhalte wie Komponenten.
         Radien und Schatten kommen direkt aus tokens.css. Vollständiges Mapping:{" "}
         <a href="../guidelines/09-shadcn-radix-mapping.md" style={{ color: "#6B4A94", textDecoration: "underline", textUnderlineOffset: 3 }}>guidelines/09-shadcn-radix-mapping.md</a>.
       </p>

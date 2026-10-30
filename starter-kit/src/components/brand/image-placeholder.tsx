@@ -26,7 +26,7 @@ export function ImagePlaceholder({
     >
       <span
         className="absolute bottom-3 left-3 bg-off-white px-2.5 py-1 text-charcoal"
-        style={{ font: "500 12px/1.4 var(--font-mono)" }}
+        style={{ font: "500 12px/1.4 var(--font-sans)" }}
       >
         {caption}
       </span>

@@ -19,7 +19,7 @@
    Safari/Firefox nie — sie ignorieren die @page-Größe.
 
    Die Versand-Datei hat KEINE externen Abhängigkeiten: Auch die
-   Fonts (Inter, JetBrains Mono, Material Symbols) liegen lokal
+   Fonts (Inter, JetBrains Mono) liegen lokal
    im Kit (assets/fonts/fonts.css, Compliance: kein Google-
    Aufruf) und werden als Data-URIs mit eingebettet. Die Datei
    funktioniert offline, ohne Ordner, ohne Netz.

@@ -111,7 +111,8 @@ Nichts weglassen, nichts umbauen. Der Kommentar in Zeile 2
        Middot, Gedankenstriche sparsam, kein „→" im Fließtext.
      - Decks sind STATISCH (PDF-Artefakt): keine Animationen,
        kein kasane-drift, keine Hover-Effekte.
-     - Icons: NUR Material Symbols Outlined (.msym), einfarbig in
+     - Icons: NUR Lucide, inline als SVG in .bm-icon (Dateien in
+       ../assets/icons/lucide/, Strich 1.5), einfarbig in
        der Textfarbe des Kontexts (hell: Charcoal), nie in
        Markenfarben, funktional — nie als Zeilenschmuck.
      - Wortmarke auf Cover und Schluss (../assets/logos/).
@@ -848,7 +849,6 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0,0" />
 
 <style>
   /* ----------------------------------------------------------
@@ -878,15 +878,10 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
                               = Abstand Unterkante→Baseline (~28px) */
   }
 
-  /* Material Symbols — einzige erlaubte Icon-Quelle. */
-  .msym {
-    font-family: 'Material Symbols Outlined';
-    font-weight: normal; font-style: normal;
-    font-size: 32px; line-height: 1;
-    display: inline-block;
-    font-variation-settings: 'opsz' 48, 'wght' 300, 'FILL' 0, 'GRAD' 0;
-    -webkit-font-smoothing: antialiased;
-  }
+    /* Icons: Lucide, inline als SVG (assets/icons/lucide/), Strich 1.5
+     über svg.lucide in tokens.css. Größe über width/height am .bm-icon. */
+  .bm-icon { display: inline-flex; flex: none; width: 32px; height: 32px; }
+  .bm-icon svg { width: 100%; height: 100%; stroke-width: 1.5; }
 
   /* ---------- Slide-Grundgerüst ----------
      Content-Slides: Headline beginnt IMMER bei --deck-title-y.
@@ -1010,7 +1005,7 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
   }
   .principle { border-top: var(--border-subtle); padding-top: var(--space-4); }
   .principle .p-head { display: flex; justify-content: space-between; align-items: center; }
-  .principle .p-head .msym { color: var(--charcoal); font-size: 24px; }
+  .principle .p-head .bm-icon { color: var(--charcoal); width: 24px; height: 24px; }
   .principle p { color: var(--dark); margin: var(--space-4) 0 0; }
 
   /* ---------- PATTERN: Resultat-Band ----------
@@ -1086,7 +1081,7 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
     padding: var(--space-4) var(--space-5);
     margin: var(--space-5); border-radius: var(--radius-md);
     color: var(--dark); max-width: 90%;
-    font: 500 14px/1.5 var(--font-mono);
+    font: 500 14px/1.5 var(--font-sans);
   }
 
   /* Kapiteltrenner: große Ziffer in Inter als stilles Element —
@@ -1160,10 +1155,10 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
         <div class="cover-bridge" style="flex: 1; align-self: center; height: 24px; position: relative;">
           <div style="position: absolute; left: -2px; right: 0; top: 10.96px; height: 2.58px; background: #fff;"></div>
         </div>
-        <span class="cover-client" style="flex-shrink: 0; margin-left: var(--space-6); font: 500 14px/1 var(--font-mono); color: var(--soft);">[ Kundenlogo ]</span>
+        <span class="cover-client" style="flex-shrink: 0; margin-left: var(--space-6); font: 500 14px/1 var(--font-sans); color: var(--soft);">[ Kundenlogo ]</span>
       </div>
       <div>
-        <div class="type-eyebrow" style="color: var(--soft); margin-bottom: var(--space-6);">Kunde × Bridgemaker — Anlass</div>
+        <div class="type-eyebrow" style="color: var(--soft); margin-bottom: var(--space-6);">Kunde × Bridgemaker, Anlass</div>
         <h1 class="type-display-l" style="margin: 0; max-width: 1080px; color: var(--off-white);">Titel des Decks über<br />maximal zwei Zeilen</h1>
       </div>
       <div class="type-small" style="color: var(--soft);">Gemeinsamer Arbeitsstand, 17. Juli 2026</div>
@@ -1345,18 +1340,18 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
       <div class="deck-body">
         <div class="hl-cols hl-cols-3">
           <div class="hl-col">
-            <div class="hl-index"><span class="type-small">01</span><span class="msym" style="font-size: 18px;">arrow_forward</span></div>
+            <div class="hl-index"><span class="type-small">01</span><span class="bm-icon" style="width: 18px; height: 18px;"><svg class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span></div>
             <h3 class="type-h4 hl-title">Erster Punkt</h3>
             <p class="type-body">Zwei bis drei Sätze, die den Punkt tragen: als Fließtext, nicht als Halbzeilen.</p>
             <p class="type-body">Weiterer Absatz nur, wenn er etwas Neues sagt.</p>
           </div>
           <div class="hl-col">
-            <div class="hl-index"><span class="type-small">02</span><span class="msym" style="font-size: 18px;">arrow_forward</span></div>
+            <div class="hl-index"><span class="type-small">02</span><span class="bm-icon" style="width: 18px; height: 18px;"><svg class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span></div>
             <h3 class="type-h4 hl-title">Zweiter Punkt</h3>
             <p class="type-body">Zwei bis drei Sätze, die den Punkt tragen.</p>
           </div>
           <div class="hl-col">
-            <div class="hl-index"><span class="type-small">03</span><span class="msym" style="font-size: 18px;">arrow_forward</span></div>
+            <div class="hl-index"><span class="type-small">03</span><span class="bm-icon" style="width: 18px; height: 18px;"><svg class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span></div>
             <h3 class="type-h4 hl-title">Dritter Punkt</h3>
             <p class="type-body">Zwei bis drei Sätze, die den Punkt tragen.</p>
           </div>
@@ -1510,19 +1505,19 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
       <div class="deck-body">
         <div class="principle-grid">
           <div class="principle">
-            <div class="p-head"><span class="type-h4">Erster Aspekt</span><span class="msym">insights</span></div>
+            <div class="p-head"><span class="type-h4">Erster Aspekt</span><span class="bm-icon"><svg class="lucide lucide-lightbulb" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg></span></div>
             <p class="type-body">Ein bis zwei Sätze, was das konkret heißt.</p>
           </div>
           <div class="principle">
-            <div class="p-head"><span class="type-h4">Zweiter Aspekt</span><span class="msym">hub</span></div>
+            <div class="p-head"><span class="type-h4">Zweiter Aspekt</span><span class="bm-icon"><svg class="lucide lucide-network" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></span></div>
             <p class="type-body">Ein bis zwei Sätze, was das konkret heißt.</p>
           </div>
           <div class="principle">
-            <div class="p-head"><span class="type-h4">Dritter Aspekt</span><span class="msym">query_stats</span></div>
+            <div class="p-head"><span class="type-h4">Dritter Aspekt</span><span class="bm-icon"><svg class="lucide lucide-chart-line" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="m19 9-5 5-4-4-3 3" /></svg></span></div>
             <p class="type-body">Ein bis zwei Sätze, was das konkret heißt.</p>
           </div>
           <div class="principle">
-            <div class="p-head"><span class="type-h4">Vierter Aspekt</span><span class="msym">rocket_launch</span></div>
+            <div class="p-head"><span class="type-h4">Vierter Aspekt</span><span class="bm-icon"><svg class="lucide lucide-rocket" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /></svg></span></div>
             <p class="type-body">Ein bis zwei Sätze, was das konkret heißt.</p>
           </div>
         </div>
@@ -1544,13 +1539,13 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
       <div class="deck-body">
         <div class="hl-cols hl-cols-2">
           <div class="hl-col">
-            <div class="hl-index"><span class="type-eyebrow" style="color: var(--mid);">Blickwinkel A</span><span class="msym" style="font-size: 20px; color: var(--charcoal);">verified</span></div>
+            <div class="hl-index"><span class="type-eyebrow" style="color: var(--mid);">Blickwinkel A</span><span class="bm-icon" style="width: 20px; height: 20px; color: var(--charcoal);"><svg class="lucide lucide-badge-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m16 9-5.5 5.5L8 12" /></svg></span></div>
             <p class="type-body">Erster Punkt als ganzer Satz.</p>
             <p class="type-body">Zweiter Punkt als ganzer Satz.</p>
             <p class="type-body">Dritter Punkt als ganzer Satz.</p>
           </div>
           <div class="hl-col">
-            <div class="hl-index"><span class="type-eyebrow" style="color: var(--mid);">Blickwinkel B</span><span class="msym" style="font-size: 20px; color: var(--charcoal);">pending</span></div>
+            <div class="hl-index"><span class="type-eyebrow" style="color: var(--mid);">Blickwinkel B</span><span class="bm-icon" style="width: 20px; height: 20px; color: var(--charcoal);"><svg class="lucide lucide-clock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg></span></div>
             <p class="type-body">Erster Punkt als ganzer Satz.</p>
             <p class="type-body">Zweiter Punkt als ganzer Satz.</p>
             <p class="type-body">Dritter Punkt als ganzer Satz.</p>

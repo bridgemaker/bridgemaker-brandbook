@@ -200,7 +200,7 @@ function BbLayoutSection() {
         {scale.map(([k, v]) => (
           <div key={k} style={{ display: "grid", gridTemplateColumns: "80px 60px 1fr", alignItems: "center", gap: 16 }}>
             <code style={{ font: "400 12px/1 'JetBrains Mono', Menlo, monospace", color: "#6B4A94" }}>--space-{k}</code>
-            <span style={{ font: "400 12px/1 'JetBrains Mono', Menlo, monospace", color: "#6B6B65" }}>{v}px</span>
+            <span style={{ font: "400 12px/1 Inter, sans-serif", color: "#6B6B65" }}>{v}px</span>
             <div style={{ height: 12, background: "#6B4A94", borderRadius: 2, width: v, maxWidth: "100%" }} />
           </div>
         ))}

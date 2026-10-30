@@ -123,7 +123,7 @@ function BbHero() {
 function BbGroupHeader({ letter, label }) {
   return (
     <div className="bb-group" style={{ paddingTop: 96, display: "flex", alignItems: "baseline", gap: 16 }}>
-      <div style={{ font: "600 15px/1 'JetBrains Mono', Menlo, monospace", color: "#6B4A94" }}>{letter}</div>
+      <div style={{ font: "600 15px/1 Inter, sans-serif", color: "#6B4A94" }}>{letter}</div>
       <div style={{ font: "500 13px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.14em", color: "#918F87" }}>{label}</div>
       <div style={{ flex: 1, height: 1, background: "#C5C0B8", alignSelf: "center" }} />
     </div>
@@ -162,7 +162,7 @@ function BbSwatch({ name, hex, usage, token, light }) {
         display: "flex", alignItems: "flex-end", padding: 12,
         border: "none",
       }}>
-        <span style={{ font: "400 11px/1 'JetBrains Mono', Menlo, monospace", color: isLight ? "#1C1C1E" : "#fff", opacity: 0.8 }}>
+        <span style={{ font: "400 11px/1 Inter, sans-serif", color: isLight ? "#1C1C1E" : "#fff", opacity: 0.8 }}>
           {copied ? "Copied!" : hex}
         </span>
       </div>

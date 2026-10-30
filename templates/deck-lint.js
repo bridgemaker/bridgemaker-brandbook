@@ -14,7 +14,7 @@
    - Max. fünf Textgrößen pro Seite: drei Basisgrößen (Headline /
      Content / Meta) plus bis zu zwei Auszeichnungen (Nils, 2026-10-30)
    - Grund Off-White auf Content-Slides; kein rohes Purple auf Dunkel
-   - Kein Mono außerhalb von Code und Platzhalter-Captions,
+   - Kein Mono außerhalb von echtem Code (auch nicht für Platzhalter),
      keine fremden Schriften
    - Kein Überlauf: Inhalt bleibt in der 1440×810-Stage
    - Zeichen & Voice-Basics: kein Middot/Bullet, keine Emoji,
@@ -148,19 +148,19 @@ function lintInPage() {
          Gedankenstrich-Check ausgenommen, wie Eyebrows/Headlines. */
       if (!el.closest('.deck-title, .type-eyebrow, h1, h2') && cs.fontStyle !== 'italic') bodyText += ' ' + txt;
 
-      /* Mono ist legitim für echten Code, Platzhalter-Captions und
-         Klammer-Platzhalter wie „[ Zitat folgt ]" (08-voice.md). */
+      /* Mono ist nur für echten Code legitim (Nils, 2026-10-30);
+         Platzhalter laufen in Inter. */
       const ff = cs.fontFamily;
-      const istPlatzhalter = el.closest('.placeholder-caption, code, pre') || /^\[.*\]$/.test(txt);
+      const istPlatzhalter = el.closest('code, pre');
       if (/JetBrains/i.test(ff) && !istPlatzhalter) {
-        err(`Mono außerhalb von Code/Platzhalter-Caption: „${txt.slice(0, 40)}" — UI-Text läuft in Inter.`);
-      } else if (!/Inter|JetBrains|Material Symbols/i.test(ff)) {
+        err(`Mono außerhalb von Code: „${txt.slice(0, 40)}" — UI-Text läuft in Inter.`);
+      } else if (!/Inter|JetBrains/i.test(ff)) {
         err(`Fremde Schrift „${ff.split(',')[0]}" bei „${txt.slice(0, 40)}" — nur Inter (und Mono für Code).`);
       }
       if (dark && cs.color === RAW_PURPLE) {
         err(`Rohes Purple auf Dunkel bei „${txt.slice(0, 40)}" — auf Dunkel gilt --bm-lavender-dark.`);
       }
-      if (el.closest('.slide-head, .slide-foot, .num, .o-num, .chapter-num, .msym, .placeholder-caption, .pagenum')) return;
+      if (el.closest('.slide-head, .slide-foot, .num, .o-num, .chapter-num, .bm-icon, .placeholder-caption, .pagenum')) return;
       /* ≤14px = Meta-Register (Eyebrow, Captions, type-small,
          Quellen) — gezählt werden nur die Register darüber. */
       const px = Math.round(parseFloat(cs.fontSize));

@@ -32,10 +32,10 @@
   Stufe hoch (§9.6), Rahmen an schwebenden Ebenen raus, englische
   Beschriftungen auf Deutsch. **Nie `shadcn init`** erneut laufen
   lassen, es überschreibt `globals.css`.
-- **Icons:** Inhalte mit Material Symbols
-  (`<span className="material-symbols-outlined">name</span>`, Font
-  selbst gehostet in `src/app/fonts/`). Lucide nur innerhalb der
-  `ui/`-Komponenten (Häkchen, Chevron, X).
+- **Icons:** nur Lucide (`lucide-react`), Strich 1.5 über die
+  Regel in tokens.css. Ein Set für Inhalte und Komponenten.
+- **Navigation:** `AppShell` aus `components/brand/app-shell.tsx`
+  (Floating Sidebar, guidelines/09 §9.12), Demo unter `/dashboard`.
 - `TooltipProvider` sitzt im Root-Layout.
 
 ## Abstände (guidelines/06 §6.5–6.6, 09 §9.6)

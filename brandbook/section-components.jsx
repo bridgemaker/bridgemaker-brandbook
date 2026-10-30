@@ -70,14 +70,14 @@ function BbComponentsSection() {
       <h3 style={{ font: "500 17px/1.3 Inter, sans-serif", color: "#1C1C1E", margin: "0 0 8px" }}>Badges</h3>
       <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "0 0 20px", maxWidth: 620 }}>
         Kleine Pills: <strong>Tint-Hintergrund + Deep-Textfarbe</strong>. Mehr als 3 pro View = Layout-Problem.
-        Daneben existiert eine Mono-Micro-Variante für technische Labels.
+        Daneben gibt es ein Micro-Label in Inter-Versalien für technische Kennzeichnungen.
       </p>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 64, alignItems: "center" }}>
         <span className="bm-badge">Neutral</span>
         <span className="bm-badge bm-badge-purple">Kundenschnittstelle</span>
         <span className="bm-badge bm-badge-berry">Neue Felder</span>
         <span className="bm-badge bm-badge-teal">Vertrieb</span>
-        <span style={{ font: "500 10px/1 'JetBrains Mono', Menlo, monospace", background: "#EDE3F5", color: "#4A2D6B", padding: "5px 10px", borderRadius: 999, textTransform: "uppercase", letterSpacing: "0.1em" }}>Mono-Micro</span>
+        <span style={{ font: "500 10px/1 Inter, sans-serif", background: "#EDE3F5", color: "#4A2D6B", padding: "5px 10px", borderRadius: 999, textTransform: "uppercase", letterSpacing: "0.1em" }}>Micro-Label</span>
       </div>
 
       {/* Forms */}

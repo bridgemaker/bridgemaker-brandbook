@@ -10,10 +10,10 @@
   Für UI-Text ist Mono **verboten**: Eyebrows, Tag-Pills und Badges,
   KPI- und Dauer-Anzeigen, Meta-Zeilen, Nummerierungen („01/02/03"),
   Chart-Achsenbeschriftungen — alles läuft in Inter. Der Token
-  `--font-mono` bleibt definiert, reserviert für Code-Blöcke.
-  Einzige zweite erlaubte Verwendung: die Monospace-Caption auf
-  Platzhaltern (§7.7) — sie markiert Unfertiges und wird nie
-  ausgeliefert.
+  `--font-mono` bleibt definiert, reserviert für Code-Blöcke und
+  Code-Bezeichner (Klassen, Token, Dateipfade). Auch Platzhalter-
+  Captions, Hex-Werte und px-Angaben laufen in Inter *(Nils,
+  2026-10-30 — ersetzt die frühere Platzhalter-Ausnahme)*.
 - **Print-Ausnahme** *(Nils, 2026-07-14)*: In Print-Publikationen
   (DIN-A4-Layer, `tokens/print-tokens.css`) zeigt `--font-display` auf
   **Inter Display** — die Schrift ist für große Grade gezeichnet und
@@ -59,7 +59,7 @@ ersetzt die fixe px-Skala von v1.
 | `type-display` | `clamp(40px, 5.5vw, 64px)` | **600** | 1.10 | −0.03em | Standard-Hero |
 | `type-h1` | `clamp(32px, 4.2vw, 48px)` | 600 | 1.15 | −0.025em | Seitentitel |
 | `type-h2` | `clamp(26px, 3vw, 32px)` | 600 | 1.25 | −0.025em | Sektions-Headlines |
-| `type-stat` | `clamp(28px, 3vw, 36px)` | 500 | 1.10 | −0.025em | Kennzahlen, Counts |
+| `type-stat` | `clamp(28px, 3vw, 36px)` | 300 | 1.10 | −0.025em | Kennzahlen, Counts — große KPIs immer Light *(Nils, 2026-10-30)* |
 | `type-h3` | 24px | 500 | 1.30 | −0.5px | Zwischenüberschriften |
 | `type-h4` | 20px | 500 | 1.40 | −0.3px | Karten-Titel |
 | `type-card-title` | 18px | **600** | 1.45 | −0.3px | Kleine Karten-/Box-Headlines (Lead-Größe, Semi-Bold) |
