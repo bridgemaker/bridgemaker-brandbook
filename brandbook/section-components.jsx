@@ -15,7 +15,7 @@ function BbComponentsSection() {
       </p>
 
       <div style={{ background: "#fff", borderRadius: 20, padding: 40, marginBottom: 16 }} className="card-clean">
-        <div style={{ font: "500 11px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87", marginBottom: 20 }}>Auf hellem Grund</div>
+        <div style={{ font: "500 11px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87", marginBottom: 20 }}>Auf hellem Grund</div>
         <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
           <button className="bm-btn bm-btn-primary">Jetzt starten</button>
           <button className="bm-btn bm-btn-secondary">Mehr erfahren</button>
@@ -33,7 +33,7 @@ function BbComponentsSection() {
         <div className="bg-contact-cta" style={{ position: "absolute", inset: 0 }} />
         <div className="grain-screen" style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
         <div style={{ position: "relative", padding: 40 }}>
-          <div style={{ font: "500 11px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "rgba(255,255,255,0.6)", marginBottom: 20 }}>Auf dunklem Grund</div>
+          <div style={{ font: "500 11px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "rgba(255,255,255,0.6)", marginBottom: 20 }}>Auf dunklem Grund</div>
           <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
             <button className="bm-btn bm-btn-primary">Let's build together</button>
             <button className="bm-btn bm-btn-secondary">Mehr erfahren</button>
@@ -78,6 +78,22 @@ function BbComponentsSection() {
         <span className="bm-badge bm-badge-berry">Neue Felder</span>
         <span className="bm-badge bm-badge-teal">Vertrieb</span>
         <span style={{ font: "500 10px/1 Inter, sans-serif", background: "#EDE3F5", color: "#4A2D6B", padding: "5px 10px", borderRadius: 999, textTransform: "uppercase", letterSpacing: "0.1em" }}>Micro-Label</span>
+      </div>
+
+      {/* Icons */}
+      <h3 style={{ font: "500 17px/1.3 Inter, sans-serif", color: "#1C1C1E", margin: "0 0 8px" }}>Icons</h3>
+      <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "0 0 20px", maxWidth: 620 }}>
+        <strong>Lucide</strong>, Strichstärke 1,5, einfarbig in der Textfarbe, nie in Markenfarben. Funktional statt
+        dekorativ: ein Icon pro Karte, Aspekt oder Navigationspunkt. React <code>lucide-react</code>, statisch die SVGs
+        aus <code>assets/icons/lucide/</code>.
+      </p>
+      <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginBottom: 64, alignItems: "center", color: "#1C1C1E" }}>
+        {["layout-dashboard", "folder-open", "users", "chart-line", "messages-square", "lightbulb", "rocket", "settings"].map(n => (
+          <div key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: 88 }}>
+            <BbLucide name={n} />
+            <span style={{ font: "400 11px/1.3 Inter, sans-serif", color: "#918F87" }}>{n}</span>
+          </div>
+        ))}
       </div>
 
       {/* Forms */}

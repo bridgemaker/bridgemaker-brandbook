@@ -39,7 +39,7 @@ function BbColorsSection() {
             <div onClick={() => navigator.clipboard?.writeText(b.hex)}
               style={{ cursor: "pointer", background: b.hex, borderRadius: 16, height: 160,
                 display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 20 }}>
-              <div style={{ font: "500 11px/1 Inter, sans-serif", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{b.role}</div>
+              <div style={{ font: "500 11px/1 Inter, sans-serif", color: "rgba(255,255,255,0.55)", textTransform: "uppercase", letterSpacing: "0.10em" }}>{b.role}</div>
               <div style={{ font: "600 22px/1 Inter, sans-serif", color: "#fff", letterSpacing: "-0.4px", marginTop: 6 }}>{b.name}</div>
               <div style={{ font: "400 12px/1 Inter, sans-serif", color: "rgba(255,255,255,0.75)", marginTop: 6 }}>{b.hex}</div>
             </div>
@@ -82,7 +82,7 @@ function BbColorsSection() {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div style={{ background: "#fff", borderRadius: 16, padding: 28 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87" }}>Ränder & Trennlinien</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87" }}>Ränder & Trennlinien</div>
           <ul style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li><strong>Sektions-/Flächengrenzen:</strong> 1px <code>--surface-stone</code> — die weichste sichtbare Grenze</li>
             <li><strong>Umriss-Boxen, Tabellen:</strong> <code>--border-subtle</code> (#C5C0B8)</li>
@@ -91,7 +91,7 @@ function BbColorsSection() {
           </ul>
         </div>
         <div className="bm-on-dark" style={{ background: "#1C1C1E", borderRadius: 16, padding: 28 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#AF94D2" }}>Auf dunklem Grund</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#AF94D2" }}>Auf dunklem Grund</div>
           <ul style={{ font: "var(--text-small)", color: "#F5F4F1", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Headlines <span style={{ color: "#F5F4F1" }}>Off-White</span>, Fließtext <span style={{ color: "#A8A69E" }}>Soft</span></li>
             <li>Links & CTAs <span style={{ color: "#AF94D2" }}>Lavender Dark</span> — nie rohes Purple</li>

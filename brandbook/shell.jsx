@@ -101,8 +101,8 @@ function BbNav({ sections, active, onJump }) {
 function BbHero() {
   return (
     <section style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 48px 72px" }}>
-      <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87", marginBottom: 32 }}>
-        Bridgemaker, Brand & Style, v2.0 — Juli 2026
+      <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87", marginBottom: 32 }}>
+        Bridgemaker, Brand & Style, v2.0, Stand Oktober 2026
       </div>
       <h1 className="type-display-l" style={{ color: "#1C1C1E", margin: 0, maxWidth: 980 }}>
         Ergebnis. KI-nativ.<br/>Umgesetzt.

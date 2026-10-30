@@ -34,7 +34,7 @@ function BbLogoSection() {
       {/* Monogram */}
       <h3 style={{ font: "500 17px/1.3 Inter, sans-serif", color: "#1C1C1E", margin: "0 0 8px" }}>Monogram — Signet</h3>
       <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "0 0 24px", maxWidth: 620 }}>
-        Für quadratische Anwendungen ab App-Icon-Größe (~120 px): Touch-Icon, Social-Avatar, kleine Stempel auf Bildern. Das Browser-Favicon ist es nicht — dort läuft nur der Gedankenstrich auf schwarzem Quadrat (favicon-dash.png), weil das volle B—M bei Tab-Größe unlesbar ist. Niemals als Ersatz für das Wordmark im Hauptauftritt.
+        Für quadratische Anwendungen ab App-Icon-Größe (~120 px): Touch-Icon, Social-Avatar, kleine Stempel auf Bildern. Das Browser-Favicon ist es nicht — dort läuft nur der Gedankenstrich auf schwarzem Quadrat (favicon-dash.png), weil das volle B—M bei Tab-Größe unlesbar ist. In der eingeklappten Sidebar interner Tools steht der Gedankenstrich im schwarzen Kreis. Niemals als Ersatz für das Wordmark im Hauptauftritt.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
         <div style={{ background: "#F5F4F1", borderRadius: 20, border: "1px solid #C5C0B8", padding: 32, aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -114,7 +114,7 @@ function BbLogoSection() {
         </div>
         <div style={{ background: "#fff", borderRadius: 20, padding: 32, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>
-            <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87" }}>Mindestgrößen</div>
+            <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87" }}>Mindestgrößen</div>
             <div style={{ marginTop: 20, display: "grid", gap: 14 }}>
               <div>
                 <div style={{ font: "500 13px/1.3 Inter, sans-serif", color: "#1C1C1E" }}>Wordmark</div>
@@ -138,16 +138,16 @@ function BbLogoSection() {
 
       {/* Color rules */}
       <div style={{ background: "#fff", borderRadius: 20, padding: 32, marginBottom: 32 }}>
-        <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87" }}>Farbregeln</div>
+        <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87" }}>Farbregeln</div>
         <p style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "12px 0 0", maxWidth: 720 }}>
-          Charcoal (#1C1C1E) auf hellem Grund, Off-White (#F5F4F1) auf dunklem. Niemals in Brand-Farben (Purple, Berry, Teal, Sage) eingefärbt — auch nicht als „Highlight". Das Logo bleibt monochrom; Farbe lebt drumherum.
+          Charcoal (#1C1C1E) auf hellem Grund, Off-White (#F5F4F1) auf dunklem. Niemals in Brand-Farben (Purple, Berry, Teal) eingefärbt — auch nicht als „Highlight". Das Logo bleibt monochrom; Farbe lebt drumherum.
         </p>
       </div>
 
       {/* Do / Don't */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div style={{ background: "#E8E5DF", borderRadius: 16, padding: 32 }}>
-          <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#4A5A3C" }}>Do</div>
+          <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#4A5A3C" }}>Do</div>
           <ul style={{ font: "var(--text-small)", color: "#1C1C1E", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Wordmark als primäre Anwendung — im Website-Header (64px) immer die Wordmark, 20px hoch</li>
             <li>Monogram nur, wenn das Format ein Quadrat ab App-Icon-Größe erzwingt (Touch-Icon, Avatar, Foto-Stempel) — das Browser-Favicon führt nur den Strich</li>
@@ -157,7 +157,7 @@ function BbLogoSection() {
           </ul>
         </div>
         <div style={{ background: "#F5E0E8", borderRadius: 16, padding: 32 }}>
-          <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#8A3050" }}>Don't</div>
+          <div style={{ font: "500 12px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#8A3050" }}>Don't</div>
           <ul style={{ font: "var(--text-small)", color: "#1C1C1E", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Keine Farbfüllung im Logo (kein Purple, kein Berry, kein Gradient)</li>
             <li>Monogram nicht als Ersatz für das Wordmark im Hauptauftritt</li>
@@ -171,7 +171,7 @@ function BbLogoSection() {
       {/* Downloads */}
       <div style={{ marginTop: 32, padding: 24, background: "#1C1C1E", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
         <div>
-          <div style={{ font: "500 11px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#AF94D2" }}>Downloads</div>
+          <div style={{ font: "500 11px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#AF94D2" }}>Downloads</div>
           <div style={{ font: "500 15px/1.3 Inter, sans-serif", color: "#F5F4F1", marginTop: 4 }}>Alle Logo-Dateien als SVG</div>
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>

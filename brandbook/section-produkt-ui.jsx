@@ -181,4 +181,4 @@ function BbProductUiSection() {
   );
 }
 
-Object.assign(window, { BbProductUiSection });
+Object.assign(window, { BbProductUiSection, BbLucide });

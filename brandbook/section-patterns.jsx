@@ -15,7 +15,7 @@ function BbImagerySection() {
         <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "12px 0 0", maxWidth: 620, lineHeight: 1.6 }}>
           Bis dahin: keine Bildentscheidungen ohne Creative-Director-Freigabe.
           Fehlt ein Asset, bleibt der gestreifte Platzhalter mit
-          Monospace-Caption das Mittel der Wahl.
+          Caption in Inter das Mittel der Wahl.
         </p>
       </div>
     </BbSection>
@@ -84,9 +84,6 @@ function BbLandingSection() {
             </div>
           </div>
         ))}
-      </div>
-      <div style={{ marginTop: 40 }}>
-        <a href="../examples/landing-page.html" className="bm-btn bm-btn-secondary" style={{ textDecoration: "none" }}>Beispiel-Landingpage ansehen →</a>
       </div>
     </BbSection>
   );

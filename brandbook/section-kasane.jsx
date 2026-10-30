@@ -67,7 +67,7 @@ function BbKasaneSection() {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div style={{ background: "#E8E5DF", borderRadius: 16, padding: 32 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#4A5A3C" }}>Do</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#4A5A3C" }}>Do</div>
           <ul style={{ font: "var(--text-small)", color: "#1C1C1E", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Hero (EIN Hero-Kasane pro Seite), Kapitelbänder, Moment-Sektionen, Cover-Slides, CTAs</li>
             <li>Mehrere Gradient-Felder pro Seite — im Wechsel mit ruhigen Flächen</li>
@@ -76,7 +76,7 @@ function BbKasaneSection() {
           </ul>
         </div>
         <div style={{ background: "#F5E0E8", borderRadius: 16, padding: 32 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#8A3050" }}>Don't</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#8A3050" }}>Don't</div>
           <ul style={{ font: "var(--text-small)", color: "#1C1C1E", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Zwei Gradient-Sektionen direkt aneinander</li>
             <li>Niemals hinter Fließtext — Kontrast versagt</li>

@@ -107,7 +107,7 @@ function BbVoiceSection() {
       desc='„We are matter-of-fact, but know how to express our emotions. Calm and wise, yet fierce and brave. We go deep — but we are crystal clear."'>
 
       <div style={{ background: "#EDE3F5", borderRadius: 16, padding: "20px 28px", marginBottom: 40, font: "var(--text-small)", color: "#4A2D6B", lineHeight: 1.6 }}>
-        <strong>Verbindlich für jede Textarbeit:</strong> der Voice & Style Guide v1.0 —{" "}
+        <strong>Verbindlich für jede Textarbeit:</strong> der Tone of Voice v1.2 —{" "}
         <a href="../md.html?file=guidelines%2F08-voice.md" style={{ color: "#6B4A94", textDecoration: "underline", textUnderlineOffset: 3 }}>guidelines/08-voice.md</a>.
         Er trägt Tone-Level (Standard / Empathisch / Visionär), Wortlisten, verbotene Phrasen und die Selbst-Checks.
         Diese Sektion zeigt nur die Polaritäten und Dimensionen.
@@ -208,16 +208,18 @@ function BbLayoutSection() {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 48 }}>
         <div className="card-clean" style={{ background: "#fff", borderRadius: 16, padding: 28 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87" }}>Container & Maße</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87" }}>Container & Maße</div>
           <ul style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Container max <strong>1200px</strong>, Padding 16px mobil / 32px ab md</li>
             <li>Sektionen <code>py-24</code> (96px), Grid-Gutter 24px</li>
             <li>Headlines und Leads <code>max-w-2xl</code> — nie volle Breite</li>
             <li>Negativraum ist ein Marken-Asset — im Zweifel: mehr</li>
+            <li><strong>Eine Stufe Luft:</strong> Abstände eine Stufe größer als UI-Kit-Defaults; was zusammengehört, bleibt eng</li>
+            <li><strong>Nichts klebt an einer Kante:</strong> unten derselbe Abstand wie oben, bei 375px prüfen</li>
           </ul>
         </div>
         <div className="card-clean" style={{ background: "#fff", borderRadius: 16, padding: 28 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87" }}>Hover-Konventionen</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87" }}>Hover-Konventionen</div>
           <ul style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "12px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
             <li>Karten <strong>liften</strong>: −4px + shadow-md (200ms)</li>
             <li>Buttons wechseln die Füllung in der Familie — nie nach Schwarz</li>
@@ -277,11 +279,11 @@ function BbTokensSection() {
     { k: "/* Karten & Gradients */", c: "#6B6B65" },
     [".card-clean / .card-elevated", "Inset-Haarlinie + nahe Elevation"],
     [".card-glass / .hero-card-glass", "Frost über Gradient"],
-    [".bg-kasane-* / .bg-hebel-* / …", "28 Katalog-Flächen"],
+    [".bg-kasane-* / .bg-hebel-* / …", "der Gradient-Katalog"],
   ];
   return (
     <BbSection id="tokens" num="14" title="Design Tokens"
-      desc="tokens.css + tokens.json v2.0 — Quelle: globals.css der Website. In jedem Projekt als Erstes laden; Werte nie inline neu definieren.">
+      desc="tokens.css + tokens.json (v2.2) — Quelle: globals.css der Website. In jedem Projekt als Erstes laden; Werte nie inline neu definieren.">
       <div style={{ display: "flex", gap: 12, marginBottom: 24, flexWrap: "wrap" }}>
         <a href="../tokens/tokens.css" className="bm-btn bm-btn-primary" style={{ textDecoration: "none" }}>tokens.css</a>
         <a href="../tokens/tokens.json" className="bm-btn bm-btn-secondary" style={{ textDecoration: "none" }}>tokens.json</a>
@@ -318,7 +320,9 @@ function BbClaudeSection() {
           <li>Glas nur über Gradient/Bild; Glas und Inhalte darunter ohne filter/blend-mode.</li>
           <li>Kasane: ein Hero-Kasane pro Seite; Gradient-Felder im Wechsel mit ruhigen Flächen, nie hinter Fließtext.</li>
           <li>Produkt-/App-UIs: shadcn/ui auf Radix mit explizitem Bridgemaker-Mapping (Sektion „Produkt-UIs"), nie Preset, eine Stufe luftiger als der Default.</li>
-          <li>Keine SVG-Illustrationen erfinden — gestreifte Platzhalter. KI-Bilder nur mit CD-Freigabe.</li>
+          <li>Informationsgrafiken bauen, keine Illustrationen erfinden; fehlt ein Bild, gestreifter Platzhalter. KI-Bilder nur mit CD-Freigabe.</li>
+          <li>Icons nur Lucide, Strichstärke 1.5. Große KPIs Light. JetBrains Mono nur für Code.</li>
+          <li>Decks als Slides-Artefakt mit dem Design System; Regeln sind Leitplanken (Sektion „Slide-Decks").</li>
           <li>Voice: matter-of-fact + emotional, calm + fierce, deep + crystal clear. Kein Jargon, kein KI-Geschwätz.</li>
           <li>Wenn etwas unklar ist — <strong>fragen</strong>, nicht improvisieren.</li>
         </ul>

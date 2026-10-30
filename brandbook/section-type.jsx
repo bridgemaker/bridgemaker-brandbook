@@ -7,17 +7,17 @@ function BbTypeSection() {
       desc="Inter für alles — auch Display-Größen. Die großen Stufen sind fluide via clamp(): fixe Pixel brechen auf Mobile. Typografie wird AUSSCHLIESSLICH über die type-*-Klassen gesetzt — nie ad-hoc.">
       <div style={{ display: "flex", gap: 48, flexWrap: "wrap", marginBottom: 48 }}>
         <div style={{ flex: 1, minWidth: 280 }}>
-          <div style={{ font: "500 11px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87", marginBottom: 12 }}>Alle Größen</div>
+          <div style={{ font: "500 11px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87", marginBottom: 12 }}>Alle Größen</div>
           <div style={{ font: "600 32px/1 Inter, sans-serif", color: "#1C1C1E", letterSpacing: "-0.9px" }}>Inter</div>
           <p style={{ font: "var(--text-small)", color: "#6B6B65", marginTop: 12, maxWidth: 420 }}>
             Eine Familie für Display, Headings, Body und UI. In Next.js via next/font laden. Größer = leichter — bewusst gesetzt.
           </p>
         </div>
         <div style={{ flex: 1, minWidth: 280 }}>
-          <div style={{ font: "500 11px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#918F87", marginBottom: 12 }}>Code / Daten</div>
+          <div style={{ font: "500 11px/1.4 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#918F87", marginBottom: 12 }}>Code / Daten</div>
           <div style={{ font: "400 32px/1 'JetBrains Mono', Menlo, monospace", color: "#1C1C1E" }}>JetBrains Mono</div>
           <p style={{ font: "var(--text-small)", color: "#6B6B65", marginTop: 12, maxWidth: 420 }}>
-            Für Code, Daten und technische Captions (auch Mono-Badges).
+            Nur für echten Code. Werte, Platzhalter und Labels laufen in Inter.
           </p>
         </div>
       </div>
@@ -50,16 +50,16 @@ function BbTypeSection() {
 
       <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div style={{ background: "#fff", borderRadius: 16, padding: 28 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#4A5A3C" }}>Deutsch in Display</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#4A5A3C" }}>Deutsch in Display</div>
           <p style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "12px 0 0", lineHeight: 1.7 }}>
             Umlaute in Display-Headlines sind <strong>willkommen</strong> — sie geben deutschen Headlines Charakter.
             Lange Komposita brechen lassen (<code>overflow-wrap: break-word</code>), nicht die Schrift schrumpfen.
           </p>
         </div>
         <div style={{ background: "#fff", borderRadius: 16, padding: 28 }}>
-          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em", color: "#8A3050" }}>Tracking</div>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#8A3050" }}>Tracking</div>
           <p style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "12px 0 0", lineHeight: 1.7 }}>
-            Headlines laufen mit negativem Tracking. Nie positiv spationieren — einzige Ausnahme ist das Eyebrow (+0.08em, Versalien).
+            Headlines laufen mit negativem Tracking. Nie positiv spationieren — einzige Ausnahme ist das Eyebrow (+0.10em, Versalien).
           </p>
         </div>
       </div>
