@@ -166,7 +166,7 @@ function BbVoiceSection() {
             <li>„Wir bauen Geschäftsmodelle, die im Markt bestehen."</li>
             <li>„Vom ersten Workshop bis zum Tag, an dem die Zahlen stimmen."</li>
             <li>„Faster than traditional consulting."</li>
-            <li>„Innovation ist unser Geschäft."</li>
+            <li>„Wir bleiben, bis es trägt."</li>
           </ul>
         </div>
         <div style={{ background: "#F5E0E8", borderRadius: 16, padding: 32 }}>

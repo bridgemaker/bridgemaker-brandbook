@@ -11,7 +11,10 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-Die Startseite ist die **Komponenten-Referenz**: shadcn/ui im
+Zwei Demo-Seiten: `/` ist die **Komponenten-Referenz**, `/dashboard`
+zeigt die **Floating Sidebar** für interne Tools (guidelines/09 §9.12).
+
+Die Startseite ist die Komponenten-Referenz: shadcn/ui im
 Bridgemaker-Theming, Buttons, Felder, Karten und Badges in unseren
 Rezepten — der Code der Seite ist die Gebrauchsanweisung. Die visuelle
 Herleitung steht im Brandbook.
