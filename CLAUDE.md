@@ -47,7 +47,8 @@
 7. **8px-Raster** (4px halbe Stufe). Keine krummen Werte.
 8. **Textarbeit? Erst `guidelines/08-voice.md` lesen** (Tone-Level,
    Wortlisten, harte Schreibregeln).
-9. **Produkt-/App-UI? → MD3 mit Bridgemaker-Mapping** (Abschnitt 9).
+9. **Produkt-/App-UI? → shadcn/ui auf Radix UI mit Bridgemaker-Mapping**
+   (Abschnitt 9).
 10. **Keine einzelne farbige Kante — an keiner Seite.** Karten, Boxen,
    Callouts und Listen bekommen nie einen Farbstreifen oben, links,
    rechts oder unten. Hervorhebung läuft über Surfaces (Abschnitt 4,
@@ -201,6 +202,13 @@ keine Box markieren.
 - Sektionen **`py-24`** (96px). Grid-Gutter 24px.
 - **Headlines und Leads `max-w-2xl`** — nie volle Breite.
 - Negativraum ist ein Marken-Asset. Im Zweifel: mehr.
+- **Eine Stufe Luft:** Abstände eine Stufe größer als UI-Kit-Defaults
+  (Raster 4→8→12→16→24→32→40→48); was zusammengehört (Label/Feld),
+  bleibt eng (`guidelines/06 §6.5`) *(Nils, 2026-10-30)*.
+- **Nichts klebt an einer Kante:** unten derselbe Innenabstand wie
+  oben; Karten/Dialoge/Sheets min. 32px, Popover 24px; Scroll-Bereiche
+  mit Padding innen; jede Ansicht bis ganz unten und bei 375px prüfen
+  (`guidelines/06 §6.6`) *(Nils, 2026-10-30)*.
 
 ## 7. Komponenten & Patterns
 
@@ -293,31 +301,36 @@ außerhalb expliziter UI-Bestätigungen; Aufzählungen als normaler
 Satz mit Komma und „und" — das Middot-Zeichen kommt nirgends vor,
 Gedankenstriche sparsam (max. einer pro Absatz).
 
-## 9. Produkt-/App-UIs — Material Design 3
+## 9. Produkt-/App-UIs — shadcn/ui + Radix UI
 
-Digitale Produkte bauen auf **MD3** mit Bridgemaker-Theming
-(`guidelines/09-md3-mapping.md`):
+Digitale Produkte bauen auf **shadcn/ui** mit **Radix UI** als
+Primitive-Basis und Bridgemaker-Theming
+(`guidelines/09-shadcn-radix-mapping.md`) *(Nils, 2026-10-30)*:
 
-- Farbrollen **explizit mappen, NIE seed-generieren** (primary =
-  bm-purple, surface = off-white, dark-primary = lavender-dark …).
-- Type-Scale auf `type-*` mappen; Inter, nie Roboto.
-- Icons: **Material Symbols Outlined** — einzige Icon-Quelle, auch in
+- shadcn-Variablen **explizit auf Tokens mappen, NIE Preset oder
+  Basisfarbe** (primary = bm-purple, background = off-white,
+  dark-primary = lavender-dark …; Starter-Kit: `shadcn-theme.css`).
+- Text nur über `type-*`, nie `text-sm`/`font-semibold` aus den
+  shadcn-Vorlagen; Inter, nie Geist.
+- Radien und Schatten kommen aus tokens.css (gleiche Namen wie
+  Tailwind); Buttons, Tabs, Chips Pill; Inputs `radius-md`; Karten
+  und Dialoge `radius-xl`; Karten ohne Rahmen (`card-clean`).
+- **Eine Stufe Luft:** Abstände eine Stufe größer als shadcn
+  (Karte/Dialog 32px statt 24, Popover 24 statt 16; Tabelle:
+  `09 §9.6`).
+- Icons: **Material Symbols Outlined** für alle Inhalte, auch in
   Decks; einfarbig in der Textfarbe des Kontexts (hell: Charcoal),
-  nie in Markenfarben (Regeln: `guidelines/09 §9.8`).
-- Pill = MD3 full radius; Inputs `radius-md`.
-- Bridgemaker-Elevation statt MD3-Tonal-Elevation; Motion gedeckelt.
-- MD3 liefert Anatomie, States, A11y — Bridgemaker liefert Farbe, Typo,
-  Shape, Zurückhaltung.
-- **Basis bleibt `@material/web`** (Wartungsmodus, keine neuen
-  Komponenten). Lücken: erst natives HTML, dann React Aria — keine
-  zweite Bibliothek mit eigener Optik. **M3 Expressive** gibt es fürs
-  Web nicht; übernommen werden nur Prinzipien (Hero-Momente
-  rationieren, Gruppieren statt Dekorieren), nie Shape-Morphing,
-  Feder-Motion, Vibrant-Color oder Emphasized-Typo (`09 §9.7, §9.11`)
-  *(Nils, 2026-10-08)*.
+  nie in Markenfarben (`09 §9.8`). **Lucide** nur für Glyphen
+  innerhalb der shadcn-Komponenten (Häkchen, Chevron, X), Strich 1.5.
+- Radix liefert Verhalten, Fokus und A11y; Bridgemaker liefert Farbe,
+  Typo, Shape, Abstände, Zurückhaltung. Keine zweite Bibliothek mit
+  eigener Optik daneben (auch nicht Radix Themes).
 - **Vorrang-Regel:** Bridgemaker-Rezepte (type-*, bm-btn, bm-input,
-  Karten, Badges) gelten auch in Produkt-UIs — MD3 füllt NUR die
-  Lücken (Dialoge, Menüs, Tabs, Loader, Slider, Switches …).
+  Karten, Badges) gelten auch in Produkt-UIs. Im Starter-Kit tragen
+  `Button`, `Input`, `Card`, `Badge` schon deren Optik; shadcn
+  übernimmt die Lücken (Dialoge, Menüs, Tabs, Popover, Slider,
+  Switches …). Nach jedem `shadcn add` die Datei auf Typo, Abstände
+  und Rahmen durchgehen (`09 §9.11`).
 - **Produkt-Projekte entstehen NIE in diesem Repo:**
   `node templates/new-app.js <ordner> --projekt "Name"` legt den
   Projektordner außerhalb an — Brandbook live als `brand/`

@@ -6,8 +6,8 @@ Sektion bis zur Landingpage, zum Deck oder App-Screen. Das ist das
 
 **Scope-Hinweis:** Marketing-Oberflächen (Website, Landingpages, Decks)
 entstehen mit dem hier beschriebenen Bridgemaker-Komponenten-Handwerk.
-Produkt-/App-UIs entstehen auf **Material Design 3** mit
-Bridgemaker-Theming — siehe [`09-md3-mapping.md`](09-md3-mapping.md).
+Produkt-/App-UIs entstehen auf **shadcn/ui mit Radix UI** und
+Bridgemaker-Theming — siehe [`09-shadcn-radix-mapping.md`](09-shadcn-radix-mapping.md).
 
 ## 7.1 Sektions-Anatomie
 

@@ -109,7 +109,7 @@ function BbHero() {
       </h1>
       <p style={{ font: "400 19px/1.55 Inter, sans-serif", color: "#3D3D3A", marginTop: 32, maxWidth: 640 }}>
         Das Brandbook der Bridgemaker GmbH — abgeleitet aus dem Kanon in <code>guidelines/</code> und dem gelebten
-        Design-System der Website: Glass & Karten, fluide Typografie, Gradient-Katalog, Motion, MD3 für Produkt-UIs.
+        Design-System der Website: Glass & Karten, fluide Typografie, Gradient-Katalog, Motion, shadcn/ui für Produkt-UIs.
       </p>
       <div style={{ display: "flex", gap: 16, marginTop: 48, flexWrap: "wrap" }}>
         <a href="../md.html?file=CLAUDE.md" className="bm-btn bm-btn-primary" style={{ textDecoration: "none" }}>CLAUDE.md öffnen</a>

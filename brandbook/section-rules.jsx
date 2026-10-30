@@ -317,7 +317,7 @@ function BbClaudeSection() {
           <li>Nur <code style={{ color: "#AF94D2" }}>type-*</code>-Klassen — nie ad-hoc-Typografie.</li>
           <li>Glas nur über Gradient/Bild; Glas und Inhalte darunter ohne filter/blend-mode.</li>
           <li>Kasane: ein Hero-Kasane pro Seite; Gradient-Felder im Wechsel mit ruhigen Flächen, nie hinter Fließtext.</li>
-          <li>Produkt-/App-UIs: MD3 mit explizitem Bridgemaker-Mapping (Sektion „Produkt-UIs") — nie seed-generieren.</li>
+          <li>Produkt-/App-UIs: shadcn/ui auf Radix mit explizitem Bridgemaker-Mapping (Sektion „Produkt-UIs"), nie Preset, eine Stufe luftiger als der Default.</li>
           <li>Keine SVG-Illustrationen erfinden — gestreifte Platzhalter. KI-Bilder nur mit CD-Freigabe.</li>
           <li>Voice: matter-of-fact + emotional, calm + fierce, deep + crystal clear. Kein Jargon, kein KI-Geschwätz.</li>
           <li>Wenn etwas unklar ist — <strong>fragen</strong>, nicht improvisieren.</li>

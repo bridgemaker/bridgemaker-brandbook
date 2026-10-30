@@ -46,7 +46,7 @@ Wenn etwas unklar ist — fragen.
 
 ## Weg 3 — Digitales Produkt bauen (Entwicklung)
 
-Produkt-UIs laufen auf Material Design 3 mit Bridgemaker-Theming.
+Produkt-UIs laufen auf shadcn/ui mit Radix UI und Bridgemaker-Theming.
 Das Starter-Kit bringt alles fertig verdrahtet mit:
 
 ```bash
@@ -56,12 +56,11 @@ npm install
 npm run dev        # → http://localhost:3000
 ```
 
-- Die Startseite ist die Komponenten-Referenz: alle MD3-Komponenten im
-  Bridgemaker-Look plus die Marketing-Bausteine — der Code der Seite
-  ist die Gebrauchsanweisung.
+- Die Startseite ist die Komponenten-Referenz: die shadcn-Komponenten
+  im Bridgemaker-Look — der Code der Seite ist die Gebrauchsanweisung.
 - Kit-spezifische Regeln stehen in `starter-kit/CLAUDE.md`.
 - Marketing-Flächen (Landingpages, Decks) sind Bridgemaker-Eigenbau —
-  kein MD3.
+  kein shadcn.
 
 ---
 
@@ -82,6 +81,6 @@ tokens/          ← alle Werte: tokens.css, tokens.json, print-tokens.css
 howto/           ← Schritt-für-Schritt-Anleitungen mit Start-Prompts
 CLAUDE.md        ← Destillat für KI-Arbeit
 brandbook/       ← das visuelle Brandbook (HTML-Ansicht)
-starter-kit/     ← Next.js + MD3 Referenz-Code
+starter-kit/     ← Next.js + shadcn/ui Referenz-Code
 assets/logos/    ← Wortmarke + Monogramm als SVG
 ```

@@ -16,10 +16,10 @@ ausdrücklich.
 | [03-typography](03-typography.md) | Schriften, die fluide `type-*`-Skala, Tracking, deutsche Display-Regeln |
 | [04-surfaces-glass](04-surfaces-glass.md) | Karten-Familie (Paper & Glass), Grain, Kasane, Gradient-Katalog, Handwerks-Fallen |
 | [05-motion](05-motion.md) | Motion-Rationierung, Dauern/Easings, Kasane-Drift, Hover-Konventionen, Reveals |
-| [06-layout](06-layout.md) | 8px-Raster, Container, Textbreiten, Zurückhaltungs-Regeln |
+| [06-layout](06-layout.md) | 8px-Raster, Container, Textbreiten, Zurückhaltungs-Regeln, eine Stufe Luft, Randabstand |
 | [07-product-patterns](07-product-patterns.md) | Sektions-Anatomie, Seitenrhythmus, Komponenten, Bildsprache, Decks, Print, Ventures |
 | [08-voice](08-voice.md) | Bridgemaker Tone of Voice v1.2 (wortgleich) + Copy-Mikroregeln |
-| [09-md3-mapping](09-md3-mapping.md) | Material-Design-3-Theming für Produkt-/App-UIs |
+| [09-shadcn-radix-mapping](09-shadcn-radix-mapping.md) | shadcn/ui + Radix UI mit Bridgemaker-Theming für Produkt-/App-UIs |
 
 Werte (Farben, Größen, Radien, Schatten, Rezepte) leben in
 `../tokens/tokens.css` und `../tokens/tokens.json`.

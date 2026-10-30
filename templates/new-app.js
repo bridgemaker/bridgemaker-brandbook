@@ -122,7 +122,7 @@ gemeldet, nie stumm eingebaut.
 
 - Regeln: \`CLAUDE.md\` (hier) → \`brand/CLAUDE.md\` (Kanon)
 - Werte & Rezepte: \`brand/tokens/tokens.css\` (einbinden, nie kopieren)
-- Produkt-UI: \`brand/guidelines/09-md3-mapping.md\` (inkl. Dashboard-Basics)
+- Produkt-UI: \`brand/guidelines/09-shadcn-radix-mapping.md\` (inkl. Abstände + Dashboard-Basics)
 - Next.js-Basis gefällig? \`brand/starter-kit/\` als Startpunkt kopieren.
 
 Brandbook neu einbinden, falls \`brand/\` fehlt:

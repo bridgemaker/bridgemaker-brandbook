@@ -31,12 +31,12 @@ Widerspruch zum alten Brandbook gewinnt die Website.
    `guidelines/`. CLAUDE.md, HTML-Book und Starter-Kit werden daraus
    abgeleitet. Die Doppelpflege von v1.0 (Regeln in CLAUDE.md UND im
    HTML-Book) hat das Brandbook veralten lassen — das stellen wir ab.
-5. **MD3 für Produkt-UIs:** Zukünftige digitale Produkte (Apps, Tools)
-   arbeiten mit Google Material Design 3 als Komponenten-Grundlage,
-   gebrandet über ein Bridgemaker-Token-Mapping. Das Starter-Kit wird von
-   shadcn/ui auf MD3 umgestellt. **Scope-Abgrenzung (Annahme, im Review
-   bestätigen):** Marketing-Oberflächen (Website, Landingpages, Decks)
-   bleiben Bridgemaker-Eigenbau wie heute; MD3 gilt für Produkt-/App-UIs.
+5. **shadcn/ui für Produkt-UIs:** Digitale Produkte (Apps, Tools)
+   arbeiten mit shadcn/ui auf Radix UI als Komponenten-Grundlage,
+   gebrandet über ein explizites Bridgemaker-Token-Mapping.
+   **Scope-Abgrenzung:** Marketing-Oberflächen (Website, Landingpages,
+   Decks) bleiben Bridgemaker-Eigenbau; shadcn/ui gilt für
+   Produkt-/App-UIs.
 6. **Voice-Guide wird Kapitel:** Der Voice & Style Guide v1.0 lebt
    wortgleich als `guidelines/08-voice.md` (Änderungen verlangen
    Leadership-Review). Die Duplikate (`uploads/`, `voice/`) sind gelöscht.
@@ -55,9 +55,10 @@ Widerspruch zum alten Brandbook gewinnt die Website.
 10. **Phase 6 vor Phase 5** *(Nils, 2026-07-14)*: Erst eigenes Repo mit
     v2-Basis-Commit (Git-Netz), dann der Starter-Kit-Umbau in kleinen
     Commits. Historie macht Git — keine Backup-Dateien.
-11. **MD3-Library: `@material/web`** *(Nils, 2026-07-14)*: Googles
-    offizielle MD3-Web-Components als Basis des Starter-Kits; Theming
-    ausschließlich über das explizite Mapping aus Kapitel 09.
+11. **Komponenten-Basis: shadcn/ui + Radix UI** *(Nils, 2026-10-30)*:
+    shadcn/ui (Style new-york) auf dem `radix-ui`-Sammelpaket als Basis
+    des Starter-Kits; Theming ausschließlich über das explizite Mapping
+    aus Kapitel 09, Abstände eine Stufe luftiger als der Default.
 12. **Sage gestrichen** *(Nils, 2026-07-14)*: Sage ist keine benannte
     Marken-/Chart-Farbe mehr (Familie, Tokens, Badge entfernt); ein
     Nachfolger ist noch nicht definiert. Es bleiben nur die faktisch
@@ -79,13 +80,13 @@ brandbook-repo/
 │  ├─ 06-layout.md              ← NEU
 │  ├─ 07-product-patterns.md    ← NEU
 │  ├─ 08-voice.md               ← aus uploads/ eingegliedert
-│  └─ 09-md3-mapping.md         ← NEU
+│  └─ 09-shadcn-radix-mapping.md ← NEU
 ├─ tokens/
 │  ├─ tokens.css
 │  └─ tokens.json
 ├─ CLAUDE.md                    ← Destillat aus guidelines/ (für KI-Arbeit)
 ├─ brandbook/                   ← HTML-Ansicht (menschenlesbar)
-├─ starter-kit/                 ← Next.js-Referenz-Code (MD3-basiert)
+├─ starter-kit/                 ← Next.js-Referenz-Code (shadcn/ui + Radix)
 └─ assets/                      ← Logo-SVGs
 ```
 
@@ -139,17 +140,19 @@ brandbook-repo/
   App-UI-Guidance (Formulare, Navigation, Buttons inkl. Pill-Regel und
   „lift, never darken"), Ventures-Regeln und Slide-Deck-Regeln aus den
   alten Kapiteln 8/9/12 hier eingegliedert.
-- **09-md3-mapping** *(neu)* — Wie Bridgemaker auf MD3 abgebildet wird:
-  - Farbrollen: `bm-purple` → primary, Surfaces → surface-Container-Rollen,
-    on-dark-Regeln → dark scheme. Explizites Mapping, KEIN
-    seed-generiertes Theme (sonst verfälscht MD3 die Brand-Farben).
-  - Type-Scale: MD3 display/headline/title/body/label ↔ `type-*`-Stufen.
-  - Shape: Pill-Buttons = MD3 full corner radius; Karten-Radii aus Tokens.
-  - Elevation: unsere zurückhaltende Schatten-Philosophie überschreibt
-    MD3-Default-Elevation.
-  - Was von MD3 übernommen wird (Interaktions-States, Komponenten-Anatomie,
-    A11y-Verhalten) vs. was Bridgemaker überschreibt (Farbe, Typo, Shape,
-    Elevation, Motion-Zurückhaltung).
+- **09-shadcn-radix-mapping** *(neu)* — Wie Bridgemaker auf shadcn/ui
+  abgebildet wird:
+  - Farbrollen: `bm-purple` → primary, Off-White → background, Surfaces
+    → muted/accent, On-Dark-Regeln → `.dark`/`.bm-on-dark`. Explizites
+    Mapping, KEIN Preset und keine Basisfarbe.
+  - Typo: shadcn-Textgrößen ↔ `type-*`-Stufen.
+  - Shape: Pill-Buttons, Radien aus Tokens (gleiche Namen wie Tailwind).
+  - Elevation: unsere zurückhaltende Schatten-Philosophie, Karten ohne
+    Rahmen.
+  - Abstände: eine Stufe luftiger als der shadcn-Default.
+  - Was von Radix übernommen wird (Verhalten, Fokus, A11y) vs. was
+    Bridgemaker überschreibt (Farbe, Typo, Shape, Elevation, Abstände,
+    Motion-Zurückhaltung).
 
 ## Konfliktauflösungen (alt → neu)
 
@@ -160,7 +163,7 @@ brandbook-repo/
 | Tracking | fixe px-Werte | `em`-Werte (skalieren mit der Größe) |
 | Klassen-Namen | `text-display-xl`, `text-h1`, … | `type-display-xl`, `type-h1`, … |
 | Kasane-Drift | „18–24s loops" (generisch) | konkrete Keyframes: 14s Standard, 9s bold |
-| Komponenten-Basis (Produkte) | shadcn/ui | MD3 mit Bridgemaker-Theming |
+| Komponenten-Basis (Produkte) | shadcn/ui mit Default-Theme | shadcn/ui auf Radix UI mit explizitem Bridgemaker-Mapping |
 | Glass | existiert nicht | eigenes Kapitel 04 |
 | Positionierung | „venture-building firm" | „Digitalberatung für KI-Transformation" (Über-uns); Mission/Vision von der Website |
 | Reines Weiß | als Haupthintergrund verboten | Weiß ist Sektionsfläche im Flächenrhythmus (Weiß ↔ Off-White ↔ Surfaces), Haarlinien-Abgrenzung |
@@ -183,14 +186,11 @@ brandbook-repo/
 2. **HTML-Brandbook** (`brandbook/`) — Sections an die neue Kapitelstruktur
    angleichen: neue Sections für Surfaces/Glass und Layout, Type-Section
    auf die fluide Skala umgebaut, Components-Section auf Karten-Familie +
-   MD3-Hinweis. Bestehender JSX-Ansatz bleibt (kein Framework-Umbau).
-3. **Starter-Kit** (`nextjs-handoff/` → `starter-kit/`) — Umstellung von
-   shadcn/ui auf MD3, Komponenten auf heutigen Stand: Karten-Familie inkl.
-   Glass, `type-*`-Klassen, Grain, aktualisierte `tokens.css`/`tokens.json`.
-   **Library-Entscheidung** (zu Beginn von Phase 5 mit Nils festmachen):
-   Empfehlung `@material/web` (Googles offizielle MD3-Implementierung,
-   React 19 kann Web Components nativ); Alternative MUI, falls
-   SSR-Komfort/React-Ökosystem schwerer wiegen.
+   Produkt-UI-Sektion. Bestehender JSX-Ansatz bleibt (kein Framework-Umbau).
+3. **Starter-Kit** (`nextjs-handoff/` → `starter-kit/`) — shadcn/ui auf
+   Radix UI mit Bridgemaker-Mapping, Komponenten auf heutigem Stand:
+   Karten-Familie inkl. Glass, `type-*`-Klassen, Grain, aktualisierte
+   `tokens.css`/`tokens.json`.
 
 ## Vorgehen (Phasen mit Review-Gates)
 
@@ -198,7 +198,7 @@ brandbook-repo/
 2. **Tokens abgleichen** (`tokens.css` + `tokens.json` gegen `globals.css`)
 3. **CLAUDE.md destillieren**
 4. **HTML-Brandbook umbauen** — Review-Gate im Browser
-5. **Starter-Kit auf MD3 umstellen** (nach Library-Entscheidung) —
+5. **Starter-Kit auf shadcn/ui mit Bridgemaker-Mapping umstellen** —
    Review-Gate auf localhost
 6. **Umzug ins eigene Repo**; `AGENTS.md` der Website bekommt einen
    Verweis auf das Brandbook-Repo als Design-Referenz

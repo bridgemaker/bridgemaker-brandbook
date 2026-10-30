@@ -9,15 +9,17 @@
 ## Pflichten vor jeder Gestaltung
 
 1. **`brand/CLAUDE.md` lesen** — das Destillat aller Regeln.
-   Produkt-/App-UI zusätzlich: `brand/guidelines/09-md3-mapping.md`
-   (MD3-Mapping inkl. §9.10 Dashboard-Basics — Header-Haarlinie,
-   `.bm-select`, KPI-Karten).
+   Produkt-/App-UI zusätzlich: `brand/guidelines/09-shadcn-radix-mapping.md`
+   (shadcn/ui + Radix inkl. §9.6 Abstände und §9.10 Dashboard-Basics —
+   Header-Haarlinie, `.bm-select`, KPI-Karten).
 2. **Werte NUR aus `brand/tokens/tokens.css`** — einbinden, nie
    kopieren, nie inline neu definieren. Kopien driften; genau
    dagegen ist dieses Kit gebaut.
 3. **Rezepte nutzen statt nachbauen:** `type-*`, `bm-btn`,
    `bm-input`/`bm-select` (Chevron eingebaut), `card-clean`,
-   Badges nach Vokabular. MD3 füllt nur die Lücken.
+   Badges nach Vokabular. shadcn/ui füllt nur die Lücken,
+   eine Stufe luftiger als sein Default; nichts klebt an einer Kante
+   (`brand/guidelines/06-layout.md` §6.5–6.6).
 4. **Nie eine farbige Kante an einer Box — oben, links, egal wo.**
    Kein `border-t-4`/`border-l-4`, kein inset-Shadow-Streifen, kein
    `::before`-Balken, kein farbiger Rahmen — auch nicht bei Hinweis-,
