@@ -313,7 +313,8 @@ function lintInPage() {
          21.92–27.08 von 48). Historische Bruchstelle: ein
          Kundenlogo über 24px hebt einen ge-stretch-ten
          .cover-bridge-Container samt Linie an (Nils, 24.07.). */
-      const bridgeLine = ch && ch.querySelector('.cover-bridge > div');
+      const bridgeLineEl = ch && ch.querySelector('.cover-bridge > rect, .cover-bridge > svg > rect, .cover-bridge > div');
+      const bridgeLine = bridgeLineEl;
       const wmImg = ch && ch.querySelector('img[src*="wordmark"], img[data-wm]');
       /* Interne Decks blenden die Brücke aus (cover-head-intern) —
          eine unsichtbare Linie (width 0) wird nicht geprüft. */
@@ -321,8 +322,13 @@ function lintInPage() {
         const wr = wmImg.getBoundingClientRect(), lr = bridgeLine.getBoundingClientRect();
         const dy = round(Math.abs((lr.top + lr.height / 2) - (wr.top + wr.height * (24.5 / 48))) / scale);
         if (dy > 1) err(`Brückenlinie sitzt ${dy}px neben dem Wortmarken-Strich — den .cover-bridge-Container fest 24px hoch und zentriert halten (align-self: center, nie stretch), Linie bei top 10.96px.`);
-        const gap = round((lr.left - wr.right) / scale);
-        if (gap > 1) err(`Lücke von ${gap}px zwischen Wortmarke und Brückenlinie — die Linie setzt nahtlos an (left: -2px im .cover-bridge).`);
+        /* Die Linie überdeckt den Wortmarken-Strich vollständig (er
+           beginnt bei 290.553/386 der Breite): das skalierte SVG
+           rendert den Strich weicher als die Linie, sonst entsteht
+           sichtbar eine Stufe (Nils, 2026-10-30). */
+        const dashStart = wr.left + wr.width * (290.553 / 386);
+        const late = round((lr.left - dashStart) / scale);
+        if (late > 1) err(`Brückenlinie beginnt ${late}px zu spät — sie überdeckt den Wortmarken-Strich ganz (left: -47.72px im .cover-bridge), sonst entsteht eine Stufe.`);
       }
     }
     s.querySelectorAll('.cover-head-intern').forEach(el => {

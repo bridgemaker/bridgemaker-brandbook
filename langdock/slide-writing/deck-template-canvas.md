@@ -1147,13 +1147,16 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
            Wortmarke (Nils, 2026-07-22). -->
       <div class="cover-head" style="display: flex; align-items: center; width: 100%;">
         <img class="wordmark" src="data:," data-wm="w" alt="Bridgemaker" style="flex-shrink: 0;" />
-        <!-- Brücken-Container fest 24px hoch und zentriert wie die
+        <!-- Die Linie startet bei left -47.72px und überdeckt den
+             Strich der Wortmarke deckungsgleich, sonst zeigt das
+             weicher gerenderte SVG eine Stufe (Nils, 2026-10-30).
+             Brücken-Container fest 24px hoch und zentriert wie die
              Wortmarke — NIE align-self: stretch: ein Kundenlogo
              über 24px streckt den Container sonst mit und hebt die
              Linie vom Wortmarken-Strich ab (Nils, 2026-07-24;
              deck-lint prüft Naht und Höhe). -->
         <div class="cover-bridge" style="flex: 1; align-self: center; height: 24px; position: relative;">
-          <div style="position: absolute; left: -2px; right: 0; top: 10.96px; height: 2.58px; background: #fff;"></div>
+          <svg aria-hidden="true" style="position: absolute; left: -47.72px; top: 0; width: calc(100% + 47.72px); height: 24px; overflow: visible;"><rect x="0" y="10.96" width="100%" height="2.58" fill="#fff" /></svg>
         </div>
         <span class="cover-client" style="flex-shrink: 0; margin-left: var(--space-6); font: 500 14px/1 var(--font-sans); color: var(--soft);">[ Kundenlogo ]</span>
       </div>
