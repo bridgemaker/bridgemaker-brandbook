@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-/** Klassen zusammenfügen — bewusst ohne tailwind-merge (kein shadcn mehr). */
+/** Klassen zusammenfügen — shadcn-Konvention (clsx + tailwind-merge). */
 export function cn(...inputs: ClassValue[]) {
-  return clsx(inputs);
+  return twMerge(clsx(inputs));
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { Md3Provider } from "@/components/md3/md3-provider";
+import localFont from "next/font/local";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,6 +14,15 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+});
+
+// Material Symbols Outlined (wght 300), selbst gehostet — Kopie aus
+// ../assets/fonts/. Klasse .material-symbols-outlined in globals.css.
+const materialSymbols = localFont({
+  src: "./fonts/MaterialSymbolsOutlined-300.woff2",
+  variable: "--font-material-symbols",
+  weight: "300",
+  display: "block",
 });
 
 export const metadata: Metadata = {
@@ -30,11 +40,11 @@ export default function RootLayout({
     // Attribute aufs <html>, bevor React hydriert — nur dieses Element betroffen.
     <html
       lang="de"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${materialSymbols.variable}`}
       suppressHydrationWarning
     >
       <body>
-        <Md3Provider>{children}</Md3Provider>
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );

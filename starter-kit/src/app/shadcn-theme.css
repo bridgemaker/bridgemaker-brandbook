@@ -1,0 +1,93 @@
+/* ============================================================
+   Bridgemaker → shadcn/ui — Theme-Mapping
+   Quelle: guidelines/09-shadcn-radix-mapping.md (§9.2–9.5)
+
+   Explizites Mapping der shadcn-Variablen auf die Bridgemaker-
+   Token-Familien. Keine shadcn-Basisfarbe, kein Preset, keine
+   oklch-Defaults — jede Rolle zeigt auf ein Token. Lädt NACH
+   tokens.css.
+
+   Radien und Schatten mappt NICHTS hier: tokens.css definiert
+   --radius-sm/md/lg/xl/2xl und --shadow-xs/sm/md/lg unlayered,
+   damit liefern rounded-md, shadow-md usw. in allen shadcn-
+   Komponenten automatisch Bridgemaker-Werte.
+   ============================================================ */
+
+:root {
+  /* ---------- Grund und Flächen ---------- */
+  --background: var(--off-white);
+  --foreground: var(--charcoal);
+  --card: var(--white);
+  --card-foreground: var(--charcoal);
+  --popover: var(--white);
+  --popover-foreground: var(--charcoal);
+
+  /* ---------- Rollen (9.2) ---------- */
+  --primary: var(--bm-purple);
+  --primary-foreground: var(--off-white);
+  --secondary: var(--bm-purple-tint);
+  --secondary-foreground: var(--bm-deep-plum);
+  --muted: var(--surface-stone);
+  --muted-foreground: var(--mid);
+  --accent: var(--surface-stone);
+  --accent-foreground: var(--charcoal);
+  --destructive: var(--status-critical);
+
+  /* ---------- Linien und Fokus ---------- */
+  --border: var(--surface-mid-stone);
+  --input: var(--surface-mid-stone);
+  --ring: var(--bm-purple);
+
+  /* ---------- Charts: Familienfarben, Purple zuerst ---------- */
+  --chart-1: var(--bm-purple);
+  --chart-2: var(--bm-teal);
+  --chart-3: var(--bm-berry);
+  --chart-4: var(--bm-lavender);
+  --chart-5: var(--surface-mid-stone);
+
+  /* ---------- Sidebar ---------- */
+  --sidebar: var(--white);
+  --sidebar-foreground: var(--charcoal);
+  --sidebar-primary: var(--charcoal);
+  --sidebar-primary-foreground: var(--off-white);
+  --sidebar-accent: var(--surface-stone);
+  --sidebar-accent-foreground: var(--charcoal);
+  --sidebar-border: var(--surface-stone);
+  --sidebar-ring: var(--bm-purple);
+}
+
+/* ---------- Dunkel (9.2) ----------
+   Basis Charcoal; primary wird lavender-dark — rohes Purple fällt
+   auf Dunkel durch den Kontrast (02-colors §2.5). Greift über
+   .bm-on-dark (Sektionen) und .dark (ganze App).               */
+.bm-on-dark,
+.dark {
+  --background: var(--charcoal);
+  --foreground: var(--off-white);
+  --card: var(--surface-dark);
+  --card-foreground: var(--off-white);
+  --popover: var(--surface-dark);
+  --popover-foreground: var(--off-white);
+
+  --primary: var(--bm-lavender-dark);
+  --primary-foreground: var(--charcoal);
+  --secondary: var(--bm-deep-plum);
+  --secondary-foreground: var(--bm-purple-tint);
+  --muted: var(--dark);
+  --muted-foreground: var(--soft);
+  --accent: var(--dark);
+  --accent-foreground: var(--off-white);
+
+  --border: rgba(245, 244, 241, 0.12);
+  --input: rgba(245, 244, 241, 0.28);
+  --ring: var(--bm-lavender-dark);
+
+  --sidebar: var(--surface-dark);
+  --sidebar-foreground: var(--off-white);
+  --sidebar-primary: var(--off-white);
+  --sidebar-primary-foreground: var(--charcoal);
+  --sidebar-accent: var(--dark);
+  --sidebar-accent-foreground: var(--off-white);
+  --sidebar-border: rgba(245, 244, 241, 0.12);
+  --sidebar-ring: var(--bm-lavender-dark);
+}

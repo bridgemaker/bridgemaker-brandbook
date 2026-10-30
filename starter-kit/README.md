@@ -1,8 +1,8 @@
 # Bridgemaker Starter-Kit
 
 Referenz-Code für digitale Bridgemaker-Produkte: Next.js 15 + React 19 +
-Tailwind v4 + Material Design 3 (`@material/web`), gebrandet über das
-Token-Mapping aus `../guidelines/09-md3-mapping.md`.
+Tailwind v4 + shadcn/ui auf Radix UI, gebrandet über das Token-Mapping
+aus `../guidelines/09-shadcn-radix-mapping.md`.
 
 ## Quickstart
 
@@ -11,31 +11,38 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-Die Startseite ist die **Komponenten-Referenz**: MD3-Produkt-UI im
-Bridgemaker-Theming plus die Marketing-Bausteine — der Code der Seite
-ist die Gebrauchsanweisung. Die visuelle Herleitung steht im Brandbook.
+Die Startseite ist die **Komponenten-Referenz**: shadcn/ui im
+Bridgemaker-Theming, Buttons, Felder, Karten und Badges in unseren
+Rezepten — der Code der Seite ist die Gebrauchsanweisung. Die visuelle
+Herleitung steht im Brandbook.
 
 ## Aufbau
 
 ```
+components.json          ← shadcn-Konfiguration (new-york, Radix, Lucide)
 src/
 ├─ app/
-│  ├─ tokens.css       ← Kanon-Kopie (Quelle: ../tokens/tokens.css)
-│  ├─ md3-theme.css    ← MD3-System-Tokens ← Bridgemaker-Mapping
-│  ├─ globals.css      ← Tailwind-Verdrahtung (@theme) + next/font
-│  └─ …                ← Demo-Routen
+│  ├─ tokens.css         ← Kanon-Kopie (Quelle: ../tokens/tokens.css)
+│  ├─ shadcn-theme.css   ← shadcn-Variablen ← Bridgemaker-Tokens
+│  ├─ globals.css        ← Tailwind-Verdrahtung (@theme) + Icons
+│  ├─ fonts/             ← Material Symbols Outlined (selbst gehostet)
+│  └─ …                  ← Demo-Routen
 ├─ components/
-│  ├─ md3/             ← Web-Component-Registrierung + Provider
-│  └─ brand/           ← Wortmarke, Kasane, Header, Platzhalter, Swatch
-└─ types/md3.d.ts      ← JSX-Typen für md-*-Tags
+│  ├─ ui/                ← shadcn-Komponenten, auf Bridgemaker abgestimmt
+│  └─ brand/             ← Wortmarke, Kasane, Header, Platzhalter, Swatch
+└─ lib/utils.ts          ← cn() (clsx + tailwind-merge)
 ```
+
+Neue Komponente: `npx shadcn@latest add <name>`, danach auf
+Bridgemaker abstimmen (Checkliste in [`CLAUDE.md`](./CLAUDE.md)).
 
 ## Regeln
 
 Verbindlich sind `../CLAUDE.md` und `../guidelines/01–09`;
 Kit-Spezifisches steht in [`CLAUDE.md`](./CLAUDE.md). Kurzform:
-Produkt-UI = MD3, Marketing = Bridgemaker-Handwerk, Text nur über
-`type-*`-Klassen, Farben nur über Tokens.
+Produkt-UI = shadcn/ui mit Bridgemaker-Mapping, Marketing =
+Bridgemaker-Handwerk, Text nur über `type-*`-Klassen, Farben nur über
+Tokens, Abstände eine Stufe luftiger als der shadcn-Default.
 
 ## Deploy
 

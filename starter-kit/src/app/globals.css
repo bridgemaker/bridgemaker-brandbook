@@ -1,16 +1,13 @@
-/* Tailwind in Einzelteilen statt @import "tailwindcss": Preflight läuft
-   über eine Kopie, die die md-*-Hosts vom Universal-Reset ausnimmt —
-   sonst verlieren die MD3-Komponenten ihr Box-Modell (s. Datei-Header). */
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "./preflight-md3.css" layer(base);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss";
+@import "tw-animate-css";     /* shadcn: animate-in/-out für Dialoge, Menüs */
 
-@import "./tokens.css";     /* Kanon v2 — Kopie von ../tokens/tokens.css */
-@import "./md3-theme.css";  /* MD3-Mapping — guidelines/09 */
+@import "./tokens.css";        /* Kanon v2 — Kopie von ../tokens/tokens.css */
+@import "./shadcn-theme.css";  /* shadcn-Mapping — guidelines/09 */
 
 /* Custom variant: `bm-on-dark:*` — greift, wenn ein Vorfahr .bm-on-dark trägt */
 @custom-variant bm-on-dark (&:where(.bm-on-dark, .bm-on-dark *));
+/* shadcn-Komponenten nutzen `dark:*` — gleiche Logik, auch .dark zählt */
+@custom-variant dark (&:where(.dark, .dark *, .bm-on-dark, .bm-on-dark *));
 
 /* next/font liefert Inter + JetBrains Mono selbst gehostet (layout.tsx).
    Die Font-Stacks aus tokens.css werden hier auf die next/font-Variablen
@@ -82,6 +79,64 @@
   --color-border-hairline: var(--border-hairline);
   --color-border-subtle: var(--border-subtle);
   --color-border-strong: var(--border-strong);
+
+  /* ---------- shadcn-Rollen (Werte: shadcn-theme.css) ---------- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Material Symbols Outlined — Inhalts-Icons (guidelines/09 §9.8).
+   Font selbst gehostet via next/font/local (layout.tsx). */
+.material-symbols-outlined {
+  font-family: var(--font-material-symbols), "Material Symbols Outlined";
+  font-weight: 300;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 48;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lucide nur für Glyphen INNERHALB der shadcn-Komponenten (Häkchen,
+   Chevron, Schließen). Strich 1.5 statt 2 — passt zu Symbols wght 300. */
+.lucide {
+  stroke-width: 1.5;
 }
 
 /* ==========================================================================

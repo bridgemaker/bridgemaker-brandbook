@@ -5,40 +5,54 @@
 
 ## Architektur
 
-- **Next.js 15 + React 19 + Tailwind v4 + `@material/web` (MD3).**
+- **Next.js 15 + React 19 + Tailwind v4 + shadcn/ui auf Radix UI**
+  (`radix-ui`-Sammelpaket, Style `new-york`, `components.json`).
 - **Vorrang-Regel (guidelines/09 §9.1):** Bridgemaker-Rezepte gelten
   überall — Typo (`type-*`), Buttons (`bm-btn`), Formulare (`bm-input`,
-  outline-only), Karten, Badges, Header. **MD3 füllt nur die Lücken:**
-  Dialoge, Menüs, Tabs, Loader, Slider, Switches/Checkboxen, Chips.
-  Nie ein MD3-Element nehmen, wo ein Bridgemaker-Rezept existiert.
+  outline-only), Karten, Badges, Header. In `src/components/ui/` ist
+  das verdrahtet: `Button` = `bm-btn`, `Input`/`Textarea` = `bm-input`/
+  `bm-textarea`, `Card` = `bm-card card-clean`, `Badge` = `bm-badge`.
+  shadcn übernimmt die Lücken: Dialoge, Menüs, Tabs, Popover, Tooltips,
+  Sheets, Checkboxen, Switches, Radios, Slider, Progress.
 - **Tokens:** `src/app/tokens.css` ist die Kanon-Kopie (Quelle:
   `../tokens/tokens.css`) — bei Updates neu kopieren, nie hier editieren.
   Einzige beabsichtigte Abweichung: `--font-sans`/`--font-mono` zeigen in
   `globals.css` auf die next/font-Variablen.
-- **MD3-Theming:** `src/app/md3-theme.css` mappt die MD3-System-Tokens
-  explizit (guidelines/09). NIE seed-generieren, keine Library-Defaults
-  durchsickern lassen. Dark Scheme über `.bm-on-dark`.
+- **Theming:** `src/app/shadcn-theme.css` mappt jede shadcn-Variable
+  explizit auf ein Token (guidelines/09 §9.2). Nie Preset, nie
+  Basisfarbe. Dunkel über `.bm-on-dark` (Sektion) oder `.dark` (App).
+  Radien und Schatten liefert tokens.css direkt (gleiche Namen wie
+  Tailwind), deshalb kein `--radius` mit `calc()`-Kette.
 
-## MD3 verwenden
+## shadcn verwenden
 
-- `Md3Provider` (im Root-Layout) registriert die Web Components
-  clientseitig — `md-*`-Tags danach überall direkt im JSX verwenden
-  (React 19 rendert Custom Elements nativ, Typen in `src/types/md3.d.ts`).
-- Neue MD3-Komponente? Import in `src/components/md3/register.ts`
-  ergänzen + Tag in `md3.d.ts` deklarieren.
-- Web Components brauchen den Browser: Seiten mit Interaktion
-  (Dialog-State etc.) als Client Components.
-- Inputs tragen `radius-md` (12px) via Theme — nicht pro Element stylen.
+- Komponenten importieren aus `@/components/ui/<name>`.
+- Neue Komponente: `npx shadcn@latest add <name>`. Danach die Datei
+  durchgehen (guidelines/09 §9.11): Text auf `type-*`, Abstände eine
+  Stufe hoch (§9.6), Rahmen an schwebenden Ebenen raus, englische
+  Beschriftungen auf Deutsch. **Nie `shadcn init`** erneut laufen
+  lassen, es überschreibt `globals.css`.
+- **Icons:** Inhalte mit Material Symbols
+  (`<span className="material-symbols-outlined">name</span>`, Font
+  selbst gehostet in `src/app/fonts/`). Lucide nur innerhalb der
+  `ui/`-Komponenten (Häkchen, Chevron, X).
+- `TooltipProvider` sitzt im Root-Layout.
+
+## Abstände (guidelines/06 §6.5–6.6, 09 §9.6)
+
+- **Eine Stufe Luft:** Karte/Dialog 32px innen, Popover 24px,
+  Felder 24px auseinander, Button-Reihen 12px, Label → Feld 8px.
+- **Nichts klebt an einer Kante:** unten derselbe Abstand wie oben,
+  Scroll-Bereiche mit Padding innen, nichts ragt bei 375px über den
+  Rand. Jede Ansicht bis ganz unten und mobil ansehen.
 
 ## ⚠ Handwerks-Fallen
 
-1. **Tailwind-Preflight bricht MD3-Hosts:** Seiten-Regeln überschreiben
-   per CSS-Spec immer die `:host`-Styles von Web Components — Tailwinds
-   Universal-Reset (`* { padding: 0 }`) nimmt den `md-*`-Elementen ihr
-   Box-Modell (Buttons ohne Innen-Padding). Deshalb lädt `globals.css`
-   Tailwind in Einzelteilen mit **`preflight-md3.css`** (Kopie mit
-   `:where(:not(md-*)`-Ausnahme). Neue MD3-Komponente registrieren =
-   Tag in `register.ts`, `md3.d.ts` UND `preflight-md3.css` ergänzen.
+1. **Rezepte schlagen Utilities:** Die `bm-*`-Klassen in tokens.css
+   sind ungelayert und gewinnen gegen jede Tailwind-Utility. Eine
+   Rezept-Eigenschaft am Element überschreiben = `!`-Utility
+   (`!bg-transparent`). Rezepte mit `display: block` (`bm-label`)
+   nicht in Flex-Layouts einsetzen.
 2. **Hydration-Warnungen am `<html>`:** Browser-Extensions stempeln
    Attribute vor der Hydration — `suppressHydrationWarning` im Layout
    fängt genau das ab, nichts anderes.
@@ -58,7 +72,7 @@
 - Text NUR über `type-*`-Klassen — nie `text-sm`/`font-semibold` ad hoc.
 - Farben NUR über Token-Utilities (`bg-bm-purple`, `text-mid`, …).
 - Grundton Off-White; Weiß ist Sektionsfläche im Wechsel.
-- Buttons Pill, immer. Marketing: `bm-btn`-Familie; Produkt: MD3-Buttons.
+- Buttons Pill, immer: `bm-btn`-Familie bzw. `Button` aus `ui/` (gleiche Optik).
 - Karten sitzen: `card-clean`/`bm-card-*`. Hervorhebung NUR über
   Surfaces (`bm-card-stone/-mauve/-sage/-sand`); Outline-Box nimmt zurück.
 - **Nie eine farbige Kante an einer Box — oben, links, egal wo**

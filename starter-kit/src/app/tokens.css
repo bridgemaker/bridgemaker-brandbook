@@ -43,6 +43,19 @@
   /* Sage als benannte Farbe gestrichen (2026-07-14) — Grüntöne existieren
      nur noch als Bestandteile der Gradient-Rezepte und als surface-sage. */
 
+  /* ---------- Status-Farben — nur für Bewertungen (guidelines/02 §2.8) ----------
+     Website: --color-status-* in globals.css, Klassen bg-/text-status-*.
+     Base für Balken/Zahlen auf Hell, Tint als Fläche mit Charcoal-Text.
+     Nie Deko, nie Chart-Serie, nicht auf Dunkel. */
+  --status-good:          #3F9A6E;
+  --status-good-tint:     #E0F0E8;
+  --status-warn:          #D6A63A;
+  --status-warn-tint:     #F7EBD0;
+  --status-poor:          #D4703B;
+  --status-poor-tint:     #F8E3D6;
+  --status-critical:      #C4403C;
+  --status-critical-tint: #F7DDDB;
+
   /* ---------- Neutrals ---------- */
   --charcoal:  #1C1C1E;
   --dark:      #3D3D3A;
@@ -192,6 +205,13 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
 .bm-card-sand  { background: var(--surface-sand); }
 .bm-card-dark  { background: var(--charcoal); color: var(--off-white); }
 
+/* Hervorhebung: weiß flach (bm-card) → shallow (+ card-clean) → Surface
+   (bm-card-* + card-elevated) = DAS Mittel der Hervorhebung. Outline-Box
+   (transparent, var(--border-subtle) rundum) nimmt zurück.
+   VERBOTEN: farbige/stärkere Kante an nur einer Seite einer Box (oben,
+   links, egal wo; border-t-* und border-l-*, inset-Shadow, ::before-Balken)
+   und farbige Rahmen als Hervorhebung. Siehe guidelines/04 §4.2. */
+
 /* Paper — weiße matte Karte: knackige Inset-Haarlinie + nahe Elevation */
 .card-clean {
   box-shadow:
@@ -334,13 +354,63 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
 }
 
 /* Kontakt-/Abschluss-CTA — Triade auf Deep-Plum; Teal und Berry müssen
-   als eigene Farbräume lesbar bleiben, kein homogenes Lila */
+   als eigene Farbräume lesbar bleiben, kein homogenes Lila.
+   ⚠ NIE PUR ALS FLÄCHE: Das Rezept ist byte-identisch mit der
+   Website (globals.css), aber pur erzeugt es Leuchtbälle — die
+   Website nutzt es nur über das Anwendungsrezept darunter.
+   (Befund 2026-07-17, gelöst 2026-07-20 als Token-Paar:
+   .contact-cta-wash für Web, .bg-contact-cta-static für Decks
+   und Print.) */
 .bg-contact-cta {
   background:
     radial-gradient(ellipse 55% 65% at 24% 26%, rgba( 58,158,151,0.90) 0%, transparent 60%),
     radial-gradient(ellipse 50% 60% at 72% 18%, rgba(144,112,184,0.85) 0%, transparent 60%),
     radial-gradient(ellipse 55% 70% at 68% 84%, rgba(184, 74,111,0.80) 0%, transparent 60%),
     var(--bm-deep-plum);
+}
+
+/* Anwendungsrezept WEB (= ContactCta.tsx der Website): Wrapper
+   auf Deep-Plum, ZWEI Kopien der Ellipsen als Pseudo-Elemente —
+   Overscan inset -35 %, blur(32px), Opacity 0.85/0.50,
+   gegenläufiger Drift. Erst das verschmilzt die Ellipsen zum
+   Wash. Inhalt liegt als normales Kind darüber (isolation
+   hält die Pseudo-Ebenen darunter). ⚠ Handwerks-Fallen gelten:
+   Inhalte darüber ohne filter/blend-mode; auf Mobile ruckelt
+   blur auf Kasane-Flächen — prefers-reduced-motion stoppt den
+   Drift automatisch, den Blur im Mobile-Kontext reduzieren. */
+.contact-cta-wash {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bm-deep-plum);
+}
+.contact-cta-wash::before,
+.contact-cta-wash::after {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 24% 26%, rgba( 58,158,151,0.90) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 72% 18%, rgba(144,112,184,0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 70% at 68% 84%, rgba(184, 74,111,0.80) 0%, transparent 60%);
+  filter: blur(32px);
+}
+.contact-cta-wash::before { opacity: 0.85; animation: kasane-drift 14s ease-in-out infinite; }
+.contact-cta-wash::after  { opacity: 0.50; animation: kasane-drift-bold 9s ease-in-out infinite reverse; }
+@media (prefers-reduced-motion: reduce) {
+  .contact-cta-wash::before, .contact-cta-wash::after { animation: none; }
+}
+
+/* Anwendungsrezept STATISCH (Decks, Print, PDF): kein Drift,
+   kein Blur (PDF rastert beides) — der Wash ist vorgemischt.
+   Abgenommen als Schluss-Verlauf der Decks (DETAX 07/2026). */
+.bg-contact-cta-static {
+  background:
+    radial-gradient(ellipse 85% 100% at 3% 0%, rgba(168, 84,110,0.55) 0%, transparent 62%),
+    radial-gradient(ellipse 95% 130% at 100% 55%, rgba(88,102,158,0.55) 0%, transparent 68%),
+    linear-gradient(112deg, #8A5C88 0%, #7A5AA0 38%, #6C58A4 68%, #5E64A0 100%);
 }
 
 /* Featured-/Produkt-Band — satt farbig auf dunkler Basis, für weiße Typo */
@@ -376,6 +446,25 @@ a:not([class]):hover, a.bm-link:hover { text-decoration: underline; text-underli
     radial-gradient(ellipse 90% 75% at 80% 30%, rgba(196, 177, 220, 0.38) 0%, transparent 60%),
     radial-gradient(ellipse 85% 70% at 15% 70%, rgba(176, 148, 210, 0.26) 0%, transparent 60%),
     radial-gradient(ellipse 120% 70% at 50% 55%, rgba(227, 224, 232, 0.85) 0%, transparent 78%);
+}
+.bg-kasane-band-teal {
+  background:
+    radial-gradient(ellipse 90% 75% at 75% 60%, rgba(126, 196, 190, 0.34) 0%, transparent 60%),
+    radial-gradient(ellipse 85% 70% at 20% 30%, rgba( 58, 158, 151, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 70% at 50% 50%, rgba(224, 242, 240, 0.85) 0%, transparent 78%);
+}
+.bg-kasane-band-rose {
+  background:
+    radial-gradient(ellipse 90% 75% at 25% 60%, rgba(212, 128, 154, 0.26) 0%, transparent 60%),
+    radial-gradient(ellipse 85% 70% at 80% 30%, rgba(184,  74, 111, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 70% at 50% 55%, rgba(245, 224, 232, 0.85) 0%, transparent 78%);
+}
+/* Sand = die stille Variante für Kapitel ohne Farbanspruch */
+.bg-kasane-band-sand {
+  background:
+    radial-gradient(ellipse 90% 75% at 70% 35%, rgba(229, 224, 216, 0.90) 0%, transparent 62%),
+    radial-gradient(ellipse 85% 70% at 20% 70%, rgba(197, 192, 184, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 70% at 50% 50%, rgba(232, 229, 223, 0.85) 0%, transparent 78%);
 }
 
 /* Themen-Karten-Visuals — ein Hebel = eine Farbwelt */
