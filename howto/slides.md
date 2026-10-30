@@ -51,8 +51,9 @@ Claude fragt nach den Inhalten. Du lieferst:
   Ton.
 - **Bilder:** Kunden- oder Partnerlogo, Screenshots, Fotos aus dem
   Projekt, Logos von Referenzkunden. Einfach in die Unterhaltung
-  ziehen. Bilder machen das Deck lebendig, ohne sie bleibt an der
-  Stelle ein Platzhalter.
+  ziehen. Bilder machen das Deck lebendig. Fehlt eins, steht im
+  Entwurf ein Platzhalter; bevor das Deck rausgeht, muss das Bild
+  da sein oder die Stelle ohne Bild auskommen.
 
 Claude baut dann das Deck: jede Slide mit einer klaren Aussage, ein
 abwechslungsreicher Rhythmus aus ruhigen und kräftigen Seiten,

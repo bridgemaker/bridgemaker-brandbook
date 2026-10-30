@@ -178,6 +178,11 @@ function lintInPage() {
     if (/[·•]/.test(slideText)) err('Middot/Bullet-Zeichen im Text — Aufzählungen laufen als Satz mit Komma und „und".');
     const emoji = (slideText.match(/\p{Extended_Pictographic}/gu) || []).filter(c => !'©®™'.includes(c));
     if (emoji.length) err(`Emoji im Text (${[...new Set(emoji)].join(' ')}) — Emoji sind tabu.`);
+    /* Platzhalter sind Arbeitsstand (07 §7.7, Nils 2026-10-30): im
+       Entwurf okay, nach außen nie — deck-pack verweigert dann. */
+    if (s.querySelector('.placeholder-frame, .placeholder-caption, .bg-stripes-diagonal') || /\[\s[^\]]+\s\]/.test(slideText)) {
+      warn('Platzhalter auf der Slide — vor der Weitergabe Asset besorgen oder die Stelle ohne Bild bauen (deck-pack verweigert sonst).');
+    }
     if (/→/.test(slideText)) warn('„→" im Text — im Fließtext ausschreiben; Pfeile gehören in Grafiken.');
     if (/—/.test(bodyText)) warn('Gedankenstrich im Slide-Text — in Decks vermeiden (§7.8): als Satz mit Komma formulieren.');
     const phrase = slideText.match(/\b(leverage|unlock|next-gen|game.?changer|state.of.the.art|seamless)\b/i);

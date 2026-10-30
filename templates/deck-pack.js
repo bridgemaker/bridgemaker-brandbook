@@ -33,13 +33,30 @@ const args = process.argv.slice(2);
 const deckPath = args.find(a => !a.startsWith('--'));
 const wantPdf = args.includes('--pdf');
 if (!deckPath || !fs.existsSync(deckPath)) {
-  console.error('Nutzung: node deck-pack.js <deck>.html [--pdf]');
+  console.error('Nutzung: node deck-pack.js <deck>.html [--pdf] [--entwurf]');
   process.exit(1);
 }
 
 const deckDir = path.dirname(path.resolve(deckPath));
 const base = path.basename(deckPath, '.html');
 let html = fs.readFileSync(deckPath, 'utf8');
+
+/* Platzhalter sind Arbeitsstand (07 §7.7, Nils 2026-10-30): Was
+   deck-pack erzeugt, geht nach außen — dort steht kein Platzhalter.
+   --entwurf erlaubt bewusst einen internen Zwischenstand. */
+if (!args.includes('--entwurf')) {
+  const markup = html.replace(/<(style|script)[\s\S]*?<\/\1>/g, '').replace(/<!--[\s\S]*?-->/g, '');
+  const funde = [];
+  if (/class="[^"]*\b(placeholder-frame|placeholder-caption|bg-stripes-diagonal)\b/.test(markup)) funde.push('gestreifter Platzhalter');
+  const klammern = markup.replace(/<[^>]+>/g, ' ').match(/\[\s[^\]]{1,60}\s\]/g);
+  if (klammern) funde.push(...new Set(klammern));
+  if (funde.length) {
+    console.error(`Abbruch: Das Deck enthält noch Platzhalter (${funde.join(', ')}).\n` +
+      'Nach außen geht nie etwas mit Platzhalter: Asset einsetzen oder die Stelle ohne Bild bauen.\n' +
+      'Nur für einen internen Zwischenstand: --entwurf anhängen.');
+    process.exit(1);
+  }
+}
 
 const MIME = {
   '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',

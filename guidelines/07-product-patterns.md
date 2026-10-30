@@ -138,9 +138,9 @@ Nie Base-Text auf eigener Tint (Kontrast). Wann welche Stufe:
 > dieses Abschnitts ist überholt — die Website arbeitet heute ohne
 > Fotografie: feine Linien im topografischen Stil auf Gradients und
 > konstruierte Vektor-Icons. Das neue Bildkonzept ist in Klärung.
-> Bis dahin: keine Bildentscheidungen ohne CD-Freigabe; der gestreifte
-> Platzhalter mit Inter-Caption bleibt der Standard für fehlende
-> Assets. Der folgende Alt-Stand dient nur noch als Referenz.
+> Bis dahin: keine Bildentscheidungen ohne CD-Freigabe. Im Entwurf
+> markiert der gestreifte Platzhalter mit Inter-Caption ein fehlendes
+> Asset; nach außen geht nie etwas mit Platzhalter. Der folgende Alt-Stand dient nur noch als Referenz.
 
 Drei Prinzipien:
 
@@ -162,6 +162,12 @@ Heroes und Cover-Slides.
   Bildwelt, fehlendes Logo): Gestreiften Platzhalter-Block mit
   Caption in Inter verwenden, die beschreibt, was dort hingehört.
   Nie eine dekorative Illustration erfinden.
+- **Platzhalter sind Arbeitsstand** *(Nils, 2026-10-30)*: In nichts,
+  was nach außen geht (PDF, PPTX, Versand-HTML, veröffentlichte
+  Seite), steht ein Platzhalter, weder gestreift noch als „[ … ]“.
+  Vor der Weitergabe wird das Asset besorgt oder die Stelle ohne
+  Bild gebaut. `deck-lint`, `artefakt-lint` und `deck-pack`
+  prüfen das.
 - **Informationsgrafiken sind kein Bild-Asset** *(2026-07-17)*:
   Diagramme, Timelines, Prozess-Schaubilder und Charts aus der
   Marken-Formensprache (Linien, Kreise, Typografie, Familienfarben,
@@ -307,8 +313,8 @@ Die folgenden Regeln gelten für beide Wege.
   Produkt-Screenshots im Device-Mockup, Fotos aus Projekten.
   Referenz-Visuals stehen im Argument (Bausteine links, Mockup
   rechts, Bildunterschrift darunter), nie als Showcase-Solo-Slide.
-  Der gestreifte Platzhalter bleibt nur für Bilder, die wirklich
-  fehlen. Neue Bildwelten (KI-Bilder, Stock, Illustrationen)
+  Im Entwurf markiert der gestreifte Platzhalter ein fehlendes Bild;
+  vor der Weitergabe ist er ersetzt (§7.7). Neue Bildwelten (KI-Bilder, Stock, Illustrationen)
   brauchen weiter die CD-Freigabe (§7.7).
 - **Grafiken bauen, nicht ankündigen** *(2026-07-17)*: Wo ein
   Diagramm, eine Karte, eine Timeline oder ein Schaubild hilft, wird
@@ -330,7 +336,8 @@ Die folgenden Regeln gelten für beide Wege.
   Aussage und Struktur bleiben, die Sprache wird unsere. Du/ihr,
   Headlines ohne Schlusspunkt, keine Meta- oder Prozesssätze, kein
   Middot, kein „→" im Fließtext, keine Sprachmischung; belastbare
-  Zahlen mit Quelle oder Platzhalter („[ Zitat folgt ]").
+  Zahlen mit Quelle; offene Stellen im Entwurf als „[ Zitat folgt ]",
+  vor der Weitergabe gefüllt oder gestrichen.
 - **Weitergabe nach außen nur als PDF oder PPTX** (beim
   HTML-Template auch als Versand-HTML). Links auf Artefakte oder
   rohe Deck-Dateien gehen nur an Kollegen.

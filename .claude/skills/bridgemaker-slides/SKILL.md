@@ -65,7 +65,8 @@ fragst du:
 
 Frag außerdem nach **Bildern und Logos**, die es gibt: Kunden- oder
 Partnerlogo, Screenshots, Fotos, Kundenlogo-Band. Bilder machen
-Decks lebendig; ohne Bild bleibt nur der Platzhalter.
+Decks lebendig. Fehlt eins, markiert im Entwurf ein Platzhalter die
+Stelle; vor der Abgabe wird es besorgt oder die Slide ohne Bild gebaut.
 
 Die Sprache erkennst du aus den Inhalten (Deutsch oder Englisch, nie
 mischen). **Konzept-Dokument als Input** *(NSTR, 2026-07-24)*: Die
@@ -122,14 +123,14 @@ Gelieferte Inhalte werden aktiv in Bridgemaker-Sprache umgeschrieben
 Sprache wird unsere. Du/ihr, aktive Verben, Headlines ohne
 Schlusspunkt und max. zwei Zeilen, keine Meta- oder Prozesssätze,
 kein Middot, keine Gedankenstriche, kein „→" im Fließtext,
-verbotene Phrasen raus, belastbare Zahlen mit Quelle oder
-Platzhalter („[ Zitat folgt ]").
+verbotene Phrasen raus, belastbare Zahlen mit Quelle. Offene Stellen
+im Entwurf als „[ Zitat folgt ]", vor der Abgabe gefüllt oder gestrichen.
 
 ## 7. Bilder und Grafiken
 
 **Bilder:** Vorhandene Assets einbauen (im Artefakt hochladen, im
-Template unter `assets/`). Der gestreifte Platzhalter nur, wenn ein
-Bild wirklich fehlt; neue Bildwelten (KI-Bilder, Stock) brauchen die
+Template unter `assets/`). Der gestreifte Platzhalter nur im Entwurf,
+nie in der Abgabe; neue Bildwelten (KI-Bilder, Stock) brauchen die
 CD-Freigabe.
 
 **Grafiken** werden immer gebaut, erster Draft reicht (§7.11):
@@ -182,7 +183,8 @@ Read) und abhaken:
 - [ ] Eine Linien-Ebene pro Fläche?
 - [ ] Farbige Zahlen und Texte nur mit Identität, sonst Charcoal?
 - [ ] Icons aus Lucide, Strich 1.5, einfarbig in der Textfarbe?
-- [ ] Bilder echt und scharf; Platzhalter nur, wo wirklich nichts da ist?
+- [ ] Bilder echt und scharf? **Kein einziger Platzhalter** (gestreift
+      oder „[ … ]“) mehr, wenn das Deck rausgeht?
 - [ ] Grafik-Geometrie nachgerechnet, keine Kollision Linie ↔ Text?
 - [ ] Arbeitsstände in den Speaker Notes statt auf der Slide?
 - [ ] Text redigiert, kein Middot, kein Gedankenstrich, lesbarer

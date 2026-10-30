@@ -320,7 +320,7 @@ function BbClaudeSection() {
           <li>Glas nur über Gradient/Bild; Glas und Inhalte darunter ohne filter/blend-mode.</li>
           <li>Kasane: ein Hero-Kasane pro Seite; Gradient-Felder im Wechsel mit ruhigen Flächen, nie hinter Fließtext.</li>
           <li>Produkt-/App-UIs: shadcn/ui auf Radix mit explizitem Bridgemaker-Mapping (Sektion „Produkt-UIs"), nie Preset, eine Stufe luftiger als der Default.</li>
-          <li>Informationsgrafiken bauen, keine Illustrationen erfinden; fehlt ein Bild, gestreifter Platzhalter. KI-Bilder nur mit CD-Freigabe.</li>
+          <li>Informationsgrafiken bauen, keine Illustrationen erfinden. Platzhalter nur im Entwurf, nie in etwas, das nach außen geht. KI-Bilder nur mit CD-Freigabe.</li>
           <li>Icons nur Lucide, Strichstärke 1.5. Große KPIs Light. JetBrains Mono nur für Code.</li>
           <li>Decks als Slides-Artefakt mit dem Design System; Regeln sind Leitplanken (Sektion „Slide-Decks").</li>
           <li>Voice: matter-of-fact + emotional, calm + fierce, deep + crystal clear. Kein Jargon, kein KI-Geschwätz.</li>

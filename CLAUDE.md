@@ -252,8 +252,10 @@ keine Box markieren.
   topografische Linien auf Gradients, konstruierte Vektor-Icons). Bis
   das neue Konzept steht: KEINE Bildentscheidungen ohne CD-Freigabe.
   Fehlendes **Bild-Asset** (Foto, freie Illustration, CD-pflichtige
-  Bildwelt, fehlendes Logo) → gestreifter Platzhalter mit
-  Caption in Inter. **Informationsgrafiken** — Diagramme, Timelines,
+  Bildwelt, fehlendes Logo) → im Entwurf gestreifter Platzhalter mit
+  Caption in Inter. **Nach außen geht nie etwas mit Platzhalter**
+  (gestreift oder „[ … ]“): vor der Weitergabe Asset besorgen oder
+  die Stelle ohne Bild bauen *(Nils, 2026-10-30)*. **Informationsgrafiken** — Diagramme, Timelines,
   Prozess-Schaubilder, Charts aus der Marken-Formensprache (Linien,
   Kreise, Typo, Familienfarben, Lucide-Icons) — sind kein
   Bild-Asset: Sie werden IMMER gebaut, als erster Draft, der
@@ -278,7 +280,7 @@ keine Box markieren.
   Zitat, Schluss); Sperrzone über der Fußzeile; Serien-Slides
   stehen beim Blättern; **Fläche nutzen** (kein Loch unter der
   Headline); **Bilder rein** (Logos, Screenshots, Fotos vorhandener
-  Assets — Platzhalter nur, wenn wirklich nichts da ist); Kennzahlen
+  Assets; Platzhalter nur im Entwurf, nie in der Weitergabe); Kennzahlen
   dürfen im Deep-Ton einer Identität stehen; Logo-Brücke auf Kunden-
   und Partnerdecks; Redigat-Pflicht. Nach außen nur PDF oder PPTX.
   Regeln: `guidelines/07 §7.8`, Workflow: Repo-Skill
@@ -355,8 +357,8 @@ Primitive-Basis und Bridgemaker-Theming
 
 **Do:** tokens.css zuerst laden ✓ Flächenrhythmus nutzen ✓ Wortmarke im
 Header ✓ Pill-Buttons ✓ `type-*`-Klassen ✓ Karten sitzen lassen ✓
-Grain auf Glas/Gradient ✓ Tone of Voice vor Textarbeit ✓ Platzhalter
-statt erfundener Assets ✓ Negativraum atmen lassen ✓ Fragen, wenn unklar.
+Grain auf Glas/Gradient ✓ Tone of Voice vor Textarbeit ✓ Echte Assets statt
+erfundener — Platzhalter nur im Entwurf ✓ Negativraum atmen lassen ✓ Fragen, wenn unklar.
 
 **Don't:** ganze Seiten in sterilem Reinweiß ❌ Monogramm im Header ❌
 Rechtecke statt Pills ❌ farbige Kanten an Boxen (oben, links, egal

@@ -115,6 +115,10 @@ slides.forEach((sl, i) => {
   const text = src.replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<[^>]+>/g, ' ');
   if (/·/.test(text)) add(s, 'error', 'Middot im Slide-Text — Aufzählungen als Satz mit Komma und „und".');
   if (/—|\s–\s/.test(text)) add(s, 'error', 'Gedankenstrich im Slide-Text — in Decks tabu.');
+  /* Platzhalter sind Arbeitsstand (07 §7.7): vor dem Export ersetzen. */
+  if (/\[\s[^\]]+\s\]/.test(text) || /<img(?![^>]*\bsrc=)[^>]*>/.test(src)) {
+    add(s, 'warn', 'Platzhalter auf der Slide — vor dem Export als PDF/PPTX Asset einsetzen oder die Stelle ohne Bild bauen.');
+  }
 });
 
 if (Object.values(deck.faces || {}).some(f => /fonts\.googleapis/.test(f.href || ''))) {

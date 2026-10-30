@@ -14,8 +14,9 @@ function BbImagerySection() {
         </p>
         <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "12px 0 0", maxWidth: 620, lineHeight: 1.6 }}>
           Bis dahin: keine Bildentscheidungen ohne Creative-Director-Freigabe.
-          Fehlt ein Asset, bleibt der gestreifte Platzhalter mit
-          Caption in Inter das Mittel der Wahl.
+          Fehlt ein Bild im Entwurf, markiert ein gestreifter Platzhalter die
+          Stelle. Nach außen geht nie etwas mit Platzhalter: Vor der Weitergabe
+          wird das Asset besorgt oder die Stelle ohne Bild gebaut.
         </p>
       </div>
     </BbSection>
