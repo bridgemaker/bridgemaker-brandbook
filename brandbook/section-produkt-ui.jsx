@@ -32,7 +32,7 @@ function BbProductUiSection() {
   ];
 
   return (
-    <BbSection id="produkt-ui" num="14" title="Produkt-UIs — shadcn/ui"
+    <BbSection id="produkt-ui" num="12" title="Produkt-UIs — shadcn/ui"
       desc="Digitale Bridgemaker-Produkte (Apps, Tools) bauen auf shadcn/ui mit Radix UI, gebrandet über ein explizites Token-Mapping. Marketing-Oberflächen (Website, Landingpages, Decks) bleiben Bridgemaker-Handwerk.">
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 48 }}>

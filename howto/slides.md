@@ -1,137 +1,104 @@
-# Slides bauen mit Claude Code
+# Slides bauen
 
-Diese Anleitung führt dich zu einer HTML-Slide-Präsentation im
-Bridgemaker-Look. Du brauchst nur Claude Code — Layouts, Markenregeln
-und Qualitätskontrolle bringt das Brandbook mit.
+Diese Anleitung führt dich zu einer Präsentation im Bridgemaker-Look.
+Du baust sie direkt in claude.ai, gemeinsam mit Kolleginnen und
+Kollegen, und exportierst sie am Ende als PDF oder PowerPoint.
 
-> **Wichtig, bevor du loslegst:** Das Ganze funktioniert nur in
-> **Claude Code** — dem Programm, das du im Terminal startest — und
-> nur, wenn du es **im Brandbook-Ordner** startest (Schritt 1 und 2).
-> Claude auf der Website (claude.ai) oder in anderen Tools kennt
-> unsere Regeln nicht. Es baut dir trotzdem bereitwillig etwas — es
-> sieht dann nur aus wie Bridgemaker, ist es aber nicht.
+> **Wichtig, bevor du loslegst:** Der Bridgemaker-Look kommt aus dem
+> **Bridgemaker Design System**. Claude kennt unsere Regeln nur, wenn
+> du es ausdrücklich nennst. Der Start-Prompt unten erledigt das.
+> Ohne ihn baut Claude trotzdem etwas, es sieht dann nur aus wie
+> Bridgemaker, ist es aber nicht.
 
-## Schritt 1: Brandbook auf deinen Rechner holen
+## Schritt 1: Neue Unterhaltung in claude.ai
 
-Öffne das Terminal und kopiere diese zwei Zeilen hinein:
+Öffne claude.ai und starte eine neue Unterhaltung.
 
-```bash
-git clone https://github.com/bridgemaker/bridgemaker-brandbook.git
-cd bridgemaker-brandbook
-```
+## Schritt 2: Start-Prompt
 
-Sie holen den Brandbook-Ordner auf deinen Rechner und wechseln
-hinein. Hast du den Ordner schon? Dann reicht `git pull` — die
-Regeln entwickeln sich weiter.
-
-## Schritt 2: Claude Code im Brandbook-Ordner starten
-
-```bash
-claude
-```
-
-Der Ordner ist entscheidend: Nur hier kennt Claude die
-Bridgemaker-Regeln und den kompletten Ablauf.
-
-## Schritt 3: Start-Prompt
-
-Kopieren, nur den Ansprechpartner eintragen, abschicken — **die
+Kopieren, die Felder in eckigen Klammern ausfüllen, abschicken. **Die
 Inhalte kommen bewusst noch nicht mit:**
 
 ```text
-Baue mir ein Slide-Deck nach dem bridgemaker-slides-Skill.
+Baue mir ein Slide-Deck als Slides-Artefakt.
 
-Prüfe zuerst dein Setup: Findest du das Skill bridgemaker-slides und
-die Datei templates/deck-template.html? Wenn eines von beidem fehlt,
-baue NICHTS und sag mir stattdessen, dass ich im falschen Ordner
-oder im falschen Programm bin.
+Nutze das Bridgemaker Design System:
+https://claude.ai/artifact/FMQDotgs2JtQ4FhXa1cJok
+Lies dort zuerst brand-rules.md, guidelines/07-product-patterns.md
+(Abschnitt 7.8 und 7.8.1) und guidelines/08-voice.md und halte dich
+an diese Regeln. Wenn du das Design System nicht öffnen kannst, baue
+NICHTS und sag es mir.
 
-Ansprechpartner für die Schluss-Slide: Name, Rolle, geprüfte E-Mail.
+Anlass: [z. B. Erstvorstellung beim Vorstand]
+Publikum: [wer sitzt da?]
+Kunde oder Partner fürs Cover: [Name, oder „intern"]
+Ansprechpartner für die Schluss-Slide: [Name, Rolle, geprüfte E-Mail]
 
-Richte zuerst alles ein. Wenn du bereit bist, frag mich nach den
-Inhalten — ich liefere sie dann als Nachricht oder als Datei.
+Frag mich zuerst nach den Inhalten und nach vorhandenen Bildern und
+Logos. Ich liefere sie dann als Nachricht oder als Datei.
 ```
 
-Mehr steht da nicht, mit Absicht: Den kompletten Ablauf — Layout,
-Texte, Grafiken, Qualitätskontrolle — kennt Claude schon. Die
-Prüf-Zeile ist deine Sicherung: Antwortet Claude, dass etwas fehlt,
-bist du im falschen Ordner oder im falschen Programm — zurück zu
-Schritt 1 und 2, nicht weitermachen.
+Die Prüf-Zeile ist deine Sicherung: Sagt Claude, dass es das Design
+System nicht öffnen kann, fehlt dir der Zugang. Dann melde dich beim
+Creative Director, bevor du weitermachst.
 
-## Schritt 4: Inhalte liefern — als letzte Aktion
+## Schritt 3: Inhalte und Bilder liefern
 
-Claude richtet erst alles ein und fragt dann nach den Inhalten.
-Jetzt lieferst du — auf einem von zwei Wegen:
+Claude fragt nach den Inhalten. Du lieferst:
 
-- **Direkt als Nachricht:** Deinen kompletten Content einfach
-  einfügen, auch wenn es mehrere Seiten sind. Nichts kürzen, nichts
-  in Klammern quetschen.
-- **Als Datei:** Inhaltsdokument (z. B. `inhalts-master.md`) in den
-  Projektordner legen und Claude den Pfad nennen.
+- **Text:** direkt als Nachricht (auch mehrere Seiten am Stück) oder
+  als hochgeladene Datei. Nichts kürzen, Claude bringt es in unseren
+  Ton.
+- **Bilder:** Kunden- oder Partnerlogo, Screenshots, Fotos aus dem
+  Projekt, Logos von Referenzkunden. Einfach in die Unterhaltung
+  ziehen. Bilder machen das Deck lebendig, ohne sie bleibt an der
+  Stelle ein Platzhalter.
 
-Die Sprache erkennt Claude aus deinen Inhalten. Dann baut Claude
-das Deck: jede Slide mit einer klaren Aussage, deine Inhalte im
-Bridgemaker-Ton, Grafiken als ersten Entwurf, den ihr gemeinsam
-verfeinert. Zum Schluss prüft Claude jede Seite gegen die
-Qualitäts-Checkliste und sagt dir, wenn alles sauber ist.
+Claude baut dann das Deck: jede Slide mit einer klaren Aussage, ein
+abwechslungsreicher Rhythmus aus ruhigen und kräftigen Seiten,
+Grafiken als erster Entwurf, den ihr gemeinsam verfeinert.
+
+## Schritt 4: Gemeinsam weiterarbeiten
+
+- **Kolleginnen und Kollegen einladen:** Über „Teilen" im Artefakt,
+  wie bei Google Slides.
+- **Kommentieren:** direkt am Deck statt mit Screenshots im Chat.
+- **Ändern:** einfach weiterschreiben („Slide 3: andere Headline").
+  Wirkt etwas nicht mehr nach Bridgemaker, reicht ein Satz: **„Halt
+  dich an das Bridgemaker Design System."**
+
+## Schritt 5: Weitergeben
+
+Nach außen gehen nur **PDF** oder **PowerPoint (PPTX)**: im Artefakt
+über „Teilen" › „Exportieren". Den Link zum Artefakt bekommen nur
+Kolleginnen und Kollegen, nie Kunden.
 
 ## Vom Konzept zum Deck — der stärkste Input
 
-Die besten Decks entstehen, wenn das Denken vor dem Setzen
-passiert: Du erarbeitest ein Thema erst als Konzept-Dokument —
-in so vielen Runden, wie es braucht — und gibst dann das fertige
-Konzept als Inhalt in die Slide-Produktion. Ein Konzept ist
-slide-reif, wenn es fünf Merkmale hat:
+Die besten Decks entstehen, wenn das Denken vor dem Setzen passiert:
+Du erarbeitest ein Thema erst als Konzept-Dokument, in so vielen
+Runden, wie es braucht, und gibst dann das fertige Konzept als
+Inhalt in die Slide-Produktion. Ein Konzept ist slide-reif, wenn es
+fünf Merkmale hat:
 
-- **Jede Abschnitts-Überschrift ist eine Aussage,** keine
-  Kategorie: „Die KI orchestriert, die Rechen-Engine rechnet"
-  statt „Architektur". Aus solchen Überschriften werden
-  Slide-Headlines — niemand muss sie erfinden.
+- **Jede Abschnitts-Überschrift ist eine Aussage,** keine Kategorie:
+  „Die KI orchestriert, die Rechen-Engine rechnet" statt
+  „Architektur". Aus solchen Überschriften werden Slide-Headlines.
 - **Zählbare Blöcke:** „die vier Vorteile", „die Journey in vier
   Schritten". Was gezählt ist, bringt sein Slide-Layout schon mit.
-- **Zahlen tragen Quelle und Datum** — oder sie fehlen. Auf der
-  Slide steht nie mehr Gewissheit als im Konzept.
-- **Nicht-Ziele und offene Fragen stehen drin.** Das macht aus
-  dem Papier eine Entscheidungsvorlage — und liefert die
-  stärksten Schluss-Kapitel gleich mit.
-- **Der Adressat ist eingearbeitet** (etwa die
-  Investoren-Perspektive für einen Beteiligungs-Termin), nicht
-  erst fürs Deck draufgelegt.
+- **Zahlen tragen Quelle und Datum** oder sie fehlen. Auf der Slide
+  steht nie mehr Gewissheit als im Konzept.
+- **Nicht-Ziele und offene Fragen stehen drin.** Das macht aus dem
+  Papier eine Entscheidungsvorlage.
+- **Der Adressat ist eingearbeitet,** nicht erst fürs Deck
+  draufgelegt.
 
-Zwei Dinge stehen nie im Konzept und gehören deshalb immer in
-deine Übergabe-Nachricht: der **Anlass** (was für ein Termin ist
-das?) und das **Publikum** (wer sitzt da?). Eine Erstvorstellung
-braucht ein anderes Deck als ein Entscheidungstermin — auch beim
-selben Konzept.
+Anlass und Publikum stehen nie im Konzept, deshalb fragt der
+Start-Prompt danach.
 
-## Ergebnis anschauen und weitergeben
+## Sonderfall: Langdock oder Offline-Versand
 
-- **Anschauen:** HTML-Datei im Browser öffnen (Doppelklick; die
-  Datei bleibt dafür in ihrem Projektordner), Navigation per
-  Pfeiltasten. Oder direkt das PDF.
-- **Weitergeben:** Sag Claude „Mach das Deck versandfertig" — du
-  bekommst beides: das PDF (eine Seite pro Slide) und eine einzelne
-  Versand-HTML, in der alles steckt, auch die Schriften. Die kannst
-  du gefahrlos verschicken: keine Ordner, keine Assets, kein
-  Internet nötig. Schnellweg: In Chrome funktioniert auch Drucken →
-  „Als PDF speichern" — aber nur mit „Hintergrundgrafiken" an,
-  Kopf- und Fußzeilen aus und Skalierung auf Standard, und nie in
-  Safari oder Firefox (die zerschneiden die Slides auf
-  Papierformate). Die rohe Deck-HTML bleibt tabu zum Verschicken.
-- **Wichtig — Kundenarbeit gehört nie in den Brandbook-Ordner:**
-  Claude legt für jedes Kundenprojekt automatisch einen eigenen
-  Ordner an und kopiert alles Nötige hinein. Deck und
-  Inhaltsdokumente legst du nur dort ab.
-
-## Änderungen danach
-
-Einfach normal weiterschreiben („Slide 3: andere Headline"). Wirkt
-etwas plötzlich nicht mehr nach Bridgemaker, reicht ein Satz:
-**„Halt dich ans Brandbook."**
-
-Kommst du später oder an einem anderen Tag zurück: Starte Claude
-Code im **Projektordner des Kunden** — Terminal öffnen, mit
-`cd Pfad/zum/Projektordner` hineinwechseln, `claude` eintippen. Die
-Regeln liegen dort bei, Claude kennt sie also auch ohne den
-Brandbook-Ordner. Nur für ein **neues** Deck startest du wieder im
-Brandbook-Ordner bei Schritt 2.
+Arbeitest du in Langdock oder brauchst du eine Präsentation, die
+ganz ohne Internet läuft, gibt es den bisherigen Weg über das
+HTML-Template. Sprich dafür den Creative Director an; den Start
+richtet ihr dann gemeinsam ein.

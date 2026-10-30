@@ -28,8 +28,9 @@
    Slide. Grund immer Off-White; Farbfläche nur auf Cover,
    Kapiteltrenner, Zitat und Schluss.
 5. **Pro Slide:** eine Aussage; Headline max. zwei Zeilen und ohne
-   Gedankenstrich (redigieren, nicht schrumpfen); max. drei Textgrößen
-   (Headline/Content/Meta); Kopfzeile „NN / Kapitel" links und
+   Gedankenstrich (redigieren, nicht schrumpfen); drei Basisgrößen
+   (Headline/Content/Meta) plus bis zu zwei Auszeichnungen, max. fünf;
+   Rhythmus aus Linien- und Flächen-Seiten, Fläche nutzen; Kopfzeile „NN / Kapitel" links und
    Fußzeile Wortmarke + Kunde + Seitenzahl auf jeder Slide außer
    Cover, Zitat und Schluss — Positionen stehen wie angenagelt.
 6. **Sprache:** per Du/ihr (Englisch: you), aktive Verben, kurze

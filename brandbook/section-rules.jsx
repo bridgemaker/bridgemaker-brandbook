@@ -280,7 +280,7 @@ function BbTokensSection() {
     [".bg-kasane-* / .bg-hebel-* / …", "28 Katalog-Flächen"],
   ];
   return (
-    <BbSection id="tokens" num="15" title="Design Tokens"
+    <BbSection id="tokens" num="14" title="Design Tokens"
       desc="tokens.css + tokens.json v2.0 — Quelle: globals.css der Website. In jedem Projekt als Erstes laden; Werte nie inline neu definieren.">
       <div style={{ display: "flex", gap: 12, marginBottom: 24, flexWrap: "wrap" }}>
         <a href="../tokens/tokens.css" className="bm-btn bm-btn-primary" style={{ textDecoration: "none" }}>tokens.css</a>
@@ -304,7 +304,7 @@ function BbTokensSection() {
 
 function BbClaudeSection() {
   return (
-    <BbSection id="claude" num="16" title="Claude Instructions"
+    <BbSection id="claude" num="15" title="Claude Instructions"
       desc="Die CLAUDE.md (v2) macht dieses Brandbook maschinenlesbar — das Destillat aus den Guidelines. Claude lädt sie bei jedem Projekt.">
       <div style={{ background: "#1C1C1E", color: "#F5F4F1", borderRadius: 20, padding: 48 }}>
         <div style={{ font: "500 11px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.1em", color: "#AF94D2", marginBottom: 16 }}>Hard Rules (v2)</div>

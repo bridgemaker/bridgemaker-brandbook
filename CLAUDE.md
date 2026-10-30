@@ -31,8 +31,9 @@
    des Betrachters an Google; LG München 2022). Ausnahme *(Nils,
    2026-07-20)*: rein interne Entwürfe in Firmen-Tools ohne
    Dateizugriff (z. B. Langdock-Canvas) dürfen Inter per
-   Google-Fonts-Link laden — Weitergabe trotzdem nur als PDF oder
-   Versand-HTML mit eingebetteten Fonts. Keine
+   Google-Fonts-Link laden; dasselbe gilt für Slides-Artefakte in
+   claude.ai (2026-10-30) — Weitergabe trotzdem nur als PDF, PPTX
+   oder Versand-HTML mit eingebetteten Fonts. Keine
    anderen Fonts ohne Freigabe. Einzige Ausnahme: Print-Display-Grade
    laufen in **Inter Display** (Override im Print-Layer, s. Punkt
    „Print" in Abschnitt 7).
@@ -254,31 +255,31 @@ keine Box markieren.
   Kreise, Typo, Familienfarben, Material Symbols) — sind kein
   Bild-Asset: Sie werden IMMER gebaut, als erster Draft, der
   gemeinsam iteriert wird. Nie als Platzhalter mit Text-Idee ablegen.
-- **Decks:** immer als Kopie von `templates/deck-template.html`
-  (1440×810-Stage, Web-Typoskala, statisch, Weitergabe nur als PDF).
-  Kopfzeile „NN / Kapitel" links, Fußzeile Wortmarke + Kunde +
-  Seitenzahl (jede Slide außer Cover, Zitat und Schluss);
-  Headlines max. zwei
-  Zeilen, ohne Gedankenstrich (redigieren statt schrumpfen); max.
-  drei Textgrößen pro Seite (Headline/Content/Meta).
-  **Serien-Slides** (ein Inhalt über mehrere Seiten, z. B. ein
-  Tabellen-Inventar): EINE konstante einzeilige Headline (kein
-  „Fortsetzung"-Wechsel), festes Spaltenraster (`table-layout:
-  fixed` + th-Breiten, identisch auf allen Seiten), `.deck-body`
-  auf `flex-start` — beim Blättern steht ALLES. Die 72px-Reserve
-  über der Fußzeile (`--deck-pad-b`) ist Sperrzone für Content;
-  deck-lint misst Serie, Sperrzone, Cover-Brücken-Naht und
-  farbige Kanten an Boxen
-  *(Nils, 2026-07-24)*. Cover-Kopf:
-  Logo-Brücke nur bei Kundendecks, interne Decks nur Wortmarke
-  (`.cover-head-intern`). Layouts ausschließlich aus dem
-  Template; Regeln + Sehpflicht: `guidelines/07 §7.8` und Repo-Skill
-  `bridgemaker-slides`. Vor der Sehpflicht die messbaren Regeln
-  maschinell prüfen: `node ../templates/deck-lint.js <deck>.html`
-  (Exit 0 = weiter zum Ansehen). Kundenarbeit entsteht NIE in
-  diesem Repo (auch nicht lokal/gitignored) — Projektordner
-  außerhalb legt `node templates/new-deck.js <ordner> --kunde
-  "Name"` an (komplettes Kit + startklare Template-Kopie).
+- **Decks** *(Nils, 2026-10-30)*: **Leitplanken, keine Zwangsjacke** —
+  Ziel sind Decks, die gut aussehen und Spaß machen; macht eine
+  Regel eine Slide dröge, ist sie falsch angewendet. **Standard ist
+  das Slides-Artefakt in claude.ai** mit dem Bridgemaker Design
+  System (Kollaboration, Export PDF/PPTX; Bühne 1920×1080, Typo
+  64/28/24px, Fußzeile bei `bottom:64px`, Sperrzone ab y 920,
+  Lint `node templates/artefakt-lint.js <ordner>`). **Rückfallweg**
+  für Langdock oder Offline-Versand: Kopie von
+  `templates/deck-template.html` (1440×810, `deck-lint.js`,
+  Weitergabe über `deck-pack.js`; Projektordner außerhalb per
+  `node templates/new-deck.js <ordner> --kunde "Name"`). Für beide:
+  **Rhythmus** aus Linien-Seiten und Flächen-Seiten (Karten, große
+  Zahlen, Bilder), keine Form dominiert; **Typo drei Basisgrößen**
+  (Headline/Inhalt/Meta) **plus bis zu zwei Auszeichnungen**, max.
+  fünf; Headline max. zwei Zeilen, ohne Gedankenstrich, auf jeder
+  Content-Slide an derselben Position; Kopfzeile „NN / Kapitel",
+  Fußzeile Wortmarke + Kunde/Partner + Seitenzahl (außer Cover,
+  Zitat, Schluss); Sperrzone über der Fußzeile; Serien-Slides
+  stehen beim Blättern; **Fläche nutzen** (kein Loch unter der
+  Headline); **Bilder rein** (Logos, Screenshots, Fotos vorhandener
+  Assets — Platzhalter nur, wenn wirklich nichts da ist); Kennzahlen
+  dürfen im Deep-Ton einer Identität stehen; Logo-Brücke auf Kunden-
+  und Partnerdecks; Redigat-Pflicht. Nach außen nur PDF oder PPTX.
+  Regeln: `guidelines/07 §7.8`, Workflow: Repo-Skill
+  `bridgemaker-slides`. Kundenarbeit entsteht NIE in diesem Repo.
 - **Print (DIN A4):** `tokens/print-tokens.css` als Layer NACH tokens.css
   laden. mm/pt statt px, Baseline-Grid 14pt, Großziffer→Headline 18mm,
   Eyebrow→Headline 12mm, Hairlines 0.4pt statt 1px, Print-Kasane mit

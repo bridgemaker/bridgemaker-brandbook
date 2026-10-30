@@ -14,9 +14,9 @@ Kopien: Bei Widerspruch gewinnt immer der Kanon in `guidelines/`.
 **[→ ONBOARDING.md](ONBOARDING.md)** zeigt dir den Weg, der zu
 deiner Aufgabe passt. Die zwei häufigsten Abkürzungen:
 
-- **Slides bauen:** [howto/slides.md](howto/slides.md) — vom Klonen
-  bis zur versandfertigen Präsentation, mit fertigem Start-Prompt
-  für Claude Code.
+- **Slides bauen:** [howto/slides.md](howto/slides.md) — in
+  claude.ai mit dem Bridgemaker Design System, mit fertigem
+  Start-Prompt.
 - **Nachschlagen:** [Visuelles Brandbook](brandbook/index.html) im
   Browser öffnen oder direkt in die
   [Guidelines](guidelines/README.md) springen.

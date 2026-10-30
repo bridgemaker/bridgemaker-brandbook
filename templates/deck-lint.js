@@ -11,7 +11,8 @@
    - Kopf-/Fußzeilen-System: Content-Slides tragen beides,
      Kapiteltrenner nur die Fußzeile, Cover/Zitat/Schluss nichts —
      und die Fußzeile steht überall an derselben Position
-   - Max. drei Textgrößen pro Seite (Headline / Content / Meta)
+   - Max. fünf Textgrößen pro Seite: drei Basisgrößen (Headline /
+     Content / Meta) plus bis zu zwei Auszeichnungen (Nils, 2026-10-30)
    - Grund Off-White auf Content-Slides; kein rohes Purple auf Dunkel
    - Kein Mono außerhalb von Code und Platzhalter-Captions,
      keine fremden Schriften
@@ -166,9 +167,11 @@ function lintInPage() {
       if (px > 14 && !sizes.has(px)) sizes.set(px, txt.slice(0, 30));
     });
 
-    if (sizes.size > 3) {
+    /* Über dem Meta-Register: Headline + Content + bis zu zwei
+       Auszeichnungen (Kartentitel, große Zahl) = max. vier. */
+    if (sizes.size > 4) {
       const list = [...sizes.keys()].sort((a, b) => b - a).join('/');
-      err(`${sizes.size} Textgrößen über dem Meta-Register (${list}px) — max. drei pro Seite: Headline, Content, Meta.`);
+      err(`${sizes.size} Textgrößen über dem Meta-Register (${list}px) — max. fünf pro Seite: drei Basisgrößen (Headline, Content, Meta) plus bis zu zwei Auszeichnungen.`);
     }
 
     /* Zeichen & Voice-Basics (messbare Teilmenge von 08-voice.md). */

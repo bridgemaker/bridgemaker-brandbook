@@ -178,244 +178,260 @@ Heroes und Cover-Slides.
 
 ## 7.8 Slide-Decks
 
-Decks sind **statische Lese-Artefakte**: gebaut als HTML auf einer
-festen **1440×810-Stage** (`templates/deck-stage.js` skaliert verlust-
-frei). **Weitergabe nur in zwei Formaten, beide aus
-`templates/deck-pack.js`** *(2026-07-17)*: das **PDF** (`--pdf`,
-Headless-Chrome-Render, pixelidentisch, eine Seite pro Slide,
-ohne Stellschrauben) und bei Bedarf die **versandfertige
-Einzeldatei** `<deck>-versand.html` (Tokens, Stage-Skript, Fonts,
-Logos und Bilder inline — keine Pfade, die brechen können, keine
-externen Aufrufe, läuft offline). Der Projektordner und die rohe
-Deck-HTML werden nie verschickt. Schnellweg für Geübte: In
-**Chrome** liefert Drucken → „Als PDF speichern" dank der
-`@page`-Regel im Stage-Skript dasselbe Ergebnis — Bedingungen:
-Hintergrundgrafiken AN, Kopf- und Fußzeilen AUS, Skalierung
-Standard. Safari und Firefox sind fürs Deck-PDF tabu (sie
-ignorieren die `@page`-Größe und zwängen die Stage auf
-Papierformate). **Fonts lokal:** Decks laden Inter,
-JetBrains Mono und Material Symbols aus `assets/fonts/`
-(Compliance — der Google-Fonts-Link ist in Decks tabu,
-*2026-07-17*; Ausnahme *2026-07-20*: rein interne Entwürfe in
-Firmen-Tools ohne Dateizugriff, z. B. Langdock-Canvas, dürfen
-Inter per Google-Link laden — Weitergabe nur als PDF oder
-Versand-HTML). Keine Animationen, kein kasane-drift, keine
-Hover-Effekte. (Stage-Neufassung 16.07.2026 — ersetzt die frühere
-1920×1080-/24px-Regel.)
+**Leitsatz** *(Nils, 2026-10-30)*: Die Regeln sind Leitplanken. Ziel
+sind Decks, die gut aussehen und Spaß machen: sauber, dynamisch,
+freundlich. Wird eine Slide durch eine Regel dröge, ist die Regel
+falsch angewendet. Hart und messbar sind nur die Qualitätsregeln,
+die nicht bremsen (feste Kopfzone, Fußzeile und Sperrzone, keine
+farbigen Kanten, Farben aus Tokens und Katalog, Redigat). Alles
+andere ist Balance.
 
-- **Nordstern** *(2026-07-17)*: Eine Bridgemaker-Slide ist
-  Typografie auf ruhigem Grund, gegliedert durch Linien. **Boxen
-  sind die Ausnahme mit Bedeutung** — benanntes Ding (Produkt,
-  Case, Angebot), Zitat oder Bühne für eine Illustration. Reine
-  Information (Listen, Zahlen, Vergleiche, Prozesse, Prinzipien)
-  läuft über Hairlines, Spalten und Abstände. Visuelle Referenz:
-  `assets/referenz/website-2026-07/`.
+**Zwei Wege, ein Regelwerk** *(Nils, 2026-10-30)*:
+
+- **Standard: Slides-Artefakt in claude.ai** mit dem Bridgemaker
+  Design System als Grundlage. Kollegen arbeiten mit (Einladen wie
+  bei Google Slides), Export als PDF oder PPTX. Format-Regeln:
+  §7.8.1.
+- **Rückfallweg: HTML-Template** (`templates/deck-template.html`)
+  für Langdock und Fälle, die pixelgenaue Kontrolle oder einen
+  Offline-Versand brauchen. Format-Regeln: §7.8.2.
+
+Die folgenden Regeln gelten für beide Wege.
+
+- **Rhythmus statt Einheitsform** *(Nils, 2026-10-30 — ersetzt den
+  Linien-Nordstern vom 2026-07-17)*: Ein Deck lebt vom Wechsel.
+  Feine Seiten mit Linien, Spalten und Tabellen wechseln mit
+  Seiten, die Fläche zeigen: getönte Karten, große Zahlen, Bilder,
+  Bühnen. Keine Form dominiert. Folgen zwei, drei Seiten derselben
+  Machart aufeinander, wechselt die nächste die Form. Die Linien
+  bleiben das ruhige Grundmuster der Website
+  (`assets/referenz/website-2026-07/`), die Flächen bringen
+  Freundlichkeit und Tempo.
 - **Slide Writing — Layout folgt Argument:** Vor jedem Layout die
   Strukturfrage: gleichrangige Punkte? Kontrast? Ursachen →
-  Resultat? Tabelle? Benannte Dinge? Das Layout bildet genau diese
-  Struktur ab — gleichrangig heißt uniform behandelt (dieselbe
+  Resultat? Tabelle? Benannte Dinge? Das Layout bildet diese
+  Struktur ab: Gleichrangiges wird uniform behandelt (dieselbe
   Typo-Stufe, auch im 50/50-Zweispalter), ein Resultat wird anders
   exponiert (Resultat-Band), ein Prozess läuft. Aufeinanderfolgende
-  Phasen laufen HORIZONTAL — Hairline-Kolumnen in Ablaufrichtung
-  oder Roadmap, nie als vertikale Tabelle *(Nils, 2026-07-23)*.
-  Musterpaar: Hairline-Kolumnen = Beobachtungen, nummerierte
-  Objekt-Karten = zählbare Handlungsaufträge. Ein gefülltes Raster
+  Phasen laufen horizontal, als Kolumnen in Ablaufrichtung oder
+  Roadmap *(Nils, 2026-07-23)*. Für jede Struktur gibt es mehrere
+  gute Formen (Linien-Spalten oder Karten, Tabelle oder Zahlenreihe);
+  welche, entscheidet der Rhythmus des Decks. Ein gefülltes Raster
   ist noch keine Slide.
-- **Template-Pflicht:** Jedes Deck entsteht als Kopie von
-  `templates/deck-template.html` — einen Ordner tief im Repo oder,
-  bei Kundenarbeit, im Projekt-Kit außerhalb des Repos (Kit-Prinzip
-  im Skill `bridgemaker-slides`; Kundendaten nie ins Brandbook).
-  Die dortigen Layouts — Cover, Agenda, Kapiteltrenner,
-  **Hairline-Kolumnen (mit optionalem Resultat-Band)**, Content
-  2/3 + 1/3 mit gebauter Infografik, Zahlen (freie Stats),
-  Principle-Zeilen, Gegenüberstellung, Objekt-Karten, nummerierte
-  Objekt-Karten, Tabelle, Zitat, Schluss — sind die freigegebene
-  Menge. Slides duplizieren
-  und umsortieren ja; neue Layouts erfinden nein. Fehlt ein
-  Layout: CD fragen. Vollbeispiel (16 Seiten, neutralisiert):
-  `examples/beispiel-kundendeck.html`.
 - **Feste Kopfzone — die Headline steht:** Eyebrow-Kopfzeile und
   Headline beginnen auf jeder Content-Slide an exakt derselben
-  Position (`--deck-title-y` im Template); der Inhalt füllt den
-  Raum darunter (`.deck-body`), nie umgekehrt. Blätter-Test in der
-  Sehpflicht: Beim Durchschalten darf nichts springen — neben
-  Kopfzeile, Headline, Fußzeile und Seitenzahl gilt das für JEDES
-  wiederkehrende Element (Tabellenkopf, Spaltenraster,
-  Serien-Headline) *(Nils, 2026-07-24)*.
+  Position; der Inhalt füllt den Raum darunter, nie umgekehrt.
+  Blätter-Test: Beim Durchschalten springt nichts, weder Kopfzeile,
+  Headline, Fußzeile und Seitenzahl noch wiederkehrende Elemente
+  (Tabellenkopf, Spaltenraster, Serien-Headline) *(Nils,
+  2026-07-24)*.
 - **Serien-Slides — ein Inhalt über mehrere Seiten** *(Nils,
   2026-07-24)*: Läuft dieselbe Struktur über mehrere Slides (z. B.
   ein Tabellen-Inventar), steht beim Blättern alles: EINE
-  konstante, einzeilige Headline auf jeder Seite der Serie (kein
-  „Fortsetzung"-Zusatz, kein Wechsel der Zeilenzahl — die
-  Seitenzahl trägt die Fortsetzung), identische Spaltenbreiten
-  (`table-layout: fixed` + feste th-Breiten, bemessen am
-  breitesten Inhalt der GANZEN Serie) und der `.deck-body` auf
-  `justify-content: flex-start`, damit die Oberkante nicht mit
-  der Inhaltshöhe wandert. Hintergrund: Das Auto-Layout des
-  Browsers verteilt Tabellenspalten pro Seite nach Inhalt, und
-  das zentrierende `deck-body`-Default optimiert die Einzelseite —
-  beides sabotiert Serien. deck-lint prüft Headline, Oberkante
-  und Raster jeder Serie (Erkennung über identische Spaltenköpfe).
+  konstante, einzeilige Headline (kein „Fortsetzung"-Zusatz, die
+  Seitenzahl trägt die Fortsetzung), identische Spaltenbreiten,
+  bemessen am breitesten Inhalt der ganzen Serie, und eine feste
+  Oberkante des Inhalts.
 - **Eine Linien-Ebene pro Fläche:** Die Hairline hat pro Slide
-  genau einen Job — Spalten eröffnen ODER Zeilen trennen, nie
-  beides ineinander. Sie bindet sich durch Nähe an ihren Inhalt;
-  Zwischenüberschriften trennen sich durch Raum, nicht durch
-  eigene Striche. Nie Linien-Listen in Karten stapeln (Box ODER
-  Linie — ein Inhalt, ein Gliederungsmittel).
-- **Typografie = Web:** die normalen `type-*`-Klassen in Web-Größen
-  (Basis 16px, Contentbreite 1200px wie der Web-Container). Der
-  Deck-Layer pinnt nur die fluiden `clamp()`-Stufen auf feste Werte,
-  damit Bildschirm und PDF identisch sind. Keine eigenen Größen.
-  Hurenkinder vermeiden: Headlines `text-wrap: balance`, Fließtext
-  `pretty` — notfalls umformulieren.
-- **Grund konstant Off-White.** Hintergrundwechsel nur mit Bedeutung:
-  Kapiteltrenner (Kapitelband `bg-kasane-band-*` + große Ziffer
-  light + topografische Konturen in Hellgrau `#C5C0B8`),
-  Cover/Schluss (dunkel), max. eine Moment-Slide (Zitat).
-- **Moment-Flächen** *(Neufassung 2026-07-17)*: Cover = Charcoal +
-  `bg-kasane-cta` (statisch) + topografische Konturen — rechts
-  dicht, links offen zum Text, wie der Website-Hero. Schluss =
-  Footer-Verlauf (Token `bg-contact-cta-static` — die vorgemischte
-  statische Hälfte des contact-cta-Paars; das rohe `bg-contact-cta`
-  bleibt tabu als Fläche, im Web gilt `.contact-cta-wash`)
-  + konzentrische Konturen um den Content. Zitat =
-  `bg-stimme-teal` (statisch, mit `grain-photo-screen`) *(Nils,
-  2026-07-24)*: Die Stimme des Kunden bekommt ihre eigene
-  Farbwelt — auf `bg-stimme-plum` erzählten Zitat und Schluss
-  fast dieselbe Purple-Fläche zweimal hintereinander. Topo-Linien
-  sind Blickführung um den Content, nie Deko-Gewusel; Generator:
-  `templates/deck-topo-konturen.js` (cover/schluss). Dazu die
-  Kapitelbänder `bg-kasane-band-*` mit hellgrauen Konturen. Bei
-  mehreren Kapiteln variieren die Trenner: nächste Band-Farbwelt
-  + eigenes Linienbild (Konturen-Seed = Basis + Kapitelnummer) —
-  nie zwei identische Trenner hintereinander. Andere vibrante
-  Website-Rezepte (`bg-commercial-os`, `bg-kasane-plum` …) sind
-  in Decks tabu. Auf Dunkel: Headlines `--off-white`, Fließtext
-  `--soft`.
-- **Kopf- und Fußzeile als System** *(Neufassung 2026-07-17 —
-  ersetzt „keine Fußzeile")*: Kopfzeile = NUR das Kapitel-Label
-  „NN / Kapitel" links (`type-eyebrow`, neutral). Fußzeile =
-  Wortmarke (14px) + Kunde/Projekt links (4px Gap — halbe
-  Rasterstufe, optischer Ausgleich zum Geviertstrich-Innenabstand
-  der Wortmarke; der Kundenname im Wortmarken-Schwarz und
-  semi-bold — Kunde und Bridgemaker stehen gleichwertig),
-  Seitenzahl rechts (12px Inter Regular in `--mid`, CSS-Counter). Beide auf jeder
-  Slide außer den Moment-Slides Cover, Zitat und Schluss, immer
-  an exakt derselben Position (`--deck-head-y`, `--deck-foot-y`);
-  `--deck-pad-b` hält die Mindestluft zwischen Inhalt und
-  Fußzeilen-Typo. Auf dunklen Slides mit Fußzeile trägt sie die
-  weiße Wortmarke. **Die Reserve ist Sperrzone** *(Nils,
-  2026-07-24)*: Kein Content-Element unterschreitet die
-  `--deck-pad-b`-Mindestluft — auch wenn es „noch auf die Seite
-  passt". Wer hineinläuft, kürzt oder teilt die Slide; deck-lint
-  misst die Zone (nicht erst die Seitenkante).
-- **Cover-Kopf nach Anlass:** Die Logo-Brücke (Wortmarke, Linie,
-  Kundenlogo) verbindet zwei Marken — sie gehört auf Kundendecks.
-  Interne Decks führen nur die Wortmarke: der Cover-Kopf-Container
-  bekommt zusätzlich `.cover-head-intern` *(Nils, 2026-07-22)*.
-  Die Brückenlinie richtet sich an der 24px-Wortmarke aus — der
-  `.cover-bridge`-Container läuft fest 24px hoch und zentriert
-  (`align-self: center`), NIE `stretch`: Ein Kundenlogo über 24px
-  streckt den Container sonst mit und hebt die Linie vom
-  Wortmarken-Strich ab. deck-lint prüft Naht und Höhe *(Nils,
-  2026-07-24)*.
+  einen Job, Spalten eröffnen oder Zeilen trennen, nicht beides
+  ineinander. Zwischenüberschriften trennen sich durch Raum, nicht
+  durch eigene Striche. In einer Karte keine gestapelten
+  Linien-Listen: ein Inhalt, ein Gliederungsmittel.
+- **Typografie: drei Basisgrößen, höchstens fünf** *(Nils,
+  2026-10-30 — ersetzt „max. drei Textgrößen")*: Die Basis sind
+  Headline, Inhalt und Meta (Eyebrow, Quellen, Fußzeile,
+  Bildunterschrift). Dazu kommen pro Slide bis zu zwei
+  Auszeichnungen, etwa eine große Zahl und ein Kartentitel, oder
+  Kleingedrucktes. Konkrete Größen je Format in §7.8.1 und §7.8.2.
+  Hurenkinder vermeiden, notfalls umformulieren.
 - **Headlines: max. zwei Zeilen, ohne Geviertstrich.** Löst eine
-  Headline die dritte Zeile aus, wird redigiert — nicht geschrumpft
-  und nicht mit willkürlichen max-widths gequetscht. Umbruch nach
-  Sinn per `<br />` (dann `text-wrap: initial`). Gedankenstriche
-  sind in Decks tabu: im Fließtext (AI-Slop-Signal) wie in
-  Headlines *(Nils, 2026-07-22 — ersetzt die frühere Ausnahme
-  „in Headlines als Strukturmittel okay"; deck-lint prüft beides)*.
-- **Max. drei Textgrößen pro Seite:** Headline / Content / Meta
-  (12px). Quellen und Fußnoten laufen im Meta-Register
-  (`.source-note`: 12px, rechtsbündig, `--mid`; in Karten
-  `--light` und per `margin-top: auto` am Boxboden, Sternchen
-  verknüpft Label\* ↔ \* Fußnote; Grafik-Fußnoten mittelachsig)
-  — nie als eigene Stufe.
-- **Kontrast auf Off-White:** Typo eher dunkler (`--dark` statt
-  `--mid` für Fließtext, `--mid` statt `--light` für Eyebrows),
-  Trennlinien `--border-subtle` — die Haarlinie trennt nur auf Weiß.
-- **Karten:** Füllungen Weiß/Mauve/Sage — Sand und Stone sind auf
-  Off-White Ton-in-Ton und dort tabu (Ausnahme: der Vierer-
-  Farbcode nummerierter Objekt-Karten, dessen `card-clean`-
-  Anatomie sie per Inset-Haarlinie vom Grund trennt). Karten
-  umschließen ihren Inhalt eng — Leerraum lebt auf Slide-Ebene,
-  nicht in aufgeblasenen Boxen; Karten-Reihen mit gemeinsamer
-  Unterkante und gleicher Höhe (min-height im 8px-Raster); dasselbe
-  Register gilt für parallele Spalten aus Zeilen — gleiche
-  Zeilenhöhe, Typo vertikal zentriert, damit die Hairlines über
-  beide Spalten konstant laufen *(Nils, 2026-07-23)*.
-  **Tönung braucht Bedeutung**
-  *(ersetzt „nie zweimal dieselbe Surface", 2026-07-17)*: Dieselbe
-  Surface darf sich frei wiederholen — Uniformität ist Ruhe.
-  Unterschiedliche Tönungen nur, wenn der Unterschied etwas sagt
-  (Identität, Kategorie, Rolle); Schachbrett-Alternanz zweier
-  Tönungen ist verboten. Summen-/Resultat-Elemente werden anders
-  exponiert als die Reihe darüber (Rolle = Behandlung — Gestalt
-  des Resultat-Bands: Mauve-Tint, Eyebrow und Satz in Deep-Plum,
-  Satz als `type-body` bold, nie `type-h4`, nie Charcoal-Kachel).
-- **Raum nutzen — auch vertikal:** ab vier Listenpunkten
-  zweispaltig denken; keine Slide, deren rechte Hälfte leer bleibt,
-  und keine, deren unteres Drittel ohne Absicht leer bleibt — der
-  Inhalt verteilt sich über die verfügbare Höhe (macht
-  `.deck-body` im Template automatisch), statt oben zu kleben.
-- **Farbe rationiert:** eine Farbwelt pro Slide. Farbe kommt aus
-  Inhalten — Badges, Zielwerte, Icons, der Gedankenstrich als
-  Verbinder (z. B. im Gegenüberstellungs-Ledger) — nie aus Eyebrows
-  oder Kapitel-Farbcodes. Einfache Daten-SVGs (Balken, Zeitachsen)
-  in EINER Farbfamilie.
-- **Badges in Decks:** Semantik-Badges sitzen rechtsbündig am
-  Zeilenende (Flex, baseline) — nie im Textfluss; max. 3 pro
-  Seite (Vokabular: §7.6).
-- **Große Ziffern** (KPIs, Karten-Nummern): `type-display` mit
-  `font-weight: 300` — immer light. Nummerierte Objekt-Karten:
-  Display-Ziffer im Familien-Deep-Ton der Kartenfarbe (Neutrals:
-  Charcoal), Surface-Farbcode eine je Identität
-  (mauve/sage/sand/stone). Nummerierte Karten nur, wenn die Punkte
-  eine Bühne verdienen — ruhige zählbare Punkte (offene Fragen,
-  Klärungen) laufen als nummerierte Hairline-Zeilen in
-  Agenda-Anatomie *(Nils, 2026-07-23)*.
-- **Arbeitsstände nie auf die Slide** („folgt nach Freigabe",
-  „wird noch geklärt"): Sie gehören in die Speaker Notes
-  (`script#speaker-notes`, liest `deck-stage.js`) — nie ins
-  Layout.
-- **Referenz-Visuals** (Dashboards, Produkt-Screens) sind
-  contentverwoben, nie Showcase-Solo-Slide: Bausteine/Argument
-  links, Device-Mockup rechts, Bildunterschrift zentriert unterm
-  Bild. Das Bild selbst ist ein Bild-Asset — fehlt es, gilt die
-  Platzhalter-Regel (§7.7).
-- **Grafiken bauen, nicht ankündigen** *(ersetzt die
-  Platzhalter-Regel, 2026-07-17)*: Wo ein Diagramm oder Schaubild
-  hilft, wird es als Informationsgrafik gebaut — erster Draft
-  reicht, iteriert wird gemeinsam (Regeln: §7.11). Der gestreifte
-  Platzhalter bleibt nur für Bild-Assets (Fotos, CD-pflichtige
-  Bildwelt, fehlende Logos/Daten).
-- **Icons:** nur Material Symbols Outlined (s. `09 §9.8`), einfarbig
-  in der Textfarbe des Kontexts (hell: Charcoal, dunkel: Off-White),
-  nie in Markenfarben *(Nils, 2026-07-23)* — funktional statt
-  dekorativ.
-- **Wortmarke** auf Cover und Schluss (`assets/logos/`). Die
-  Schluss-Slide ist ein Statement, keine Content-Seite: EIN Satz
-  in direkter Anrede („ihr"), bold und fast leer; Ansprechpartner
-  klein und dezent als Textzeilen OHNE Eyebrow (Name, Rolle,
-  **verifizierte** E-Mail — keine erfundenen Adressen). Keine
-  Glass-Karte, kein Foto-Platzhalter, keine To-do-Listen
-  *(2026-07-17)*.
+  Headline die dritte Zeile aus, wird redigiert, nicht geschrumpft.
+  Umbruch nach Sinn. Gedankenstriche sind in Decks tabu, im
+  Fließtext wie in Headlines *(Nils, 2026-07-22)*.
+- **Kopf- und Fußzeile als System** *(2026-07-17)*: Kopfzeile = das
+  Kapitel-Label „NN / Kapitel" links (Eyebrow, neutral). Fußzeile =
+  Wortmarke + Kunde, Partner oder Projekt links, Seitenzahl rechts.
+  Beide auf jeder Slide außer den Moment-Slides Cover, Zitat und
+  Schluss, immer an derselben Position. **Die Reserve über der
+  Fußzeile ist Sperrzone** *(Nils, 2026-07-24)*: Kein
+  Content-Element läuft hinein, auch wenn es „noch auf die Seite
+  passt". Wer hineinläuft, kürzt oder teilt die Slide.
+- **Cover-Kopf nach Anlass:** Die Logo-Brücke (Wortmarke, Linie,
+  Kunden- oder Partnerlogo) verbindet zwei Marken und gehört auf
+  Kunden- und Partnerdecks. Interne Decks führen nur die Wortmarke
+  *(Nils, 2026-07-22)*. Die Linie setzt nahtlos am Strich der
+  Wortmarke an, auf derselben Höhe.
+- **Grund Off-White, Moment-Flächen mit Bedeutung:** Content-Slides
+  stehen auf Off-White. Farbflächen tragen Momente: Cover dunkel
+  (Charcoal + `bg-kasane-cta` + topografische Konturen, rechts
+  dicht, links offen zum Text), Kapiteltrenner auf den Bändern
+  `bg-kasane-band-*` (große Ziffer light, Konturen in `#C5C0B8`),
+  Zitat auf `bg-stimme-teal` *(Nils, 2026-07-24)*, Schluss auf
+  `bg-contact-cta-static` + konzentrische Konturen. Mehrere Trenner
+  variieren Band-Farbwelt und Linienbild. Andere vibrante
+  Website-Rezepte (`bg-commercial-os`, `bg-kasane-plum` …) sind in
+  Decks tabu. Auf Dunkel: Headlines `--off-white`, Fließtext
+  `--soft`.
+- **Karten und Tönung:** Füllungen Weiß, Mauve, Sage, Rose-Tint;
+  Sand und Stone sind auf Off-White Ton-in-Ton und brauchen die
+  Inset-Haarlinie von `card-clean`. Karten umschließen ihren Inhalt
+  eng; Reihen gleicher Rolle mit gemeinsamer Unterkante.
+  **Tönung braucht Bedeutung** *(2026-07-17)*: Dieselbe Surface
+  darf sich wiederholen. Unterschiedliche Tönungen, wenn der
+  Unterschied etwas sagt (Identität, Kategorie, Rolle), z. B. eine
+  Tönung je Haus in einem Partner-Deck oder eine je Angebot.
+  Schachbrett-Alternanz zweier Tönungen ist verboten. Resultat-
+  Elemente werden anders exponiert als die Reihe darüber
+  (Resultat-Band: Mauve-Tint, Eyebrow und Satz in Deep-Plum, Satz
+  bold). Nie eine farbige Kante an einer Karte (guidelines/04
+  §4.2).
+- **Fläche nutzen** *(Nils, 2026-10-30, verschärft)*: Der Inhalt
+  verteilt sich über die verfügbare Höhe bis zur Sperrzone. Kein
+  Loch zwischen Headline und Inhalt, kein unteres Drittel, das ohne
+  Absicht leer bleibt, keine leere rechte Hälfte. Reicht der Inhalt
+  nicht für die Fläche, wird er größer gesetzt (Auszeichnung), mit
+  einem Bild oder einer Grafik ergänzt oder mit der Nachbarslide
+  zusammengelegt.
+- **Farbe mit Bedeutung** *(Nils, 2026-10-30 — erweitert)*: Eine
+  Farbwelt pro Slide als Grundsatz. Farbe kommt aus Inhalten:
+  Badges, Zielwerte, Resultat-Bänder, Grafiken und **Kennzahlen und
+  Auszeichnungen in den Deep-Tönen einer Familie, wenn die Farbe
+  eine Identität trägt** (z. B. Deep-Plum für Bridgemaker, Deep-Teal
+  für den Partner, konsequent über das ganze Deck). Keine Farbe als
+  reine Deko, keine Kapitel-Farbcodes auf Eyebrows. Einfache
+  Daten-SVGs in einer Farbfamilie.
+- **Große Ziffern** (KPIs, Karten-Nummern): immer light
+  (`font-weight: 300`), in Charcoal oder im Deep-Ton der Identität.
+- **Bilder rein** *(Nils, 2026-10-30)*: Vorhandene Assets werden
+  eingebaut: Wortmarke und Partnerlogos, Kundenlogo-Bänder,
+  Produkt-Screenshots im Device-Mockup, Fotos aus Projekten.
+  Referenz-Visuals stehen im Argument (Bausteine links, Mockup
+  rechts, Bildunterschrift darunter), nie als Showcase-Solo-Slide.
+  Der gestreifte Platzhalter bleibt nur für Bilder, die wirklich
+  fehlen. Neue Bildwelten (KI-Bilder, Stock, Illustrationen)
+  brauchen weiter die CD-Freigabe (§7.7).
+- **Grafiken bauen, nicht ankündigen** *(2026-07-17)*: Wo ein
+  Diagramm, eine Karte, eine Timeline oder ein Schaubild hilft, wird
+  es gebaut, als erster Draft, der gemeinsam iteriert wird (§7.11).
+- **Icons:** nur Material Symbols Outlined (`09 §9.8`), einfarbig in
+  der Textfarbe des Kontexts *(Nils, 2026-07-23)*, funktional statt
+  dekorativ. Eine Icon-Kachel (weiße Fläche in einer getönten
+  Karte) ist erlaubt.
+- **Badges in Decks:** rechtsbündig am Zeilenende, nie im
+  Textfluss; max. 3 pro Seite (Vokabular: §7.6).
+- **Arbeitsstände nie auf die Slide** („folgt nach Freigabe"): Sie
+  gehören in die Speaker Notes.
+- **Schluss-Slide:** Statement, keine Content-Seite. Ein Satz in
+  direkter Anrede, fast leer; Ansprechpartner klein als Textzeilen
+  (Name, Rolle, **verifizierte** E-Mail). Wortmarke auf Cover und
+  Schluss.
 - **Voice — Redigat ist Pflicht** *(2026-07-17)*: Gelieferte
-  Inhalte werden aktiv in Bridgemaker-Sprache redigiert (Satzbau,
-  Wording, Ton nach `08-voice.md`) — die Aussage und die Struktur
-  dahinter bleiben unangetastet, die Sprache wird unsere.
-  Durchgehend Du/ihr, Headlines ohne Schlusspunkt, keine
-  Meta-/Prozesssätze im Slide-Text, kein Middot, Gedankenstriche
-  sparsam (max. einer pro Absatz), kein „→" im Fließtext, keine
-  Sprachmischung; belastbare Zahlen oder Mono-Platzhalter
-  („[ Zitat folgt ]").
-- **Sehpflicht:** Vor jeder Abgabe das Deck per Headless-Chrome als
-  PDF rendern, jede Seite ansehen und gegen diese Liste prüfen —
-  korrigieren und erneut rendern, bis nichts mehr auffällt.
+  Inhalte werden aktiv in Bridgemaker-Sprache redigiert (`08-voice.md`);
+  Aussage und Struktur bleiben, die Sprache wird unsere. Du/ihr,
+  Headlines ohne Schlusspunkt, keine Meta- oder Prozesssätze, kein
+  Middot, kein „→" im Fließtext, keine Sprachmischung; belastbare
+  Zahlen mit Quelle oder Platzhalter („[ Zitat folgt ]").
+- **Weitergabe nach außen nur als PDF oder PPTX** (beim
+  HTML-Template auch als Versand-HTML). Links auf Artefakte oder
+  rohe Deck-Dateien gehen nur an Kollegen.
+- **Sehpflicht:** Vor jeder Abgabe jede Seite ansehen und gegen diese
+  Liste prüfen, dazu den Lint des jeweiligen Wegs laufen lassen.
   Workflow im Repo-Skill `bridgemaker-slides`.
 
-### 7.8.1 Ausnahme: interaktive Artefakte im Deck-Look
+### 7.8.1 Slides-Artefakt (Standard)
+
+*(Nils, 2026-10-30)* Ein Deck entsteht in claude.ai als Artefakt vom
+Typ „Slides" mit dem **Bridgemaker Design System** als Grundlage.
+Die Slides-Vorlage liest aus dem Design System die README und die
+Tokens; diese Regeln sind dort verlinkt.
+
+- **Bühne 1920×1080**, Innenabstand 128px, unten 160px
+  (`padding:128px 128px 160px`). Die Kopfzone steht oben, der
+  Inhalt läuft darunter (`flex-direction:column`, nie vertikal
+  zentriert). Damit beginnt die Headline auf jeder Content-Slide
+  bei derselben Höhe.
+- **Typo-Skala (px):** Basis = Headline 64 (600, Tracking −1.5px),
+  Inhalt 28, Meta 24 (Eyebrow 24 in Versalien +2.4px, Fußzeile,
+  Quellen, Bildunterschrift). Auszeichnungen, höchstens zwei pro
+  Slide: große Zahl 64–96 light, Kartentitel 40, in dichten
+  Tabellen Inhalt 24. Cover- und Schluss-Headline 120. 24px ist die
+  Untergrenze der Vorlage.
+- **Fußzeile:** eine gepinnte Zeile bei `bottom:64px`, links und
+  rechts 128px: Wortmarke (24px hoch) und Partner- oder Kundenlogo
+  links, Quelle und Seitenzahl rechts in Meta 24 `--mid`.
+  **Sperrzone:** Kein Inhalt unterhalb von y = 920px.
+- **Farben nur als Hex aus den Tokens**, Verläufe 1:1 aus den
+  Kasane-Rezepten in `tokens.css` (Werte und Positionen der
+  `radial-gradient`-Ebenen übernehmen; jede Ellipse darf eine eigene
+  vollflächige, gepinnte Ebene sein). Kein reines Schwarz oder Weiß
+  als Grund.
+- **Logos und Fonts aus dem Design System:** Wortmarke und Monogramm
+  liegen dort unter `assets/logos/`. Inter läuft derzeit über den
+  Google-Fonts-Eintrag der Vorlage; das ist für die Arbeit im
+  Artefakt erlaubt (wie die Langdock-Ausnahme in §7.8.2), nach außen
+  gehen nur PDF und PPTX.
+- **Kollaboration:** Kollegen per Teilen einladen; Kommentare am
+  Deck statt Screenshots im Chat.
+- **Lint:** Die Slide-Dateien sind schlichtes HTML mit festen Werten
+  und lassen sich messen: `node templates/artefakt-lint.js <ordner>`
+  prüft Textgrößen, Kopfzone, Sperrzone, Farben und Kanten (Ordner =
+  die gelesenen `project/`-Dateien des Artefakts).
+
+### 7.8.2 HTML-Template (Rückfallweg)
+
+Decks auf diesem Weg sind **statische Lese-Artefakte**, gebaut als
+HTML auf einer festen **1440×810-Stage** (`templates/deck-stage.js`
+skaliert verlustfrei).
+
+- **Template-Pflicht:** Jedes Deck entsteht als Kopie von
+  `templates/deck-template.html`, bei Kundenarbeit im Projekt-Kit
+  außerhalb des Repos (`node templates/new-deck.js <ordner> --kunde
+  "Name"`; Kundendaten nie ins Brandbook). Die Layouts dort (Cover,
+  Agenda, Kapiteltrenner, Hairline-Kolumnen mit optionalem
+  Resultat-Band, Content 2/3 + 1/3 mit Infografik, Device-Mockup,
+  Zahlen, Principle-Zeilen, Gegenüberstellung, Objekt-Karten,
+  nummerierte Objekt-Karten, Tabelle, Roadmap, Zitat, Schluss) sind
+  die Bausteine; duplizieren, umsortieren und kombinieren ist
+  ausdrücklich erwünscht, solange der Rhythmus stimmt. Vollbeispiel:
+  `examples/beispiel-kundendeck.html`.
+- **Typografie = Web:** die `type-*`-Klassen in Web-Größen (Basis
+  16px, Contentbreite 1200px); der Deck-Layer pinnt die fluiden
+  Stufen auf feste Werte. Basis = Headline, Content, Meta (12px,
+  `.source-note`: rechtsbündig, `--mid`); Auszeichnungen wie große
+  Ziffern (`type-display` light) oder Kartentitel zählen zu den zwei
+  zusätzlichen Größen. Headlines `text-wrap: balance`, Fließtext
+  `pretty`.
+- **Kopfzone und Fußzeile:** `--deck-title-y`, `--deck-head-y`,
+  `--deck-foot-y`; `--deck-pad-b` ist die Sperrzone (72px über der
+  Fußzeile). Fußzeile: Wortmarke (14px) + Kunde/Projekt mit 4px Gap
+  (Kundenname semi-bold im Wortmarken-Schwarz), Seitenzahl 12px
+  `--mid` per CSS-Counter. Serien: `table-layout: fixed` mit festen
+  th-Breiten und `.deck-body` auf `justify-content: flex-start`.
+- **Cover-Brücke:** Der `.cover-bridge`-Container läuft fest 24px
+  hoch und zentriert (`align-self: center`, nie `stretch`); interne
+  Decks setzen `.cover-head-intern` *(Nils, 2026-07-24)*.
+- **Topografische Konturen:** Generator
+  `templates/deck-topo-konturen.js` (cover/schluss); bei mehreren
+  Trennern Seed = Basis + Kapitelnummer.
+- **Fonts lokal:** Inter, JetBrains Mono und Material Symbols aus
+  `assets/fonts/` (der Google-Fonts-Link ist hier tabu,
+  *2026-07-17*). Ausnahme *2026-07-20*: rein interne Entwürfe in
+  Firmen-Tools ohne Dateizugriff (z. B. Langdock-Canvas) dürfen
+  Inter per Google-Link laden. Keine Animationen, kein
+  kasane-drift, keine Hover-Effekte.
+- **Speaker Notes** in `script#speaker-notes` (liest
+  `deck-stage.js`).
+- **Lint und Sehpflicht:** `node ../templates/deck-lint.js
+  <deck>.html`, dann per Headless-Chrome als PDF rendern und jede
+  Seite ansehen.
+- **Weitergabe** über `templates/deck-pack.js <deck>.html --pdf`:
+  das **PDF** (pixelidentisch, eine Seite pro Slide) und bei Bedarf
+  die **Versand-HTML** `<deck>-versand.html` (alle Ressourcen inline,
+  läuft offline). Schnellweg: Chrome → Drucken → „Als PDF speichern"
+  mit Hintergrundgrafiken AN, Kopf- und Fußzeilen AUS, Skalierung
+  Standard; Safari und Firefox nie.
+
+### 7.8.3 Ausnahme: interaktive Artefakte im Deck-Look
 
 *(Nils, 2026-09-29)* Manche Seiten sehen aus wie ein Deck, sind aber
 keine Lese-Artefakte: Die Website erzeugt sie aus Daten, sie sind

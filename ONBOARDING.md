@@ -11,9 +11,10 @@ Such dir den Weg, der zu deiner Aufgabe passt.
 Der schnellste Weg zum fertigen Ergebnis — Schritt für Schritt, mit
 fertigem Start-Prompt zum Copy-pasten:
 
-> **[Slides bauen (HTML-Präsentationen) →](howto/slides.md)**
+> **[Slides bauen →](howto/slides.md)**
 >
-> Vom Klonen bis zur fertigen Präsentation im Bridgemaker-Look.
+> In claude.ai mit dem Bridgemaker Design System: gemeinsam bauen,
+> als PDF oder PowerPoint exportieren.
 
 Anleitungen für Dashboards, Apps, Interfaces und Landingpages folgen.
 

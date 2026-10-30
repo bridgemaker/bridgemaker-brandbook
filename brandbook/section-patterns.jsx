@@ -3,7 +3,7 @@
 
 function BbImagerySection() {
   return (
-    <BbSection id="imagery" num="12" title="Imagery"
+    <BbSection id="imagery" num="16" title="Imagery"
       desc="Das Bildkonzept wird neu gedacht — die alten Editorial-Foto-Regeln gelten nicht mehr.">
       <div style={{ border: "1px solid #C5C0B8", borderRadius: 20, padding: 48, maxWidth: 720 }}>
         <span className="bm-badge bm-badge-purple">Work in progress</span>
@@ -24,20 +24,35 @@ function BbImagerySection() {
 
 function BbSlidesSection() {
   return (
-    <BbSection id="slides" num="13" title="Slide Templates"
-      desc="1920×1080. Mindestens 24px Text — keine Ausnahmen. Kasane nur auf Cover und End.">
-      <div style={{ border: "1px solid #C5C0B8", borderRadius: 20, padding: 48, maxWidth: 720 }}>
-        <span className="bm-badge bm-badge-purple">Work in progress</span>
-        <p style={{ font: "400 17px/1.6 Inter, sans-serif", color: "#1C1C1E", margin: "24px 0 0", maxWidth: 620 }}>
-          Die Bridgemaker-Slide-Templates gibt es noch nicht — sie sind der
-          nächste Schritt am Brand-System.
-        </p>
-        <p style={{ font: "var(--text-small)", color: "#6B6B65", margin: "12px 0 0", maxWidth: 620, lineHeight: 1.6 }}>
-          Bis sie stehen, gelten für Decks nur die Grundregeln oben und
-          Kapitel 07 der Guidelines. Keine improvisierten Layouts als
-          Vorlage weiterreichen.
-        </p>
+    <BbSection id="slides" num="13" title="Slide-Decks"
+      desc="Decks entstehen als Slides-Artefakt in claude.ai auf dem Bridgemaker Design System: gemeinsam bauen, als PDF oder PowerPoint exportieren. Die Regeln sind Leitplanken, das Ziel sind Decks, die gut aussehen und Spaß machen.">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 32 }}>
+        <div className="card-clean" style={{ background: "#fff", borderRadius: 20, padding: 32 }}>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#6B6B65" }}>Hart, weil es nicht bremst</div>
+          <ul style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "16px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
+            <li>Headline steht auf jeder Slide an derselben Stelle</li>
+            <li>Fußzeile und Sperrzone darüber</li>
+            <li>Keine farbigen Kanten an Boxen</li>
+            <li>Farben nur aus Tokens und Kasane-Katalog</li>
+            <li>Texte redigiert, Headline max. zwei Zeilen</li>
+          </ul>
+        </div>
+        <div className="card-clean" style={{ background: "#fff", borderRadius: 20, padding: 32 }}>
+          <div style={{ font: "500 12px/1 Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.10em", color: "#6B6B65" }}>Balance, keine Formel</div>
+          <ul style={{ font: "var(--text-small)", color: "#3D3D3A", margin: "16px 0 0", paddingLeft: 20, lineHeight: 1.8 }}>
+            <li>Rhythmus aus feinen Linien-Seiten und Flächen-Seiten</li>
+            <li>Drei Basisgrößen plus bis zu zwei Auszeichnungen</li>
+            <li>Fläche nutzen, kein Loch unter der Headline</li>
+            <li>Echte Bilder und Logos statt Platzhalter</li>
+            <li>Farbige Zahlen, wenn die Farbe eine Identität trägt</li>
+          </ul>
+        </div>
       </div>
+      <p style={{ font: "var(--text-small)", color: "#6B6B65", maxWidth: 720, lineHeight: 1.7 }}>
+        Start-Prompt und Ablauf: <a href="../howto/slides.md" style={{ color: "#6B4A94", textDecoration: "underline", textUnderlineOffset: 3 }}>howto/slides.md</a>.
+        Alle Regeln: <a href="../guidelines/07-product-patterns.md" style={{ color: "#6B4A94", textDecoration: "underline", textUnderlineOffset: 3 }}>guidelines/07 §7.8</a>.
+        Für Langdock und Offline-Versand bleibt das HTML-Template als Rückfallweg.
+      </p>
     </BbSection>
   );
 }
