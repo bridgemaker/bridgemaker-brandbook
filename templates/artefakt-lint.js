@@ -165,11 +165,14 @@ function measure() {
 const faces = Object.values(deck.faces || {}).filter(f => f.href).map(f => `<link rel="stylesheet" href="${f.href}">`).join('');
 const body = slides.filter(s => s.html).map(s => s.html
   .replace(/<aside>[\s\S]*?<\/aside>/g, '')
+  /* Eingebettete Live-Seiten bringen ein eigenes Dokument mit —
+     im Render nur als Fläche in ihrer Größe. */
+  .replace(/<x-embed([^>]*)>[\s\S]*?<\/x-embed>/g, '<x-embed$1 data-lint="embed"></x-embed>')
   .replace(/src="\/_blob\/[^"]*"/g, 'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"')
   .replace(/<section ([^>]*)style="/, '<section class="__s" $1style="position:relative;overflow:hidden;width:1920px;height:1080px;box-sizing:border-box;'))
   .join('\n');
 const html = `<!doctype html><html><head><meta charset="utf-8">${faces}
-<style>body{margin:0} .__s *{margin:0;box-sizing:border-box} x-embed,x-icon{display:block}</style></head><body>${body}
+<style>body{margin:0} .__s *{margin:0;box-sizing:border-box} x-embed,x-icon{display:block} x-embed[data-lint]{background:#d0ccc4} x-connector{display:none}</style></head><body>${body}
 <script>
 window.addEventListener('load', () => Promise.resolve(document.fonts ? document.fonts.ready : null).then(() => setTimeout(() => {
   let data; try { data = (${measure.toString()})(); } catch (e) { data = { error: String(e) }; }
